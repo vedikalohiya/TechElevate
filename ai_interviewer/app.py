@@ -29,8 +29,6 @@ def register():
         confirm_password = request.form['confirm_password']
         phone = request.form['phone']
         college = request.form['college']
-
-        # Server-side validation
         if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
             flash("Invalid email format", "error")
             return redirect(url_for('register'))
