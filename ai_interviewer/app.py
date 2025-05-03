@@ -4,14 +4,14 @@ import re
 import openai
 
 app = Flask(__name__)
-app.secret_key = "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"
+app.secret_key = ""
 
 # MongoDB Config
 app.config["MONGO_URI"] = "mongodb://localhost:27017/your_db_name"
 mongo = PyMongo(app)
 
 # OpenAI Config
-openai.api_key = "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"  # Replace with your actual OpenAI API key
+openai.api_key = ""  # Replace with your actual OpenAI API key
 
 # Route: Home page with AI Interviewer
 @app.route('/')
