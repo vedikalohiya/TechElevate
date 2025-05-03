@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Preparation Website</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        .hero-section {
+            background: url('https://example.com/science-background.jpg') no-repeat center center;
+            background-size: cover;
+            color: rgb(55, 8, 8);
+            padding: 100px 0 50px;
+            text-align: center;
+            margin-top: 0;
+            font-size: 7px;
+        
+            
+        }
+
+        body {
+            background-color:white;
+        }
+
+        .navbar {
+            background-color: #087e38;
+        }
+
+        .navbar-brand,
+        .nav-link {
+            color: white;
+            transition: color 0.3s ease;
+            font-size: 30px;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-button {
+            background: transparent;
+            border: 2px solid transparent;
+            text-decoration: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-button:hover {
+            color: white;
+            border: 2px solid white;
+            transform: scale(1.1);
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.8);
+        }
+
+        .card-title,
+        .card-text {
+            color: black;
+        }
+
+        img {
+            text-align: right;
+        }
+
+        .experiment-card,
+        h3 {
+            color: rgb(12, 12, 73);
+            position: relative;
+            padding: 20px;
+        }
+
+       
+        .hero-section h1 {
+            font-size: 3rem;
+        }
+
+        .experiment-card {
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .experiment-card:hover {
+            transform: scale(1.05);
+        }
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .mb-4 {
+            color: rgb(60, 7, 7);
+        }
+
+        .container.my-5 h2 {
+            margin-top: 0;
+        }
+        .lead{
+            font-weight: 7px;
+        }
+
+        .btn {
+            color: #087e38;
+        }
+       
+img{
+    border-radius: 25px;
+}
+
+.btn-custom {
+    display: inline-block; 
+    color: white; 
+    background-color: #147f2d; 
+    border: 2px solid white; 
+    padding: 10px 20px; 
+    text-decoration: none; 
+    font-size: 16px;
+    border-radius: 15px; 
+    text-align: center;
+    transition: background-color 0.3s, color 0.3s; 
+  }
+  /* Testimonials Section */
+  .testimonials {
+    background-color: #f4f4f4;
+    text-align: center;
+    padding: 50px 20px;
+     color:rgb(55, 8, 8);
+     font-weight: bold;
+  }
+  
+  .testimonials h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+  
+  .testimonial {
+    margin: 20px 0;
+    font-style: italic;
+  }
+
+
+  
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><b>TECHELEVATE</b></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <div class="nav-button" onclick="window.location.href='#'">Home</div>
+                    </li>
+                    <li class="nav-item">
+                        <div class="nav-button" onclick="window.location.href='./preparation.html'">Preparation</div>
+                    </li>
+                    </li>
+                    <li class="nav-item">
+                        <div class="nav-button" onclick="window.location.href='./about.html'">About Us</div>
+                    </li>
+                    <li class="nav-item">
+                        <div class="nav-button" onclick="window.location.href='./contact.html'">Contact</div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="http://localhost/newly%20generated/logout.php" style="text-decoration: none;">
+                            <div class="nav-button" onclick="window.location.href='./logout.php'">Logout</div>
+                        </a>
+                                            </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+   
+    <section class="hero-section">
+        <div class="container">
+            <h1>“Only those who dare to fail greatly can ever achieve greatly.” <br>           — Robert F. Kennedy</h1>
+            <p class="lead">Practice with real interview questions and get personalized feedback to land your dream job.</p>
+        </div>
+    </section>
+
+    <div class="container my-5" id="experiments">
+        <div class="row text-center">
+            <h2 class="mb-4">Required Skillset</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card experiment-card text-center">
+                    <img src="https://th.bing.com/th/id/OIP.Q_8s3lxw8C1CK55jNR8xQwHaE8?w=280&h=187&c=7&r=0&o=5&pid=1.7" class="card-img-top" alt="Experiment 1">
+                    <div class="card-body">
+                        <h5 class="card-title">Aptitude Skills</h5>
+                        <p class="card-text">"Aptitude shows what you’re capable of, but attitude determines how far you will go."</p>
+                        <a href="./aptitude.html" class="btn-custom btn-outline-primary">Sight More</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card experiment-card text-center">
+                    <img src="https://www.liveabout.com/thmb/U2Z9sAG8zu2qfcju9EcnPWP_kNw=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/technical-skills-list-2063775_final2-5b9ffdaec9e77c00502e1c2f.png" class="card-img-top" alt="Experiment 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Technical Skills </h5>
+                        <p class="card-text">"The technology you use impresses no one. The experience you create with it is everything."</p>
+                        <a href="./technical.html" class="btn-custom btn-outline-primary">Sight More</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card experiment-card text-center">
+                    <img src="https://th.bing.com/th/id/OIP._fHAeac8X5cPBTSSTIClzwHaFQ?w=253&h=180&c=7&r=0&o=5&pid=1.7" class="card-img-top" alt="Experiment 3">
+                    <div class="card-body">
+                        <h5 class="card-title">Soft Skills</h5>
+                        <p class="card-text">"Your technical ability may get you hired, but your soft skills will keep you employed."</p>
+                        <a href="electricityfrom-lemon.html" class="btn-custom btn-outline-primary">Sight More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <-- Testimonials Section -->
+  <section class="testimonials">
+    <h2>Success Stories</h2>
+    <div class="testimonial">
+      <p>"Thanks to InterviewPrep, I nailed my tech interview and got the job!" - Alex J.</p>
+    </div>
+    <div class="testimonial">
+      <p>"The mock interviews helped me feel more confident than ever before." - Sarah P.</p>
+    </div>
+  </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html> 
