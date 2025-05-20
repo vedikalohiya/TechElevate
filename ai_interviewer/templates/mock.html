@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mock Test</title>
+    <style>
+      body {
+        background: url("https://media.istockphoto.com/photos/laptop-with-job-search-engine-on-screen-in-modern-office-picture-id1352380090?b=1&k=20&m=1352380090&s=170667a&w=0&h=eM_nRFyGk4uQe5_WV9ZGOF4Oujohh-IIL0lyAcfrgak=")
+          no-repeat center center fixed;
+        background-size: cover;
+        position: relative;
+        margin: 0;
+        font-family: sans-serif;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(202, 169, 169, 0.7);
+        z-index: -1;
+      }
+
+      h1 {
+        text-align: center;
+        font-size: xxx-large;
+        color: #002246;
+      }
+
+      .tabs {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+      }
+
+      .tabs button {
+        background: #0a2647;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        margin: 5px;
+        border-radius: 5px;
+        font-size: xx-large;
+      }
+
+      .tabs button.active {
+        background-color: #144272;
+      }
+
+      .container {
+        max-width: 700px;
+        margin: auto;
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      #timer {
+        text-align: center;
+        font-size: 1.3em;
+        font-weight: bold;
+        margin-top: 10px;
+        color: #002246;
+      }
+
+      .question {
+        font-weight: bold;
+        margin-top: 10px;
+      }
+
+      .options {
+        margin: 10px 0 20px;
+      }
+
+      .options label {
+        display: block;
+        margin-bottom: 8px;
+        cursor: pointer;
+      }
+
+      .correct {
+        background-color: #d4edda;
+      }
+
+      .incorrect {
+        background-color: #f8d7da;
+      }
+
+      #submit {
+        background-color: #0a2647;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 5px;
+        display: block;
+        margin: 20px auto 0;
+        font-size: large;
+      }
+
+      #submit:disabled {
+        background-color: gray;
+        cursor: not-allowed;
+      }
+
+      #result {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 1.2em;
+        font-weight: bold;
+      }
+
+      .correction {
+        background-color: #ffe0e0;
+        border-left: 4px solid red;
+        padding: 10px;
+        margin-top: 10px;
+      }
+
+      @media (max-width: 768px) {
+        .tabs button {
+          font-size: large;
+          padding: 8px 12px;
+        }
+
+        .container {
+          margin: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Mock Test</h1>
+    <div class="tabs">
+      <button onclick="loadQuestions('cpp', event)" class="active">C++</button>
+      <button onclick="loadQuestions('java', event)">Java</button>
+      <button onclick="loadQuestions('python', event)">Python</button>
+    </div>
+
+    <div class="container">
+      <div id="timer">
+        Time Left: <span id="time-left">05:00</span>
+      </div>
+      <div id="quiz-container"></div>
+      <div id="result"></div>
+    </div>
+
+    <script>
+      const data = {
+        cpp: [
+          {
+            q: "What is the size of int in C++?",
+            options: ["2 bytes", "4 bytes", "8 bytes", "Depends on system"],
+            answer: 1,
+          },
+          {
+            q: "Which operator cannot be overloaded?",
+            options: ["+", "=", "::", "[]"],
+            answer: 2,
+          },
+          {
+            q: "What is used to define a constant in C++?",
+            options: ["const", "#define", "Both", "None"],
+            answer: 2,
+          },
+          {
+            q: "Which keyword is used for exception handling?",
+            options: ["try", "throw", "catch", "All of these"],
+            answer: 3,
+          },
+          {
+            q: "What is the default access modifier in a class?",
+            options: ["public", "private", "protected", "none"],
+            answer: 1,
+          },
+        ],
+        java: [
+          {
+            q: "Which keyword is used to inherit a class in Java?",
+            options: ["super", "this", "extends", "implements"],
+            answer: 2,
+          },
+          {
+            q: "Which of these is not a Java feature?",
+            options: [
+              "Object-Oriented",
+              "Platform Dependent",
+              "Secure",
+              "Robust",
+            ],
+            answer: 1,
+          },
+          {
+            q: "What is JVM?",
+            options: [
+              "Java Virtual Machine",
+              "Java Very Main",
+              "Java Verified Mode",
+              "None",
+            ],
+            answer: 0,
+          },
+          {
+            q: "Which data type is used for a true/false value?",
+            options: ["int", "boolean", "byte", "double"],
+            answer: 1,
+          },
+          {
+            q: "Which method is the entry point for Java programs?",
+            options: ["main()", "start()", "init()", "run()"],
+            answer: 0,
+          },
+        ],
+        python: [
+          {
+            q: "What is the output of print(2 ** 3)?",
+            options: ["6", "8", "9", "5"],
+            answer: 1,
+          },
+          {
+            q: "Which keyword is used to define a function in Python?",
+            options: ["function", "fun", "def", "define"],
+            answer: 2,
+          },
+          {
+            q: "Which of these is a mutable data type?",
+            options: ["tuple", "list", "str", "int"],
+            answer: 1,
+          },
+          {
+            q: "How do you comment a single line?",
+            options: ["//", "#", "/* */", "--"],
+            answer: 1,
+          },
+          {
+            q: "What is the output of len([1,2,3])?",
+            options: ["2", "3", "1", "Error"],
+            answer: 1,
+          },
+        ],
+      };
+
+      let currentLang = "cpp";
+      let timerInterval;
+
+      function loadQuestions(lang, event) {
+        currentLang = lang;
+        clearInterval(timerInterval);
+
+        document.querySelectorAll(".tabs button").forEach((btn) =>
+          btn.classList.remove("active")
+        );
+        event.target.classList.add("active");
+
+        const quiz = document.getElementById("quiz-container");
+        const questions = data[lang];
+        let html = "";
+        questions.forEach((q, i) => {
+          html += `<div class="question">${i + 1}. ${q.q}</div><div class="options">`;
+          q.options.forEach((opt, j) => {
+            html += ` 
+              <label>
+                <input type="radio" name="q${i}" value="${j}">
+                ${opt}
+              </label>`;
+          });
+          html += `</div>`;
+        });
+        html += `<button id="submit" onclick="submitQuiz()">Submit</button>`;
+        quiz.innerHTML = html;
+        document.getElementById("result").innerHTML = "";
+        startTimer();
+      }
+
+      function submitQuiz() {
+        const questions = data[currentLang];
+        let score = 0;
+        let feedback = "";
+
+        questions.forEach((q, i) => {
+          const radios = document.getElementsByName("q" + i);
+          let selected = -1;
+
+          for (const radio of radios) {
+            if (radio.checked) {
+              selected = parseInt(radio.value);
+              if (selected === q.answer) {
+                radio.parentElement.classList.add("correct");
+                score++;
+              } else {
+                radio.parentElement.classList.add("incorrect");
+              }
+            }
+
+            if (parseInt(radio.value) === q.answer) {
+              radio.parentElement.classList.add("correct");
+            }
+          }
+
+          if (selected !== q.answer) {
+            const correct = q.options[q.answer];
+            feedback += ` 
+              <div class="correction">
+                <strong>Q${i + 1}: ${q.q}</strong><br>
+                Correct answer: <span style="color:green;">${correct}</span>
+              </div
+        `;
+      }
+    });
+
+    document.getElementById("result").innerHTML = `You scored ${score} out of ${questions.length}`;
+    document.getElementById("quiz-container").innerHTML += feedback;
+  }
+
+  function startTimer() {
+    let time = 300;
+    timerInterval = setInterval(() => {
+      const minutes = Math.floor(time / 60);
+      const seconds = time % 60;
+      document.getElementById("time-left").textContent =
+        `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+      if (time === 0) {
+        clearInterval(timerInterval);
+        submitQuiz();
+      }
+      time--;
+    }, 1000);
+  }
+
+  loadQuestions(currentLang, { target: document.querySelector(".tabs button") });
+</script>
+</body> </html>

@@ -1,0 +1,92 @@
+[
+  {
+    "title": "Two Sum",
+    "difficulty": "Easy",
+    "leetcodeUrl": "https://leetcode.com/problems/two-sum/",
+    "solutionUrl": "https://www.youtube.com/watch?v=KLlXCFG5TnA",
+    "codeUrl": "https://github.com/neetcode-gh/leetcode/blob/main/cpp/0001-two-sum.cpp",
+    "difficultyScore": 1,
+    "status": "Completed",
+    "topics": ["Array", "Hash Table"]
+  },
+  {
+    "title": "Valid Anagram",
+    "difficulty": "Easy",
+    "leetcodeUrl": "https://leetcode.com/problems/valid-anagram/",
+    "solutionUrl": "https://www.youtube.com/watch?v=V8K-V7bHMQg",
+    "codeUrl": "https://github.com/neetcode-gh/leetcode/blob/main/cpp/0242-valid-anagram.cpp",
+    "difficultyScore": 1,
+    "status": "Completed",
+    "topics": ["Hash Table", "String"]
+  },
+  {
+    "title": "Contains Duplicate",
+    "difficulty": "Easy",
+    "leetcodeUrl": "https://leetcode.com/problems/contains-duplicate/",
+    "solutionUrl": "https://www.youtube.com/watch?v=EqqXkFdL_zM",
+    "codeUrl": "https://github.com/neetcode-gh/leetcode/blob/main/cpp/0217-contains-duplicate.cpp",
+    "difficultyScore": 1,
+    "status": "Completed",
+    "topics": ["Array", "Hash Set"]
+  },
+  {
+    "title": "Group Anagrams",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/group-anagrams/",
+    "solutionUrl": "https://www.youtube.com/watch?v=Ca4fMK4-OGM",
+    "codeUrl": "https://github.com/neetcode-gh/leetcode/blob/main/cpp/0049-group-anagrams.cpp",
+    "difficultyScore": 3,
+    "status": "Pending",
+    "topics": ["Hash Table", "Sorting"]
+  },
+  {
+    "title": "Top K Frequent Elements",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/top-k-frequent-elements/",
+    "solutionUrl": "https://www.youtube.com/watch?v=Q0dJdOZUsIQ",
+    "codeUrl": "https://github.com/neetcode-gh/leetcode/blob/main/cpp/0347-top-k-frequent-elements.cpp",
+    "difficultyScore": 3,
+    "status": "Pending",
+    "topics": ["Heap", "Hash Table"]
+  },
+  {
+    "title": "Product of Array Except Self",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/product-of-array-except-self/",
+    "solutionUrl": "https://www.youtube.com/watch?v=TxYtCmD5-cY",
+    "codeUrl": "https://github.com/neetcode-gh/leetcode/blob/main/cpp/0238-product-of-array-except-self.cpp",
+    "difficultyScore": 3,
+    "status": "Pending",
+    "topics": ["Array", "Prefix Sum"]
+  },
+  {
+    "title": "Trapping Rain Water",
+    "difficulty": "Hard",
+    "leetcodeUrl": "https://leetcode.com/problems/trapping-rain-water/",
+    "solutionUrl": "https://www.youtube.com/watch?v=q5a5OiGbT6Q",
+    "codeUrl": "https://github.com/neetcode-gh/leetcode/blob/main/cpp/0042-trapping-rain-water.cpp",
+    "difficultyScore": 5,
+    "status": "Not Started",
+    "topics": ["Two Pointers", "Stack"]
+  },
+  {
+    "title": "Merge k Sorted Lists",
+    "difficulty": "Hard",
+    "leetcodeUrl": "https://leetcode.com/problems/merge-k-sorted-lists/",
+    "solutionUrl": "https://www.youtube.com/watch?v=8tJdLbm6q7Y",
+    "codeUrl": "https://github.com/neetcode-gh/leetcode/blob/main/cpp/0023-merge-k-sorted-lists.cpp",
+    "difficultyScore": 5,
+    "status": "Not Started",
+    "topics": ["Heap", "Linked List"]
+  },
+  {
+    "title": "Word Search II",
+    "difficulty": "Hard",
+    "leetcodeUrl": "https://leetcode.com/problems/word-search-ii/",
+    "solutionUrl": "https://www.youtube.com/watch?v=TIuXG1jEK9E",
+    "codeUrl": "https://github.com/neetcode-gh/leetcode/blob/main/cpp/0212-word-search-ii.cpp",
+    "difficultyScore": 5,
+    "status": "Not Started",
+    "topics": ["Backtracking", "Trie"]
+  }
+]

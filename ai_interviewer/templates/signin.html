@@ -3,114 +3,280 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login and Registration</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <title>TechElevate - Login/Register</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-image: url('https://media.istockphoto.com/photos/laptop-with-job-search-engine-on-screen-in-modern-office-picture-id1352380090?b=1&k=20&m=1352380090&s=170667a&w=0&h=eM_nRFyGk4uQe5_WV9ZGOF4Oujohh-IIL0lyAcfrgak=');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+    }
+    .container {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      position: relative;
+      width: 900px;
+      max-width: 100%;
+      min-height: 600px;
+      overflow: hidden;
+      display: flex;
+    }
+    form {
+      background-color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      padding: 0 30px;
+      height: 100%;
+      justify-content: center;
+    }
+    input, select {
+      background-color: #f0f0f0;
+      border: none;
+      padding: 12px;
+      margin: 4px 0;
+      border-radius: 4px;
+      width: 100%;
+    }
+    button {
+      border: none;
+      padding: 12px;
+      background-color: #ff981b;
+      color: #fff;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: 0.3s ease;
+    }
+    button:hover {
+      background-color: #00c6ff;
+    }
+    .form-container {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      max-height: 100%;
+    }
+    .overlay-container {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 50%;
+      background: #0A2647;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      padding: 40px;
+      transition: transform 0.6s ease-in-out;
+      z-index: 5;
+    }
+    .container.right-panel-active .overlay-container {
+      transform: translateX(100%);
+    }
+    .overlay-panel {
+      margin: auto;
+    }
+    .error-text {
+      color: red;
+      font-size: 0.8em;
+      margin: 2px 0 8px;
+      height: 14px;
+    }
+    .social-icons {
+      margin-top: 10px;
+    }
+    .social-icons .icon {
+      margin: 0 5px;
+      color: #555;
+      text-decoration: none;
+    }
+    label {
+      margin-top: 10px;
+    }
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+      }
+      .overlay-container {
+        position: relative;
+        width: 100%;
+        height: 200px;
+      }
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <div class="forms-container">
-      <div class="signin-signup">
-        <!-- Sign In Form -->
-        <form action="#" class="sign-in-form" id="sign-in-form">
-          <h2 class="title">Sign in</h2>
-          <input type="email" id="login-email" class="form-input" placeholder="Email" required />
-          <div class="error-text" id="error-login-email"></div>
+  <div class="container" id="container">
+    <div class="form-container sign-up-container">
+      <form id="sign-up-form">
+        <h2>Create Account</h2>
+        <input type="text" id="full-name" placeholder="Full Name" required />
+        <div class="error-text" id="name-error"></div>
 
-          <input type="password" id="login-password" class="form-input" placeholder="Password" required />
-          <div class="error-text" id="error-login-password"></div>
+        <input type="email" id="register-email" placeholder="Email" required />
+        <div class="error-text" id="email-error"></div>
 
-          <button type="submit" class="login-btn">Login</button>
+        <input type="password" id="register-password" placeholder="Password" required />
+        <div class="error-text" id="password-error"></div>
 
-          <p class="social-text">Or Sign in with social platforms</p>
-          <div class="social-media">
-            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-            <a href="#" class="social-icon"><i class="fab fa-google"></i></a>
-            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-          </div>
-        </form>
+        <input type="tel" id="phone" placeholder="Phone Number" required />
+        <div class="error-text" id="phone-error"></div>
 
-        <!-- Sign Up Form -->
-        <form action="#" class="sign-up-form" id="sign-up-form">
-          <h2 class="title">Sign up</h2>
+        <input type="text" id="college" placeholder="College Name" required />
+        <div class="error-text" id="college-error"></div>
 
-          <input type="text" id="full-name" class="form-input" placeholder="Full Name" required />
-          <div class="error-text" id="error-full-name"></div>
+        <input type="text" id="branch" placeholder="Branch" required />
+        <div class="error-text" id="branch-error"></div>
 
-          <input type="email" id="register-email" class="form-input" placeholder="Email Address" required />
-          <div class="error-text" id="error-register-email"></div>
+        <select id="passing-year" required>
+          <option value="" disabled selected>Select Passing Year</option>
+          <option value="2023">2023</option>
+          <option value="2024">2024</option>
+          <option value="2025">2025</option>
+          <option value="2026">2026</option>
+        </select>
 
-          <input type="email" id="confirm-email" class="form-input" placeholder="Confirm Email Address" required />
-          <div class="error-text" id="error-confirm-email"></div>
-
-          <input type="password" id="register-password" class="form-input" placeholder="Password" required />
-          <div class="error-text" id="error-register-password"></div>
-
-          <input type="password" id="confirm-password" class="form-input" placeholder="Confirm Password" required />
-          <div class="error-text" id="error-confirm-password"></div>
-
-          <input type="tel" id="phone" class="form-input" placeholder="Phone Number" required />
-          <div class="error-text" id="error-phone"></div>
-
-          <input type="text" id="college" class="form-input" placeholder="College Name" required />
-          <div class="error-text" id="error-college"></div>
-
-          <input type="text" id="branch" class="form-input" placeholder="Branch" required />
-          <div class="error-text" id="error-branch"></div>
-
-          <label for="passing-year">Passing Year</label>
-          <select id="passing-year" class="form-input" required>
-            <option value="" disabled selected>Select Year</option>
-            <option value="2023">2023</option>
-            <option value="2024">2024</option>
-            <option value="2025">2025</option>
-            <option value="2026">2026</option>
-            <option value="2027">2027</option>
-            <option value="2028">2028</option>
-            <option value="2029">2029</option>
-          </select>
-          <div class="error-text" id="error-passing-year"></div>
-
-          <label class="checkbox-label">
-            <input type="checkbox" id="terms" required /> I accept the Terms and Conditions
-          </label>
-          <div class="error-text" id="error-terms"></div>
-
-          <button type="submit" class="register-btn">Register</button>
-
-          <p class="social-text">Or Sign up with social platforms</p>
-          <div class="social-media">
-            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-            <a href="#" class="social-icon"><i class="fab fa-google"></i></a>
-            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-          </div>
-        </form>
-      </div>
+        <label><input type="checkbox" id="terms" required /> I accept the Terms & Conditions</label>
+        <button type="submit">Register</button>
+      </form>
     </div>
 
-    <!-- Panels Container -->
-    <div class="panels-container">
-      <div class="panel left-panel">
-        <div class="content">
-          <h3>New here?</h3>
-          <p>Create your account and get started!</p>
-          <button class="btn transparent" id="sign-up-btn">Sign up</button>
+    <div class="form-container sign-in-container">
+      <form id="sign-in-form">
+        <h2>Sign In</h2>
+        <input type="email" id="login-email" placeholder="Email" required />
+        <input type="password" id="login-password" placeholder="Password" required />
+        <div class="error-text" id="login-error"></div>
+        <button type="submit">Login</button>
+        <p>Or sign in with</p>
+        <div class="social-icons">
+          <a href="#" class="icon"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="icon"><i class="fab fa-google"></i></a>
+          <a href="#" class="icon"><i class="fab fa-linkedin-in"></i></a>
         </div>
-        <img src="img/signup.svg" class="image" alt="Sign up" />
-      </div>
-      <div class="panel right-panel">
-        <div class="content">
-          <h3>One of us?</h3>
-          <p>Already have an account? Sign in here!</p>
-          <button class="btn transparent" id="sign-in-btn">Sign in</button>
-        </div>
-        <img src="img/signin.svg" class="image" alt="Sign in" />
+      </form>
+    </div>
+
+    <div class="overlay-container">
+      <div class="overlay-panel">
+        <h3>Welcome!</h3>
+        <p>Login or register to get started with TechElevate</p>
+        <button class="ghost" id="toggle">Switch</button>
       </div>
     </div>
   </div>
 
-  <script src="/script.js"></script>
+  <script>
+    const nameInput = document.getElementById('full-name');
+    const emailInput = document.getElementById('register-email');
+    const passwordInput = document.getElementById('register-password');
+    const phoneInput = document.getElementById('phone');
+    const collegeInput = document.getElementById('college');
+    const branchInput = document.getElementById('branch');
+
+    const nameError = document.getElementById('name-error');
+    const emailError = document.getElementById('email-error');
+    const passwordError = document.getElementById('password-error');
+    const phoneError = document.getElementById('phone-error');
+    const collegeError = document.getElementById('college-error');
+    const branchError = document.getElementById('branch-error');
+
+    const nameRegex = /^[A-Za-z\s]+$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$/;
+    const phoneRegex = /^\d{10}$/;
+    const lettersOnlyRegex = /^[A-Za-z\s]+$/;
+
+    nameInput.addEventListener('input', () => {
+      nameError.textContent = nameRegex.test(nameInput.value) ? '' : 'Only letters and spaces allowed.';
+    });
+
+    emailInput.addEventListener('input', () => {
+      emailError.textContent = emailRegex.test(emailInput.value) ? '' : 'Invalid email format.';
+    });
+
+    passwordInput.addEventListener('input', () => {
+      passwordError.textContent = passwordRegex.test(passwordInput.value)
+        ? ''
+        : 'Min 8 chars, 1 uppercase, 1 lowercase, 1 special.';
+    });
+
+    phoneInput.addEventListener('input', () => {
+      phoneError.textContent = phoneRegex.test(phoneInput.value) ? '' : 'Must be 10-digit numeric.';
+    });
+
+    collegeInput.addEventListener('input', () => {
+      collegeError.textContent = lettersOnlyRegex.test(collegeInput.value) ? '' : 'Only letters and spaces allowed.';
+    });
+
+    branchInput.addEventListener('input', () => {
+      branchError.textContent = lettersOnlyRegex.test(branchInput.value) ? '' : 'Only letters and spaces allowed.';
+    });
+
+    document.getElementById('sign-up-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      if (
+        !nameRegex.test(nameInput.value) ||
+        !emailRegex.test(emailInput.value) ||
+        !passwordRegex.test(passwordInput.value) ||
+        !phoneRegex.test(phoneInput.value) ||
+        !lettersOnlyRegex.test(collegeInput.value) ||
+        !lettersOnlyRegex.test(branchInput.value)
+      ) {
+        alert('Please fill out the form correctly.');
+        return;
+      }
+
+      const users = JSON.parse(localStorage.getItem('users') || '{}');
+      users[emailInput.value] = {
+        name: nameInput.value,
+        password: passwordInput.value,
+        phone: phoneInput.value,
+        college: collegeInput.value,
+        branch: branchInput.value,
+        passingYear: document.getElementById('passing-year').value
+      };
+      localStorage.setItem('users', JSON.stringify(users));
+      alert('Account created successfully');
+      document.getElementById('container').classList.remove('right-panel-active');
+    });
+
+    document.getElementById('sign-in-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('login-email').value.trim();
+      const password = document.getElementById('login-password').value;
+      const loginError = document.getElementById('login-error');
+
+      const users = JSON.parse(localStorage.getItem('users') || '{}');
+      if (!users[email]) {
+        loginError.textContent = 'User not registered.';
+      } else if (users[email].password !== password) {
+        loginError.textContent = 'Incorrect password.';
+      } else {
+        loginError.textContent = '';
+        alert(`Welcome back, ${users[email].name}!`);
+        
+        // Redirect to the dashboard
+        window.location.href = "dashboard.html";
+    }
+    });
+
+    document.getElementById('toggle').addEventListener('click', () => {
+      document.getElementById('container').classList.toggle('right-panel-active');
+    });
+  </script>
 </body>
 </html>
