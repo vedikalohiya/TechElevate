@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TechElevate - Login/Register</title>
+  <style>
+    /* --- Base styles --- */
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-image: url('https://media.istockphoto.com/photos/laptop-with-job-search-engine-on-screen-in-modern-office-picture-id1352380090?b=1&k=20&m=1352380090&s=170667a&w=0&h=eM_nRFyGk4uQe5_WV9ZGOF4Oujohh-IIL0lyAcfrgak=');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .container {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      position: relative;
+      width: 900px;
+      max-width: 100%;
+      min-height: 600px;
+      overflow: hidden;
+      display: flex;
+      color: #000;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    form {
+      background-color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      padding: 0 30px;
+      height: 100%;
+      justify-content: center;
+    }
+    input, select {
+      background-color: #f0f0f0;
+      border: none;
+      padding: 12px;
+      margin: 4px 0;
+      border-radius: 4px;
+      width: 100%;
+      color: #000;
+    }
+    button {
+      border: none;
+      padding: 12px;
+      background-color: #ff981b;
+      color: #fff;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: 0.3s ease;
+    }
+    button:hover {
+      background-color: #00c6ff;
+    }
+    .form-container {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      max-height: 100%;
+    }
+    .overlay-container {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 50%;
+      background: #0A2647;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      padding: 40px;
+      transition: transform 0.6s ease-in-out;
+      z-index: 5;
+    }
+    .container.right-panel-active .overlay-container {
+      transform: translateX(100%);
+    }
+    .overlay-panel {
+      margin: auto;
+    }
+    .error-text {
+      color: red;
+      font-size: 0.8em;
+      margin: 2px 0 8px;
+      height: 14px;
+    }
+    .social-icons {
+      margin-top: 10px;
+    }
+    .social-icons .icon {
+      margin: 0 5px;
+      color: #555;
+      text-decoration: none;
+    }
+    label {
+      margin-top: 10px;
+    }
+    /* --- Dark mode styles --- */
+    body.dark-mode {
+      background-image: none;
+      background-color: #121212;
+      color: #ddd;
+    }
+    body.dark-mode .container {
+      background-color: #1e1e1e;
+      color: #ddd;
+      box-shadow: 0 0 20px rgba(255,255,255,0.1);
+    }
+    body.dark-mode form {
+      background-color: #1e1e1e;
+      color: #ddd;
+    }
+    body.dark-mode input, 
+    body.dark-mode select {
+      background-color: #333;
+      color: #ddd;
+    }
+    body.dark-mode button {
+      background-color: #ff981b;
+      color: #000;
+    }
+    body.dark-mode button:hover {
+      background-color: #00c6ff;
+      color: #000;
+    }
+    body.dark-mode .overlay-container {
+      background: #0f3c91;
+      color: #fff;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+        min-height: unset;
+      }
+      .overlay-container {
+        position: relative;
+        width: 100%;
+        height: 200px;
+      }
+    }
+
+    /* --- Dark mode toggle button --- */
+    #dark-mode-toggle {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      background: #ff981b;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: bold;
+      z-index: 1000;
+      transition: background-color 0.3s ease;
+    }
+    #dark-mode-toggle:hover {
+      background: #00c6ff;
+    }
+
+    /* OTP Modal Styles */
+    #otp-modal {
+      display: none; /* hidden by default */
+      position: fixed;
+      z-index: 2000;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      justify-content: center;
+      align-items: center;
+    }
+    #otp-modal.active {
+      display: flex;
+    }
+    #otp-modal .modal-content {
+      background: #fff;
+      padding: 20px 30px;
+      border-radius: 10px;
+      width: 300px;
+      max-width: 90%;
+      text-align: center;
+      color: #000;
+    }
+    #otp-modal input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0 20px;
+      font-size: 1.2em;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      text-align: center;
+      letter-spacing: 10px;
+    }
+    #otp-error {
+      color: red;
+      font-size: 0.9em;
+      margin-bottom: 10px;
+      height: 18px;
+    }
+  </style>
+</head>
+<body>
+  <button id="dark-mode-toggle">🌙 Dark Mode</button>
+
+  <div class="container" id="container">
+    <div class="form-container sign-up-container">
+      <form id="sign-up-form">
+        <h2>Create Account</h2>
+        <input type="text" id="full-name" placeholder="Full Name" required />
+        <div class="error-text" id="name-error"></div>
+
+        <input type="email" id="register-email" placeholder="Email" required />
+        <div class="error-text" id="email-error"></div>
+
+        <div style="position:relative;">
+          <input type="password" id="register-password" placeholder="Password" required style="width:100%; padding-right:40px;" />
+          <button type="button" onclick="togglePassword('register-password', this)" style="position:absolute; right:10px; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer;">👁</button>
+        </div>
+        <div class="error-text" id="password-error"></div>
+
+        <input type="tel" id="phone" placeholder="Phone Number" required />
+        <div class="error-text" id="phone-error"></div>
+
+        <input type="text" id="college" placeholder="College Name" required />
+        <div class="error-text" id="college-error"></div>
+
+        <input type="text" id="branch" placeholder="Branch" required />
+        <div class="error-text" id="branch-error"></div>
+
+        <select id="passing-year" required>
+          <option value="" disabled selected>Select Passing Year</option>
+          <option value="2023">2023</option>
+          <option value="2024">2024</option>
+          <option value="2025">2025</option>
+          <option value="2026">2026</option>
+        </select>
+
+        <label><input type="checkbox" id="terms" required /> I accept the Terms & Conditions</label>
+        <button type="submit">Register</button>
+      </form>
+    </div>
+
+    <div class="form-container sign-in-container">
+      <form id="sign-in-form">
+        <h2>Sign In</h2>
+        <input type="email" id="login-email" placeholder="Email" required />
+        <div style="position:relative;">
+          <input type="password" id="login-password" placeholder="Password" required style="width:100%; padding-right:40px;" />
+          <button type="button" onclick="togglePassword('login-password', this)" style="position:absolute; right:10px; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer;">👁</button>
+        </div>
+        <div class="error-text" id="login-error"></div>
+        <button type="submit">Login</button>
+        <p>Or sign in with</p>
+        <div class="social-icons">
+          <a href="#" class="icon"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="icon"><i class="fab fa-google"></i></a>
+          <a href="#" class="icon"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </form>
+    </div>
+
+    <div class="overlay-container">
+      <div class="overlay-panel">
+        <h3>Welcome!</h3>
+        <p>Login or register to get started with TechElevate</p>
+        <button class="ghost" id="toggle">Switch</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- OTP Modal -->
+  <div id="otp-modal">
+    <div class="modal-content">
+      <h3>Enter OTP sent to your email</h3>
+      <input type="text" id="otp-input" maxlength="6" placeholder="6-digit OTP" />
+      <div id="otp-error"></div>
+      <button id="verify-otp-btn">Verify OTP</button>
+      <button id="cancel-otp-btn" style="margin-top:10px; background:#ccc; color:#000;">Cancel</button>
+    </div>
+  </div>
+
+<script>
+  // Dark Mode toggle + persist
+  const darkModeToggle = document.getElementById('dark-mode-toggle');
+  function applyDarkMode(isDark) {
+    if (isDark) {
+      document.body.classList.add('dark-mode');
+      darkModeToggle.textContent = '☀️ Light Mode';
+      localStorage.setItem('dark-mode', 'true');
+    } else {
+      document.body.classList.remove('dark-mode');
+      darkModeToggle.textContent = '🌙 Dark Mode';
+      localStorage.setItem('dark-mode', 'false');
+    }
+  }
+  // On load apply from localStorage
+  applyDarkMode(localStorage.getItem('dark-mode') === 'true');
+  darkModeToggle.addEventListener('click', () => {
+    applyDarkMode(!document.body.classList.contains('dark-mode'));
+  });
+
+  // Toggle form panels
+  document.getElementById('toggle').addEventListener('click', () => {
+    document.getElementById('container').classList.toggle('right-panel-active');
+  });
+
+  // Password show/hide toggle
+  function togglePassword(id, btn) {
+    const input = document.getElementById(id);
+    if (input.type === 'password') {
+      input.type = 'text';
+      btn.textContent = '🙈';
+    } else {
+      input.type = 'password';
+      btn.textContent = '👁';
+    }
+  }
+
+  // Validation regexes
+  const nameRegex = /^[A-Za-z\s]+$/;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$/;
+  const phoneRegex = /^\d{10}$/;
+  const lettersOnlyRegex = /^[A-Za-z\s]+$/;
+
+  // Validation elements
+  const nameInput = document.getElementById('full-name');
+  const emailInput = document.getElementById('register-email');
+  const passwordInput = document.getElementById('register-password');
+  const phoneInput = document.getElementById('phone');
+  const collegeInput = document.getElementById('college');
+  const branchInput = document.getElementById('branch');
+
+  const nameError = document.getElementById('name-error');
+  const emailError = document.getElementById('email-error');
+  const passwordError = document.getElementById('password-error');
+  const phoneError = document.getElementById('phone-error');
+  const collegeError = document.getElementById('college-error');
+  const branchError = document.getElementById('branch-error');
+
+  // OTP modal elements
+  const otpModal = document.getElementById('otp-modal');
+  const otpInput = document.getElementById('otp-input');
+  const otpError = document.getElementById('otp-error');
+  const verifyOtpBtn = document.getElementById('verify-otp-btn');
+  const cancelOtpBtn = document.getElementById('cancel-otp-btn');
+
+  let pendingUserData = null; // store registration info while OTP verified
+
+  // Helper to validate inputs on registration form
+  function validateRegistration() {
+    let valid = true;
+
+    if (!nameRegex.test(nameInput.value.trim())) {
+      nameError.textContent = 'Name must contain only letters and spaces.';
+      valid = false;
+    } else {
+      nameError.textContent = '';
+    }
+
+    if (!emailRegex.test(emailInput.value.trim())) {
+      emailError.textContent = 'Invalid email format.';
+      valid = false;
+    } else {
+      emailError.textContent = '';
+    }
+
+    if (!passwordRegex.test(passwordInput.value)) {
+      passwordError.textContent = 'Password must be 8+ chars with uppercase, lowercase, and special char.';
+      valid = false;
+    } else {
+      passwordError.textContent = '';
+    }
+
+    if (!phoneRegex.test(phoneInput.value.trim())) {
+      phoneError.textContent = 'Phone must be 10 digits.';
+      valid = false;
+    } else {
+      phoneError.textContent = '';
+    }
+
+    if (!lettersOnlyRegex.test(collegeInput.value.trim())) {
+      collegeError.textContent = 'College name must contain only letters and spaces.';
+      valid = false;
+    } else {
+      collegeError.textContent = '';
+    }
+
+    if (!lettersOnlyRegex.test(branchInput.value.trim())) {
+      branchError.textContent = 'Branch must contain only letters and spaces.';
+      valid = false;
+    } else {
+      branchError.textContent = '';
+    }
+
+    return valid;
+  }
+
+  // Register form submission
+  document.getElementById('sign-up-form').addEventListener('submit', async e => {
+    e.preventDefault();
+    if (!validateRegistration()) return;
+
+    const userData = {
+      name: nameInput.value.trim(),
+      email: emailInput.value.trim(),
+      password: passwordInput.value, // Ideally hashed on server
+      phone: phoneInput.value.trim(),
+      college: collegeInput.value.trim(),
+      branch: branchInput.value.trim(),
+      passingYear: document.getElementById('passing-year').value,
+    };
+
+    try {
+      // Call backend API to send OTP email
+      const res = await fetch('/api/send_otp', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({email: userData.email})
+      });
+      const data = await res.json();
+      if (res.ok) {
+        pendingUserData = userData;
+        otpModal.classList.add('active');
+        otpInput.value = '';
+        otpError.textContent = '';
+      } else {
+        alert(data.error || 'Failed to send OTP. Try again.');
+      }
+    } catch (err) {
+      alert('Network error sending OTP.');
+    }
+  });
+
+  // OTP verification button
+  verifyOtpBtn.addEventListener('click', async () => {
+    const otp = otpInput.value.trim();
+    if (otp.length !== 6) {
+      otpError.textContent = 'OTP must be 6 digits.';
+      return;
+    }
+    otpError.textContent = '';
+
+    try {
+      const res = await fetch('/api/verify_otp', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({email: pendingUserData.email, otp})
+      });
+      const data = await res.json();
+      if (res.ok) {
+        // OTP verified, now finalize registration
+        const registerRes = await fetch('/api/register', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(pendingUserData)
+        });
+        const registerData = await registerRes.json();
+        if (registerRes.ok) {
+          alert('Registration successful! You can now login.');
+          otpModal.classList.remove('active');
+          document.getElementById('sign-up-form').reset();
+          document.getElementById('container').classList.remove('right-panel-active');
+        } else {
+          alert(registerData.error || 'Registration failed.');
+        }
+      } else {
+        otpError.textContent = data.error || 'Invalid OTP.';
+      }
+    } catch (err) {
+      otpError.textContent = 'Network error verifying OTP.';
+    }
+  });
+ 
+  // Cancel OTP modal
+  cancelOtpBtn.addEventListener('click', () => {
+    otpModal.classList.remove('active');
+  });
+
+  // Login form submission
+  document.getElementById('sign-in-form').addEventListener('submit', async e => {
+    e.preventDefault();
+    const email = document.getElementById('login-email').value.trim();
+    const password = document.getElementById('login-password').value;
+    const loginError = document.getElementById('login-error');
+    loginError.textContent = '';
+
+    if (!emailRegex.test(email)) {
+      loginError.textContent = 'Invalid email.';
+      return;
+    }
+    if (!password) {
+      loginError.textContent = 'Enter password.';
+      return;
+    }
+
+    try {
+      const res = await fetch('/api/login', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({email, password})
+      });
+      const data = await res.json();
+      if (res.ok) {
+        alert('Login successful! Redirecting...');
+        // Redirect or show dashboard etc.
+        window.location.href = '/dashboard'; // example
+      } else {
+        loginError.textContent = data.error || 'Login failed.';
+      }
+    } catch (err) {
+      loginError.textContent = 'Network error during login.';
+    }
+  });
+</script>
+</body>
+</html>
