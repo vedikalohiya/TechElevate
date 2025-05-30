@@ -7,7 +7,7 @@ app = Flask(__name__)
 CORS(app)
 
 # MongoDB configuration
-app.config["MONGO_URI"] = "mongodb://localhost:27017/techelevate"
+app.config["MONGO_URI"] = "mongodb://localhost:27017/TechElevate"
 mongo = PyMongo(app)
 
 # Serve the single signin.html which contains both signin & signup forms
@@ -16,7 +16,7 @@ def index():
     return render_template('signin.html')
 
 # Signup API
-@app.route('/api/signup', methods=['POST'])
+@app.route('/api/signin', methods=['POST'])
 def signup():
     data = request.get_json()
     email = data.get('email')
