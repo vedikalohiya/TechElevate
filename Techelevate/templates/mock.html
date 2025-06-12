@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>Mock Test</title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
       body {
         background: url("https://media.istockphoto.com/photos/laptop-with-job-search-engine-on-screen-in-modern-office-picture-id1352380090?b=1&k=20&m=1352380090&s=170667a&w=0&h=eM_nRFyGk4uQe5_WV9ZGOF4Oujohh-IIL0lyAcfrgak=")
@@ -23,6 +24,92 @@
         background-color: rgba(202, 169, 169, 0.7);
         z-index: -1;
       }
+     .navbar {
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+.glass {
+  background: rgba(10, 38, 71, 0.6);
+  border-radius: 0;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  padding: 6px 12px;
+  border-radius: 8px;
+}
+
+.nav-links li a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #00bcd4;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+}
+
+.hamburger span {
+  height: 3px;
+  width: 25px;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 65px;
+    right: 30px;
+    background: rgba(10, 38, 71, 0.95);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}
+.large-icon {
+  font-size: 1.4rem; /* Try 1.6rem or 2rem if you want bigger */
+}
 
       h1 {
         text-align: center;
@@ -136,6 +223,21 @@
     </style>
   </head>
   <body>
+    <nav class="navbar glass">
+    <div class="logo">TechElevate</div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="dash.html"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+      <li><a href="aboutus.html"><i class="fa-solid fa-info"></i> About Us</a></li>
+      <li><a href="contact.html"><i class="fa-solid fa-phone"></i> Contact</a></li>
+      <li><a href="#"><i class="fa-solid fa-gear"></i> Settings</a></li>
+      <li><a href="profile.html"><i class="fa-solid fa-user"></i> </a></li>
+    </ul>
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </nav>
     <h1>Mock Test</h1>
     <div class="tabs">
       <button onclick="loadQuestions('cpp', event)" class="active">C++</button>
@@ -144,14 +246,19 @@
     </div>
 
     <div class="container">
-      <div id="timer">
-        Time Left: <span id="time-left">05:00</span>
-      </div>
+      <div id="timer">Time Left: <span id="time-left">05:00</span></div>
       <div id="quiz-container"></div>
       <div id="result"></div>
     </div>
 
     <script>
+      const hamburger = document.getElementById("hamburger");
+      const navLinks = document.getElementById("navLinks");
+
+      hamburger.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+      });
+
       const data = {
         cpp: [
           {
@@ -253,16 +360,18 @@
         currentLang = lang;
         clearInterval(timerInterval);
 
-        document.querySelectorAll(".tabs button").forEach((btn) =>
-          btn.classList.remove("active")
-        );
+        document
+          .querySelectorAll(".tabs button")
+          .forEach((btn) => btn.classList.remove("active"));
         event.target.classList.add("active");
 
         const quiz = document.getElementById("quiz-container");
         const questions = data[lang];
         let html = "";
         questions.forEach((q, i) => {
-          html += `<div class="question">${i + 1}. ${q.q}</div><div class="options">`;
+          html += `<div class="question">${i + 1}. ${
+            q.q
+          }</div><div class="options">`;
           q.options.forEach((opt, j) => {
             html += ` 
               <label>
@@ -311,28 +420,34 @@
                 Correct answer: <span style="color:green;">${correct}</span>
               </div
         `;
+          }
+        });
+
+        document.getElementById(
+          "result"
+        ).innerHTML = `You scored ${score} out of ${questions.length}`;
+        document.getElementById("quiz-container").innerHTML += feedback;
       }
-    });
 
-    document.getElementById("result").innerHTML = `You scored ${score} out of ${questions.length}`;
-    document.getElementById("quiz-container").innerHTML += feedback;
-  }
-
-  function startTimer() {
-    let time = 300;
-    timerInterval = setInterval(() => {
-      const minutes = Math.floor(time / 60);
-      const seconds = time % 60;
-      document.getElementById("time-left").textContent =
-        `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
-      if (time === 0) {
-        clearInterval(timerInterval);
-        submitQuiz();
+      function startTimer() {
+        let time = 300;
+        timerInterval = setInterval(() => {
+          const minutes = Math.floor(time / 60);
+          const seconds = time % 60;
+          document.getElementById("time-left").textContent = `${String(
+            minutes
+          ).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+          if (time === 0) {
+            clearInterval(timerInterval);
+            submitQuiz();
+          }
+          time--;
+        }, 1000);
       }
-      time--;
-    }, 1000);
-  }
 
-  loadQuestions(currentLang, { target: document.querySelector(".tabs button") });
-</script>
-</body> </html>
+      loadQuestions(currentLang, {
+        target: document.querySelector(".tabs button"),
+      });
+    </script>
+  </body>
+</html>

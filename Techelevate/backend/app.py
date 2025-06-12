@@ -10,15 +10,10 @@ CORS(app)
 app.config["MONGO_URI"] = "mongodb://localhost:27017/TechElevate"
 mongo = PyMongo(app)
 
-<<<<<<< HEAD
-@app.route('/signin')
-def signin():
-=======
-# Serve login/register page
 @app.route('/')
 def index():
->>>>>>> 52a9500eed431078f502adffc1e39e7a4998a889
     return render_template('signin.html')
+
 
 # Serve home.html after login
 @app.route('/home')

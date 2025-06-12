@@ -6,16 +6,103 @@
   <meta name="description" content="Technical Preparation by Topic for coding interviews. Explore topics like Arrays, Strings, DP, and more.">
   <meta name="keywords" content="coding, interview, preparation, technical, problems, LeetCode">
   <meta name="author" content="Your Name">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <title>Tech Questions by a Topic</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: url('/ai_interviewer/static/img/technical.jpg') no-repeat center center fixed;
+      background: url('/tech1/Techelevate/static/img/technical.jpg') no-repeat center center fixed;
       background-size: cover;
       margin: 0;
       padding: 2rem;
-      color: #fff;
+      color: #000000;
     }
+     .navbar {
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+.glass {
+  background: rgba(10, 38, 71, 0.6);
+  border-radius: 0;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  padding: 6px 12px;
+  border-radius: 8px;
+}
+
+.nav-links li a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #00bcd4;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+}
+
+.hamburger span {
+  height: 3px;
+  width: 25px;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 65px;
+    right: 30px;
+    background: rgba(10, 38, 71, 0.95);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}
+.large-icon {
+  font-size: 1.4rem; /* Try 1.6rem or 2rem if you want bigger */
+}
 
     .header-container {
       background: rgba(42, 62, 86, 0.85);
@@ -209,6 +296,22 @@
   </style>
 </head>
 <body>
+   <nav class="navbar">
+    <div class="logo">TechElevate</div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="dash.html"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+      <li><a href="aboutus.html"><i class="fa-solid fa-info"></i> About Us</a></li>
+      <li><a href="contact.html"><i class="fa-solid fa-phone"></i> Contact</a></li>
+      <li><a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
+      <li><a href="profile.html"><i class="fa-solid fa-user large-icon"></i></a></li>
+    </ul>
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </nav>
+ 
   <div class="header-container">
     <h1>TECHNICAL PREPARATION TOPIC-WISE</h1>
   </div>
@@ -238,7 +341,7 @@
   <script>
     let problemsData = [];
 
-    fetch('/problems.json')
+    fetch('/tech1/Techelevate/static/problems.json')
       .then(res => res.json())
       .then(data => {
         problemsData = data;
