@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantitative Aptitude Questions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .question {
+            background-color: #eaeaea;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+
+        .question h3 {
+            color: #0A2647;
+        }
+
+        .solution {
+            display: none;
+            padding: 10px;
+            background-color: #d4edda;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+
+        .show-answer {
+            background-color: #0A2647;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .show-answer:hover {
+            background-color: #06203B;
+        }
+
+        .back-btn {
+            background-color: #0A2647;
+            color: white;
+            padding: 10px 20px;
+            margin: 20px 0;
+            cursor: pointer;
+            border-radius: 5px;
+            text-align: center;
+            display: block;
+            width: 200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .back-btn:hover {
+            background-color: #06203B;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Quantitative Aptitude Questions</h1>
+
+        <!-- Question 1 -->
+        <div class="question">
+            <h3>1. If the salary is $5000, how much does he pay in rent?</h3>
+            <button class="show-answer" onclick="toggleSolution(1)">Show Answer</button>
+            <div class="solution" id="solution-1">
+                Answer: He pays $1500 in rent.
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question">
+            <h3>2. What is 25% of 2400?</h3>
+            <button class="show-answer" onclick="toggleSolution(2)">Show Answer</button>
+            <div class="solution" id="solution-2">
+                Answer: 600.
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question">
+            <h3>3. A shopkeeper sells a product for $500, which costs him $400. What is his profit percentage?</h3>
+            <button class="show-answer" onclick="toggleSolution(3)">Show Answer</button>
+            <div class="solution" id="solution-3">
+                Answer: Profit = Selling Price - Cost Price = 500 - 400 = 100. Profit Percentage = (Profit / Cost Price) × 100 = (100 / 400) × 100 = 25%.
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question">
+            <h3>4. If a car travels 60 miles in 1 hour, how much distance will it travel in 5 hours?</h3>
+            <button class="show-answer" onclick="toggleSolution(4)">Show Answer</button>
+            <div class="solution" id="solution-4">
+                Answer: Distance = Speed × Time = 60 × 5 = 300 miles.
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question">
+            <h3>5. The cost of 5 pens and 7 pencils is $45. If the cost of a pen is $5, what is the cost of a pencil?</h3>
+            <button class="show-answer" onclick="toggleSolution(5)">Show Answer</button>
+            <div class="solution" id="solution-5">
+                Answer: Let the cost of a pencil be 'x'. The equation becomes 5(5) + 7x = 45. Simplifying: 25 + 7x = 45, so 7x = 20, hence x = 20 / 7 = $2.86 approximately.
+            </div>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="question">
+            <h3>6. A sum of $1500 is invested at 8% annual interest. How much interest will be earned in 2 years?</h3>
+            <button class="show-answer" onclick="toggleSolution(6)">Show Answer</button>
+            <div class="solution" id="solution-6">
+                Answer: Interest = Principal × Rate × Time / 100 = 1500 × 8 × 2 / 100 = $240.
+            </div>
+        </div>
+
+        <!-- Question 7 -->
+        <div class="question">
+            <h3>7. A train runs at 72 km/h. How much time will it take to cover a distance of 180 km?</h3>
+            <button class="show-answer" onclick="toggleSolution(7)">Show Answer</button>
+            <div class="solution" id="solution-7">
+                Answer: Time = Distance / Speed = 180 / 72 = 2.5 hours.
+            </div>
+        </div>
+
+        <!-- Question 8 -->
+        <div class="question">
+            <h3>8. What is the area of a triangle with base 10 cm and height 12 cm?</h3>
+            <button class="show-answer" onclick="toggleSolution(8)">Show Answer</button>
+            <div class="solution" id="solution-8">
+                Answer: Area of triangle = (Base × Height) / 2 = (10 × 12) / 2 = 60 cm².
+            </div>
+        </div>
+
+        <!-- Question 9 -->
+        <div class="question">
+            <h3>9. If a person spends 30% of his income on rent, and his monthly income is $3000, how much does he spend on rent?</h3>
+            <button class="show-answer" onclick="toggleSolution(9)">Show Answer</button>
+            <div class="solution" id="solution-9">
+                Answer: Rent spent = 30% of 3000 = (30/100) × 3000 = $900.
+            </div>
+        </div>
+
+        <!-- Question 10 -->
+        <div class="question">
+            <h3>10. A man can complete a task in 12 hours. How much time will it take him to finish the task if he works at twice the speed?</h3>
+            <button class="show-answer" onclick="toggleSolution(10)">Show Answer</button>
+            <div class="solution" id="solution-10">
+                Answer: If the speed is doubled, time will be halved. Time taken = 12 / 2 = 6 hours.
+            </div>
+        </div>
+
+        <!-- Question 11 -->
+        <div class="question">
+            <h3>11. The ratio of the ages of two brothers is 4:5. If the elder brother is 25 years old, what is the age of the younger brother?</h3>
+            <button class="show-answer" onclick="toggleSolution(11)">Show Answer</button>
+            <div class="solution" id="solution-11">
+                Answer: Let the age of the younger brother be x. According to the ratio, 4x = 25 × 4/5, hence x = 20 years.
+            </div>
+        </div>
+
+        <!-- Question 12 -->
+        <div class="question">
+            <h3>12. A car depreciates in value by 10% per year. If it is worth $15000 now, what will be its value after 2 years?</h3>
+            <button class="show-answer" onclick="toggleSolution(12)">Show Answer</button>
+            <div class="solution" id="solution-12">
+                Answer: After 1st year: 15000 × (1 - 0.10) = $13500. After 2nd year: 13500 × (1 - 0.10) = $12150.
+            </div>
+        </div>
+
+        <!-- Question 13 -->
+        <div class="question">
+            <h3>13. The length of a rectangle is 20 cm more than its breadth. If the perimeter of the rectangle is 160 cm, find its dimensions.</h3>
+            <button class="show-answer" onclick="toggleSolution(13)">Show Answer</button>
+            <div class="solution" id="solution-13">
+                Answer: Let the breadth be x cm. Length = x + 20 cm. Perimeter = 2 × (Length + Breadth) = 160 cm. Solving, x = 30 cm, Length = 50 cm.
+            </div>
+        </div>
+
+        <!-- Question 14 -->
+        <div class="question">
+            <h3>14. The price of a book is increased by 25%. If the original price was $120, what is the new price?</h3>
+            <button class="show-answer" onclick="toggleSolution(14)">Show Answer</button>
+            <div class="solution" id="solution-14">
+                Answer: New price = 120 × (1 + 0.25) = $150.
+            </div>
+        </div>
+
+        <!-- Question 15 -->
+        <div class="question">
+            <h3>15. A person invested $5000 at 10% compound interest. How much interest will he earn in 2 years?</h3>
+            <button class="show-answer" onclick="toggleSolution(15)">Show Answer</button>
+            <div class="solution" id="solution-15">
+                Answer: Compound Interest = 5000 × (1 + 0.10)² - 5000 = $1050.
+            </div>
+        </div>
+
+        <!-- Question 16 -->
+        <div class="question">
+            <h3>16. A bag contains 3 red, 5 blue, and 2 green balls. If one ball is drawn at random, what is the probability that it is red?</h3>
+            <button class="show-answer" onclick="toggleSolution(16)">Show Answer</button>
+            <div class="solution" id="solution-16">
+                Answer: Probability = (Number of red balls) / (Total number of balls) = 3/10.
+            </div>
+        </div>
+
+        <!-- Question 17 -->
+        <div class="question">
+            <h3>17. If 15% of a number is 75, what is the number?</h3>
+            <button class="show-answer" onclick="toggleSolution(17)">Show Answer</button>
+            <div class="solution" id="solution-17">
+                Answer: Let the number be x. 15% of x = 75, so x = 75 / 0.15
+                = 500.
+            </div>
+            </div>
+                <!-- Question 18 -->
+    <div class="question">
+        <h3>18. A person can walk 5 km in 1 hour. How far can he walk in 5 hours and 30 minutes?</h3>
+        <button class="show-answer" onclick="toggleSolution(18)">Show Answer</button>
+        <div class="solution" id="solution-18">
+            Answer: Distance = 5 × 5.5 = 27.5 km.
+        </div>
+    </div>
+
+    <!-- Question 19 -->
+    <div class="question">
+        <h3>19. The sum of the ages of a mother and her daughter is 50 years. The mother is four times as old as the daughter. Find their ages.</h3>
+        <button class="show-answer" onclick="toggleSolution(19)">Show Answer</button>
+        <div class="solution" id="solution-19">
+            Answer: Let the daughter's age be x. The mother's age = 4x. Hence, x + 4x = 50, so x = 10 years. Mother’s age = 40 years.
+        </div>
+    </div>
+
+    <!-- Question 20 -->
+    <div class="question">
+        <h3>20. A man completes a task in 8 hours. If he works 1.5 times as fast, how much time will he take to finish the same task?</h3>
+        <button class="show-answer" onclick="toggleSolution(20)">Show Answer</button>
+        <div class="solution" id="solution-20">
+            Answer: If the speed increases, the time taken decreases. Time = 8 / 1.5 = 5.33 hours.
+        </div>
+    </div>
+
+        <button class="back-btn" onclick="window.location.href='/apti'">Back to Home</button>
+</div>
+
+<script>
+    function toggleSolution(questionId) {
+        var solution = document.getElementById('solution-' + questionId);
+        if (solution.style.display === 'block') {
+            solution.style.display = 'none';
+        } else {
+            solution.style.display = 'block';
+        }
+    }
+</script>

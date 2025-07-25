@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <title>TechElevate Mock Test</title>
+    <style>
+     body {
+  background: url('static/img/mock.webp') no-repeat center center fixed;
+      background-size: cover;        
+        font-family: "Segoe UI", sans-serif;
+        color: #fff;
+        margin: 0;
+        padding: 20px;
+      }
+      .navbar {
+        padding: 15px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #fff;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+      }
+
+      .glass {
+        background: rgba(10, 38, 71, 0.6);
+        border-radius: 0;
+      }
+
+      .logo {
+        font-size: 1.8rem;
+        font-weight: bold;
+      }
+
+      .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 25px;
+      }
+
+      .nav-links li a {
+        text-decoration: none;
+        color: #fff;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.3s ease;
+        padding: 6px 12px;
+        border-radius: 8px;
+      }
+
+      .nav-links li a:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: #00bcd4;
+      }
+
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        gap: 5px;
+      }
+
+      .hamburger span {
+        height: 3px;
+        width: 25px;
+        background-color: #fff;
+        border-radius: 5px;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+          flex-direction: column;
+          position: absolute;
+          top: 65px;
+          right: 30px;
+          background: rgba(10, 38, 71, 0.95);
+          padding: 20px;
+          border-radius: 12px;
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .nav-links.active {
+          display: flex;
+        }
+
+        .hamburger {
+          display: flex;
+        }
+      }
+      .large-icon {
+        font-size: 1.4rem; /* Try 1.6rem or 2rem if you want bigger */
+      }
+
+      .container {
+        max-width: 960px;
+        margin: 40px auto;
+        padding: 30px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 20px;
+        backdrop-filter: blur(12px);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+      }
+
+      h1 {
+        text-align: center;
+        color: #ffe600;
+        font-size: 36px;
+        margin-bottom: 30px;
+        letter-spacing: 1px;
+      }
+
+      .tabs {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 25px;
+        gap: 10px;
+      }
+
+      .tabs button {
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;
+        border: 1px solid #444;
+        padding: 12px 20px;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 600;
+      }
+
+      .tabs button:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: scale(1.05);
+      }
+
+      .tabs button.active {
+        background: #ffe600;
+        color: #000;
+        box-shadow: 0 0 10px #ffe600aa;
+      }
+
+      .question {
+        font-size: 20px;
+        margin: 20px 0 10px;
+        font-weight: 600;
+      }
+
+      .options label {
+        display: block;
+        margin: 8px 0;
+        padding: 10px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.08);
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+
+      .options label:hover {
+        background: rgba(255, 255, 255, 0.15);
+      }
+
+      input[type="radio"] {
+        margin-right: 10px;
+        transform: scale(1.2);
+      }
+
+      #submit {
+        display: block;
+        margin: 30px auto 10px;
+        padding: 12px 25px;
+        background: #ffe600;
+        color: #000;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: bold;
+        box-shadow: 0 0 15px #ffe600aa;
+        transition: background 0.3s;
+      }
+
+      #submit:hover {
+        background: #fff04b;
+      }
+
+      .correct {
+        color: #66ff99;
+        font-weight: bold;
+      }
+
+      .incorrect {
+        color: #ff6666;
+        font-weight: bold;
+      }
+
+      #result {
+        text-align: center;
+        margin: 25px 0 10px;
+        font-size: 22px;
+        font-weight: bold;
+        color: #ffffff;
+        text-shadow: 0 0 8px #f0db4f;
+      }
+
+      .correction {
+        background: rgba(255, 255, 255, 0.06);
+        border-left: 6px solid #ffe600;
+        margin: 15px 0;
+        padding: 12px;
+        border-radius: 10px;
+        font-size: 16px;
+      }
+
+      #time-left {
+        text-align: center;
+        font-size: 18px;
+        margin-bottom: 20px;
+        font-weight: 500;
+        color: #ffe600;
+      }
+
+      @media (max-width: 600px) {
+        .tabs {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .tabs button {
+          width: 80%;
+          font-size: 16px;
+        }
+
+        .container {
+          margin: 20px;
+          padding: 20px;
+        }
+
+        h1 {
+          font-size: 28px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="logo">TechElevate</div>
+      <ul class="nav-links" id="navLinks">
+        <li>
+          <a href="/dashboard"><i class="fa-solid fa-house"></i> Dashboard</a>
+        </li>
+        <li>
+          <a href="/aboutus"><i class="fa-solid fa-info"></i> About Us</a>
+        </li>
+        <li>
+          <a href="/contact"><i class="fa-solid fa-phone"></i> Contact</a>
+        </li>
+        <li>
+          <a href="/profile"><i class="fa-solid fa-user large-icon"></i></a>
+        </li>
+      </ul>
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+    <div class="container">
+      <h1>Mock Test</h1>
+      <div id="time-left">10:00</div>
+      <div class="tabs">
+        <button onclick="loadQuestions('cpp', event)">C++</button>
+        <button onclick="loadQuestions('java', event)">Java</button>
+        <button onclick="loadQuestions('python', event)">Python</button>
+        <button onclick="loadQuestions('frontend', event)">Frontend</button>
+        <button onclick="loadQuestions('backend', event)">Backend</button>
+        <button onclick="loadQuestions('web', event)">Web</button>
+        <button onclick="loadQuestions('fullstack', event)">Full Stack</button>
+        <button onclick="loadQuestions('appdev', event)">App Dev</button>
+        <button onclick="loadQuestions('ai', event)">AI</button>
+        <button onclick="loadQuestions('ml', event)">ML</button>
+        <button onclick="loadQuestions('ds', event)">DS</button>
+        <button onclick="loadQuestions('cloud', event)">Cloud</button>
+        <button onclick="loadQuestions('cyber', event)">Cybersecurity</button>
+        <button onclick="loadQuestions('devops', event)">DevOps</button>
+        <button onclick="loadQuestions('blockchain', event)">Blockchain</button>
+        <button onclick="loadQuestions('gamedev', event)">Game Dev</button>
+        <button onclick="loadQuestions('uiux', event)">UI/UX</button>
+      </div>
+
+      <div id="quiz-container"></div>
+      <div id="result"></div>
+    </div>
+
+ <script>
+  let questions = [];
+  let currentQuestion = 0;
+  let score = 0;
+  let timerInterval;
+
+  async function loadQuestions(topic, event) {
+    clearInterval(timerInterval);
+    document.getElementById('result').innerHTML = '';
+    document.getElementById('quiz-container').innerHTML = '';
+    currentQuestion = 0;
+    score = 0;
+
+    // Highlight active button
+    document.querySelectorAll('.tabs button').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+
+    // Load questions
+    const res = await fetch('static/mock.json'); // Update path as per your setup
+    const data = await res.json();
+    questions = data[topic];
+
+    if (!questions || questions.length === 0) {
+      document.getElementById('quiz-container').innerHTML = '<p>No questions available.</p>';
+      return;
+    }
+
+    startTimer(600);
+    showQuestion();
+  }
+
+  function startTimer(seconds) {
+    const timerEl = document.getElementById('time-left');
+    let time = seconds;
+    timerEl.textContent = formatTime(time);
+
+    timerInterval = setInterval(() => {
+      time--;
+      timerEl.textContent = formatTime(time);
+      if (time <= 0) {
+        clearInterval(timerInterval);
+        showResult();
+      }
+    }, 1000);
+  }
+
+  function formatTime(sec) {
+    const m = Math.floor(sec / 60);
+    const s = sec % 60;
+    return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+  }
+
+  function showQuestion() {
+    const q = questions[currentQuestion];
+    const container = document.getElementById('quiz-container');
+    let html = `<div class="question">Q${currentQuestion + 1}: ${q.q}</div><div class="options">`;
+    q.options.forEach((opt, i) => {
+      html += `<label onclick="checkAnswer(${i})">${opt}</label>`;
+    });
+    html += `</div>`;
+    container.innerHTML = html;
+  }
+
+  function checkAnswer(selected) {
+    if (selected === questions[currentQuestion].answer) score++;
+    currentQuestion++;
+    if (currentQuestion < questions.length) {
+      showQuestion();
+    } else {
+      clearInterval(timerInterval);
+      showResult();
+    }
+  }
+
+  function showResult() {
+    document.getElementById('quiz-container').innerHTML = '';
+    document.getElementById('result').innerHTML = `<h2>Score: ${score}/${questions.length}</h2>`;
+  }
+
+  // Mobile navbar toggle
+  document.getElementById("hamburger").addEventListener("click", () => {
+    document.getElementById("navLinks").classList.toggle("active");
+  });
+</script>

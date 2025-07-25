@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profit and Loss Questions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .question-box {
+            background-color: #0A2647;
+            color: #fff;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+
+        .question-box h3 {
+            margin-top: 0;
+        }
+
+        .cta {
+            background-color: #0A2647;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .cta:hover {
+            background-color: #06203B;
+        }
+
+        .solution {
+            display: none;
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #f4f4f4;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Profit and Loss Questions</h1>
+
+        <!-- Question 1 -->
+        <div class="question-box">
+            <h3>1. A shopkeeper bought an item for $400 and sold it for $500. What is the profit percentage?</h3>
+            <button class="cta" onclick="toggleSolution('solution1')">Show Answer</button>
+            <div class="solution" id="solution1">
+                <p>The profit percentage is 25%. (Profit = 500 - 400 = 100; Profit percentage = 100/400 * 100 = 25%).</p>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question-box">
+            <h3>2. A person sold an item for $2000, making a loss of 20%. What was the cost price?</h3>
+            <button class="cta" onclick="toggleSolution('solution2')">Show Answer</button>
+            <div class="solution" id="solution2">
+                <p>The cost price was $2500. (Selling Price = Cost Price - 20% of Cost Price; 2000 = Cost Price * (1 - 0.2); Cost Price = 2000/0.8 = 2500).</p>
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question-box">
+            <h3>3. A shopkeeper bought an item for $300 and sold it for $360. What is the profit percentage?</h3>
+            <button class="cta" onclick="toggleSolution('solution3')">Show Answer</button>
+            <div class="solution" id="solution3">
+                <p>The profit percentage is 20%. (Profit = 360 - 300 = 60; Profit percentage = 60/300 * 100 = 20%).</p>
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question-box">
+            <h3>4. A person sold an item for $1500, making a profit of 25%. What was the cost price?</h3>
+            <button class="cta" onclick="toggleSolution('solution4')">Show Answer</button>
+            <div class="solution" id="solution4">
+                <p>The cost price was $1200. (Selling Price = Cost Price + 25% of Cost Price; 1500 = Cost Price * (1 + 0.25); Cost Price = 1500/1.25 = 1200).</p>
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question-box">
+            <h3>5. A trader bought an article for $800 and sold it for $1000. What is the profit percentage?</h3>
+            <button class="cta" onclick="toggleSolution('solution5')">Show Answer</button>
+            <div class="solution" id="solution5">
+                <p>The profit percentage is 25%. (Profit = 1000 - 800 = 200; Profit percentage = 200/800 * 100 = 25%).</p>
+            </div>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="question-box">
+            <h3>6. A person sold a watch for $4000, making a loss of 10%. What was the cost price?</h3>
+            <button class="cta" onclick="toggleSolution('solution6')">Show Answer</button>
+            <div class="solution" id="solution6">
+                <p>The cost price was $4444.44. (Selling Price = Cost Price - 10% of Cost Price; 4000 = Cost Price * (1 - 0.1); Cost Price = 4000/0.9 = 4444.44).</p>
+            </div>
+        </div>
+
+        <!-- Question 7 -->
+        <div class="question-box">
+            <h3>7. A shopkeeper sold an item for $540 at a loss of 10%. What is the cost price?</h3>
+            <button class="cta" onclick="toggleSolution('solution7')">Show Answer</button>
+            <div class="solution" id="solution7">
+                <p>The cost price was $600. (Selling Price = Cost Price - 10% of Cost Price; 540 = Cost Price * (1 - 0.1); Cost Price = 540/0.9 = 600).</p>
+            </div>
+        </div>
+
+        <!-- Question 8 -->
+        <div class="question-box">
+            <h3>8. A person sold a book for $1200, making a profit of 20%. What was the cost price?</h3>
+            <button class="cta" onclick="toggleSolution('solution8')">Show Answer</button>
+            <div class="solution" id="solution8">
+                <p>The cost price was $1000. (Selling Price = Cost Price + 20% of Cost Price; 1200 = Cost Price * (1 + 0.2); Cost Price = 1200/1.2 = 1000).</p>
+            </div>
+        </div>
+
+        <!-- Question 9 -->
+        <div class="question-box">
+            <h3>9. A person bought an article for $500 and sold it at a profit of 10%. What was the selling price?</h3>
+            <button class="cta" onclick="toggleSolution('solution9')">Show Answer</button>
+            <div class="solution" id="solution9">
+                <p>The selling price was $550. (Profit = 10% of 500 = 50; Selling Price = 500 + 50 = 550).</p>
+            </div>
+        </div>
+
+        <!-- Question 10 -->
+        <div class="question-box">
+            <h3>10. A shopkeeper bought a laptop for $800 and sold it for $960. What is the profit percentage?</h3>
+            <button class="cta" onclick="toggleSolution('solution10')">Show Answer</button>
+            <div class="solution" id="solution10">
+                <p>The profit percentage is 20%. (Profit = 960 - 800 = 160; Profit percentage = 160/800 * 100 = 20%).</p>
+            </div>
+        </div>
+
+        <!-- Question 11 -->
+        <div class="question-box">
+            <h3>11. A person bought a camera for $6000 and sold it for $7200. What is the profit percentage?</h3>
+            <button class="cta" onclick="toggleSolution('solution11')">Show Answer</button>
+            <div class="solution" id="solution11">
+                <p>The profit percentage is 20%. (Profit = 7200 - 6000 = 1200; Profit percentage = 1200/6000 * 100 = 20%).</p>
+            </div>
+        </div>
+
+        <!-- Question 12 -->
+        <div class="question-box">
+            <h3>12. A person sold a camera for $2500 at a profit of 25%. What was the cost price?</h3>
+            <button class="cta" onclick="toggleSolution('solution12')">Show Answer</button>
+            <div class="solution" id="solution12">
+                <p>The cost price was $2000. (Selling Price = Cost Price + 25% of Cost Price; 2500 = Cost Price * (1 + 0.25); Cost Price = 2500/1.25 = 2000).</p>
+            </div>
+        </div>
+
+        <!-- Question 13 -->
+        <div class="question-box">
+            <h3>13. A person bought a pair of shoes for $1200 and sold it for $1500. What is the profit percentage?</h3>
+            <button class="cta" onclick="toggleSolution('solution13')">Show Answer</button>
+            <div class="solution" id="solution13">
+                <p>The profit percentage is 25%. (Profit = 1500 - 1200 = 300; Profit percentage = 300/1200 * 100 = 25%).</p>
+            </div>
+        </div>
+
+        <!-- Question 14 -->
+        <div class="question-box">
+            <h3>14. A person bought a refrigerator for $5000 and sold it at a loss of 10%. What was the selling price?</h3>
+            <button class="cta" onclick="toggleSolution('solution14')">Show Answer</button>
+            <div class="solution" id="solution14">
+                <p>The selling price was $4500. (Loss = 10% of 5000 = 500; Selling Price = 5000 - 500 = 4500).</p>
+            </div>
+        </div>
+
+        <!-- Question 15 -->
+        <div class="question-box">
+            <h3>15. A trader bought an item for $500 and sold it for $600. What is the profit percentage?</h3>
+            <button class="cta" onclick="toggleSolution('solution15')">Show Answer</button>
+            <div class="solution" id="solution15">
+                <p>The profit percentage is 20%. (Profit = 600 - 500 = 100; Profit percentage = 100/500 * 100 = 20%).</p>
+            </div>
+        </div>
+
+        <!-- Question 16 -->
+        <div class="question-box">
+            <h3>16. A person sold a TV for $8000, making a profit of 20%. What was the cost price?</h3>
+            <button class="cta" onclick="toggleSolution('solution16')">Show Answer</button>
+            <div class="solution" id="solution16">
+                <p>The cost price was $6666.67. (Selling Price = Cost Price + 20% of Cost Price; 8000 = Cost Price * (1 + 0.2); Cost Price = 8000/1.2 = 6666.67).</p>
+            </div>
+        </div>
+
+        <!-- Question 17 -->
+        <div class="question-box">
+            <h3>17. A person sold a chair for $700 at a loss of 10%. What was the cost price?</h3>
+            <button class="cta" onclick="toggleSolution('solution17')">Show Answer</button>
+            <div class="solution" id="solution17">
+                <p>The cost price was $777.78. (Selling Price = Cost Price - 10% of Cost Price; 700 = Cost Price * (1 - 0.1); Cost Price = 700/0.9 = 777.78).</p>
+            </div>
+        </div>
+
+        <!-- Question 18 -->
+        <div class="question-box">
+            <h3>18. A person bought a laptop for $4000 and sold it for $4800. What is the profit percentage?</h3>
+            <button class="cta" onclick="toggleSolution('solution18')">Show Answer</button>
+            <div class="solution" id="solution18">
+                <p>The profit percentage is 20%. (Profit = 4800 - 4000 = 800; Profit percentage = 800/4000 * 100 = 20%).</p>
+            </div>
+        </div>
+
+        <!-- Question 19 -->
+        <div class="question-box">
+            <h3>19. A person bought a painting for $2000 and sold it at a profit of 15%. What was the selling price?</h3>
+            <button class="cta" onclick="toggleSolution('solution19')">Show Answer</button>
+            <div class="solution" id="solution19">
+                <p>The selling price was $2300. (Profit = 15% of 2000 = 300; Selling Price = 2000 + 300 = 2300).</p>
+            </div>
+            </div>
+                <!-- Question 20 -->
+    <div class="question-box">
+        <h3>20. A shopkeeper sold a watch for $700, making a profit of 40%. What was the cost price?</h3>
+        <button class="cta" onclick="toggleSolution('solution20')">Show Answer</button>
+        <div class="solution" id="solution20">
+            <p>The cost price was $500. (Selling Price = Cost Price + 40% of Cost Price; 700 = Cost Price * (1 + 0.4); Cost Price = 700/1.4 = 500).</p>
+        </div>
+    </div>
+
+        <button class="back-btn" onclick="window.location.href='/apti'">Back to Home</button>
+</div>
+
+<script>
+    function toggleSolution(id) {
+        const solution = document.getElementById(id);
+        solution.style.display = solution.style.display === "block" ? "none" : "block";
+    }
+</script>
+</body> </html> 

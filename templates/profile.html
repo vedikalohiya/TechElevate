@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User Profile</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #288cff, #004a99);
+      color: #fff;
+      margin: 0;
+      min-height: 100vh;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 0;
+    }
+
+    .navbar {
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .glass {
+      background: rgba(10, 38, 71, 0.6);
+      border-radius: 0;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+
+    .nav-links li a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      padding: 6px 12px;
+      border-radius: 8px;
+    }
+
+    .nav-links li a:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #00bcd4;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+    }
+
+    .hamburger span {
+      height: 3px;
+      width: 25px;
+      background-color: #fff;
+      border-radius: 5px;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 65px;
+        right: 30px;
+        background: rgba(10, 38, 71, 0.95);
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+    }
+
+    .large-icon {
+      font-size: 1.4rem;
+    }
+
+    .profile-form {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(12px);
+      padding: 30px;
+      border-radius: 16px;
+      width: 90%;
+      max-width: 420px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    .profile-form h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .profile-pic {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      margin: 0 auto 15px;
+      border: 2px solid #00bcd4;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+      position: relative;
+    }
+
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      font-size: 0.95rem;
+    }
+
+    .form-group input::placeholder {
+      color: #ddd;
+    }
+
+    .form-group input[type="file"] {
+      background: transparent;
+      color: #ccc;
+      padding: 5px 0;
+    }
+
+    .toggle-password {
+      position: absolute;
+      top: 50%;
+      right: 12px;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #ccc;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      background-color: #00bcd4;
+      color: white;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+      font-size: 1rem;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+    }
+
+    .form-group input:disabled, .form-group select:disabled {
+      opacity: 0.6;
+    }
+
+    .edit-btn {
+      background-color: #fbc02d;
+      margin-top: 0;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">TechElevate</div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/dashboard"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+      <li><a href="/aboutus"><i class="fa-solid fa-info"></i> About Us</a></li>
+      <li><a href="/contact"><i class="fa-solid fa-phone"></i> Contact</a></li>
+      <li><a href="/settings"><i class="fa-solid fa-gear"></i> Settings</a></li>
+      <li><a href="/profile"><i class="fa-solid fa-user large-icon"></i></a></li>
+    </ul>
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </nav>
+
+  <div class="container">
+    <form class="profile-form" onsubmit="saveProfile(event)">
+      <h2>Your Profile</h2>
+
+      <img id="profilePreview" class="profile-pic" src="https://i.imgur.com/2yaf2wb.png" alt="Profile Picture">
+      <div class="form-group">
+        <input type="file" id="profilePic" accept="image/*" onchange="previewImage(event)" disabled />
+      </div>
+
+      <div class="form-group">
+        <input type="text" id="fullName" value="Vedika Lohiya" disabled />
+      </div>
+
+      <div class="form-group">
+        <input type="email" id="email" value="vedika@example.com" disabled />
+      </div>
+
+      <div class="form-group">
+        <input type="password" id="password" value="Password123!" disabled />
+        <i class="fa-solid fa-eye toggle-password" onclick="togglePassword('password')"></i>
+      </div>
+
+      <div class="form-group">
+        <input type="tel" id="phone" value="9876543210" disabled />
+      </div>
+
+      <div class="form-group">
+        <input type="text" id="college" value="M.G.M.'s COE Nanded" disabled />
+      </div>
+
+      <div class="form-group">
+        <input type="text" id="branch" value="CSE A" disabled />
+      </div>
+
+      <div class="form-group">
+        <select id="year" disabled>
+          <option value="2024">2024</option>
+          <option value="2025" selected>2025</option>
+          <option value="2026">2026</option>
+        </select>
+      </div>
+
+      <button type="button" class="btn edit-btn" id="editBtn" onclick="enableEdit()">Edit</button>
+      <button type="submit" class="btn" id="saveBtn" style="display: none;">Save Changes</button>
+    </form>
+  </div>
+
+  <script>
+    function togglePassword(id) {
+      const input = document.getElementById(id);
+      input.type = input.type === "password" ? "text" : "password";
+    }
+
+    function previewImage(event) {
+      const reader = new FileReader();
+      reader.onload = function () {
+        document.getElementById('profilePreview').src = reader.result;
+      }
+      reader.readAsDataURL(event.target.files[0]);
+    }
+
+    function enableEdit() {
+      document.querySelectorAll('.form-group input, .form-group select').forEach(el => el.disabled = false);
+      document.getElementById('editBtn').style.display = 'none';
+      document.getElementById('saveBtn').style.display = 'block';
+    }
+
+    function saveProfile(e) {
+      e.preventDefault();
+      const data = {
+        fullName: document.getElementById("fullName").value,
+        email: document.getElementById("email").value,
+        password: document.getElementById("password").value,
+        phone: document.getElementById("phone").value,
+        college: document.getElementById("college").value,
+        branch: document.getElementById("branch").value,
+        year: document.getElementById("year").value
+      };
+      alert("Profile updated successfully!");
+      console.log("Updated Info:", data);
+
+      document.querySelectorAll('.form-group input, .form-group select').forEach(el => el.disabled = true);
+      document.getElementById('editBtn').style.display = 'block';
+      document.getElementById('saveBtn').style.display = 'none';
+    }
+
+    // Optional: Hamburger toggle logic for mobile
+    document.getElementById('hamburger').addEventListener('click', () => {
+      document.getElementById('navLinks').classList.toggle('active');
+    });
+  </script>
+</body>
+</html>

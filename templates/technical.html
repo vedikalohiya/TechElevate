@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Technical Preparation by Topic for coding interviews. Explore topics like Arrays, Strings, DP, and more."
+    />
+    <meta
+      name="keywords"
+      content="coding, interview, preparation, technical, problems, LeetCode"
+    />
+    <meta name="author" content="Your Name" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <title>Tech Questions by a Topic</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: url("static/img/technical.jpg") no-repeat
+          center center fixed;
+        background-size: cover;
+        margin: 0;
+        padding: 2rem;
+        color: #000000;
+      }
+      .navbar {
+        padding: 15px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #fff;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+      }
+
+      .glass {
+        background: rgba(10, 38, 71, 0.6);
+        border-radius: 0;
+      }
+
+      .logo {
+        font-size: 1.8rem;
+        font-weight: bold;
+      }
+
+      .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 25px;
+      }
+
+      .nav-links li a {
+        text-decoration: none;
+        color: #fff;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.3s ease;
+        padding: 6px 12px;
+        border-radius: 8px;
+      }
+
+      .nav-links li a:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: #00bcd4;
+      }
+
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        gap: 5px;
+      }
+
+      .hamburger span {
+        height: 3px;
+        width: 25px;
+        background-color: #fff;
+        border-radius: 5px;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+          flex-direction: column;
+          position: absolute;
+          top: 65px;
+          right: 30px;
+          background: rgba(10, 38, 71, 0.95);
+          padding: 20px;
+          border-radius: 12px;
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .nav-links.active {
+          display: flex;
+        }
+
+        .hamburger {
+          display: flex;
+        }
+      }
+      .large-icon {
+        font-size: 1.4rem; /* Try 1.6rem or 2rem if you want bigger */
+      }
+
+      .header-container {
+        background: rgba(42, 62, 86, 0.85);
+        padding: 1rem 2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        max-width: 800px;
+        margin: 0 auto 2rem;
+        text-align: center;
+      }
+
+      .header-container h1 {
+        color: #fff;
+        margin: 0;
+      }
+
+      .topic-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        max-width: 500px;
+        margin-inline: auto;
+      }
+
+      .topic-box {
+        background: white;
+        padding: 1rem;
+        border-radius: 12px;
+        text-align: center;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: transform 0.2s, background 0.3s;
+        font-weight: bold;
+        color: #0a2647;
+      }
+
+      .topic-box:hover {
+        transform: translateY(-3px);
+        background: #eaf3fb;
+      }
+
+      .topic-section {
+        background: #c0085e;
+        padding: 1rem;
+        border-radius: 8px;
+        margin: 1rem auto 2rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 0.3s ease;
+        max-width: 800px;
+      }
+
+      .topic-title {
+        color: #0a2647;
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+        border-bottom: 2px solid #0a2647;
+        padding-bottom: 5px;
+      }
+
+      .problem {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin: 10px 0;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 10px;
+        cursor: pointer;
+      }
+
+      .problem:hover {
+        background: rgb(84, 19, 153);
+      }
+
+      .problem:last-child {
+        border-bottom: none;
+      }
+
+      .status {
+        font-weight: bold;
+        padding: 5px 10px;
+        border-radius: 5px;
+      }
+
+      .Completed {
+        color: green;
+      }
+      .Pending {
+        color: orange;
+      }
+      .Not\ Started {
+        color: red;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Improved responsiveness */
+      @media (max-width: 768px) {
+        .problem {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .topic-grid {
+          max-width: 100%;
+          padding: 0;
+        }
+
+        .header-container {
+          max-width: 100%;
+          padding: 1rem;
+        }
+
+        .topic-box {
+          font-size: 0.9rem;
+        }
+
+        .modal-content {
+          width: 90%;
+        }
+      }
+
+      /* Loading Spinner */
+      .loading {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .loading-spinner {
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #0a2647;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 2s linear infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Modal */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+
+      .modal-content {
+        background-color: #c0085e;
+        margin: 10% auto;
+        padding: 20px;
+        border-radius: 10px;
+        max-width: 500px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .modal-header {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #0a2647;
+      }
+
+      .modal-close {
+        float: right;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: #888;
+      }
+
+      .modal-close:hover {
+        color: black;
+      }
+
+      .modal-item {
+        margin-bottom: 10px;
+      }
+
+      .modal-item a {
+        text-decoration: none;
+        color: #0a2647;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="logo">TechElevate</div>
+      <ul class="nav-links" id="navLinks">
+        <li>
+          <a href="/dashboard"><i class="fa-solid fa-house"></i> Dashboard</a>
+        </li>
+        <li>
+          <a href="/aboutus"><i class="fa-solid fa-info"></i> About Us</a>
+        </li>
+        <li>
+          <a href="/contact"><i class="fa-solid fa-phone"></i> Contact</a>
+        </li>
+        <li>
+          <a href="/settings"><i class="fa-solid fa-gear"></i> Settings</a>
+        </li>
+        <li>
+          <a href="/profile"><i class="fa-solid fa-user large-icon"></i></a>
+        </li>
+      </ul>
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+
+    <div class="header-container">
+      <h1>TECHNICAL PREPARATION TOPIC-WISE</h1>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div class="loading" id="loading">
+      <div class="loading-spinner"></div>
+    </div>
+
+    <div class="topic-grid" id="topicGrid"></div>
+    <div id="container"></div>
+
+    <!-- Modal -->
+    <div id="problemModal" class="modal">
+      <div class="modal-content">
+        <span class="modal-close" onclick="closeModal()">&times;</span>
+        <div class="modal-header" id="modalTitle"></div>
+        <div class="modal-item">
+          <strong>Difficulty:</strong> <span id="modalDifficulty"></span>
+        </div>
+        <div class="modal-item">
+          <strong>Difficulty Score:</strong> <span id="modalScore"></span>
+        </div>
+        <div class="modal-item">
+          <strong>Status:</strong> <span id="modalStatus"></span>
+        </div>
+        <div class="modal-item">
+          <strong>LeetCode:</strong>
+          <a id="modalLink" target="_blank">Go to Problem</a>
+        </div>
+        <div class="modal-item">
+          <strong>Solution:</strong>
+          <a id="modalSolution" target="_blank">View</a>
+        </div>
+        <div class="modal-item">
+          <strong>Code:</strong> <a id="modalCode" target="_blank">View</a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let problemsData = [];
+
+      fetch("static/problems.json")
+        .then((res) => res.json())
+        .then((data) => {
+          problemsData = data;
+          data.forEach((p) => {
+            if (!p.topics || p.topics.length === 0)
+              p.topics = ["Miscellaneous"];
+          });
+
+          const topicsMap = {};
+          data.forEach((problem) => {
+            problem.topics.forEach((topic) => {
+              if (!topicsMap[topic]) topicsMap[topic] = [];
+              topicsMap[topic].push(problem);
+            });
+          });
+
+          const topicIcons = {
+            Arrays: "🧮",
+            Strings: "🔤",
+            Graphs: "🕸️",
+            Trees: "🌳",
+            DP: "📐",
+            Greedy: "💰",
+            Recursion: "♻️",
+            "Bit Manipulation": "🧠",
+            Math: "➗",
+            Miscellaneous: "📁",
+          };
+
+          const topicGrid = document.getElementById("topicGrid");
+          topicGrid.innerHTML = "";
+
+          const container = document.getElementById("container");
+          container.innerHTML = "";
+
+          Object.keys(topicsMap).forEach((topic) => {
+            const box = document.createElement("div");
+            box.className = "topic-box";
+
+            const icon = topicIcons[topic] || "💻";
+            const count = topicsMap[topic].length;
+
+            box.innerHTML = `
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: 1.2rem;">${icon} ${topic}</span>
+              <span style="background: #0A2647; color: white; border-radius: 20px; padding: 0.2rem 0.6rem; font-size: 0.8rem;">
+                ${count}
+              </span>
+            </div>
+          `;
+
+            box.addEventListener("click", () => toggleTopicSection(topic));
+            topicGrid.appendChild(box);
+
+            const section = document.createElement("div");
+            section.className = "topic-section";
+            section.style.display = "none";
+            section.id = `section-${topic}`;
+
+            const title = document.createElement("h2");
+            title.className = "topic-title";
+            title.textContent = topic;
+            section.appendChild(title);
+
+            topicsMap[topic].forEach((p) => {
+              const problemDiv = document.createElement("div");
+              problemDiv.className = "problem";
+              problemDiv.innerHTML = `
+              <div><strong>${p.title}</strong></div>
+              <div class="status ${p.status.replace(/\s/g, "\\ ")}">${
+                p.status
+              }</div>
+            `;
+              problemDiv.addEventListener("click", () => openModal(p));
+              section.appendChild(problemDiv);
+            });
+
+            container.appendChild(section);
+          });
+
+          function toggleTopicSection(topic) {
+            const section = document.getElementById(`section-${topic}`);
+            const isVisible = section.style.display === "block";
+            document
+              .querySelectorAll(".topic-section")
+              .forEach((sec) => (sec.style.display = "none"));
+            section.style.display = isVisible ? "none" : "block";
+            section.scrollIntoView({ behavior: "smooth" });
+          }
+
+          // Hide the loading spinner after data is loaded
+          document.getElementById("loading").style.display = "none";
+        })
+        .catch((err) => {
+          document.getElementById("topicGrid").innerHTML =
+            "❌ Error loading problems.";
+          document.getElementById("loading").innerHTML =
+            "❌ Error loading data. Please try again later.";
+          console.error(err);
+        });
+
+      function openModal(problem) {
+        document.getElementById(
+          "modalTitle"
+        ).innerHTML = `<a href="${problem.leetcodeUrl}" target="_blank">${problem.title}</a>`;
+        document.getElementById("modalDifficulty").textContent =
+          problem.difficulty;
+        document.getElementById("modalScore").textContent =
+          problem.difficultyScore || "N/A";
+        document.getElementById("modalStatus").textContent = problem.status;
+        document.getElementById("modalLink").href = problem.leetcodeUrl;
+        document.getElementById("modalSolution").href =
+          problem.solutionUrl || "#";
+        document.getElementById("modalCode").href = problem.codeUrl || "#";
+        document.getElementById("problemModal").style.display = "block";
+      }
+
+      function closeModal() {
+        document.getElementById("problemModal").style.display = "none";
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Technical Skills</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f4f4;
+    }
+
+    header {
+      background-color: #0A2647;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 2em;
+    }
+
+    .container {
+      padding: 30px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .language-section {
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .language-title {
+      text-align: center;
+      font-size: 1.5em;
+      color: #0A2647;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+
+    .sub-section {
+      background-color: #e3ecf9;
+      border-left: 5px solid #0A2647;
+      margin: 10px 0;
+      padding: 15px;
+      border-radius: 5px;
+      transition: transform 0.2s ease;
+      cursor: pointer;
+    }
+
+    .sub-section:hover {
+      transform: scale(1.02);
+    }
+
+    .sub-section h3 {
+      margin: 0 0 10px 0;
+      color: #0A2647;
+    }
+
+    .sub-section p {
+      margin: 0;
+      font-size: 0.95em;
+    }
+
+    .search-bar {
+      margin: 20px auto;
+      display: block;
+      padding: 10px;
+      width: 50%;
+      font-size: 1.1em;
+    }
+
+    .progress-bar {
+      width: 100%;
+      background-color: #e3ecf9;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+
+    .progress-bar span {
+      display: block;
+      height: 10px;
+      background-color: #0A2647;
+      border-radius: 10px;
+      width: 50%; /* Example progress */
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 5px 10px;
+      background-color: #0A2647;
+      color: white;
+      border-radius: 20px;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .discussion-forum textarea {
+      width: 100%;
+      height: 80px;
+      padding: 10px;
+      font-size: 1em;
+      border: 1px solid #0A2647;
+      border-radius: 5px;
+    }
+
+    .discussion-forum button {
+      background-color: #0A2647;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .discussion-forum button:hover {
+      background-color: #08304a;
+    }
+
+    .discussion-forum {
+      margin-top: 30px;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .take-quiz-btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 15px;
+      background-color: #0A2647;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.2s ease;
+    }
+
+    .take-quiz-btn:hover {
+      background-color: #08304a;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        font-size: 1.5em;
+      }
+      .search-bar {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>Technical Skills</header>
+
+<!-- Search Bar -->
+<input type="text" id="search-bar" class="search-bar" placeholder="Search for a topic..." onkeyup="searchTopics()">
+
+<!-- Main Content -->
+<div class="container">
+
+  <!-- C++ Language -->
+  <div class="language-section">
+    <div class="language-title">C++</div>
+    
+    <!-- Syllabus Section -->
+<div class="sub-section" onclick="window.location.href='/cpp'">
+  <h3>C++ Syllabus</h3>
+  <p>Introduction to C++, Object-Oriented Programming, Data Structures & Algorithms, File Handling, and more.</p>
+</div>
+
+<!-- Video Tutorials Section -->
+<div class="sub-section" onclick="window.location.href='/cpp'">
+  <h3>C++ Video Tutorials</h3>
+  <p>Watch these essential video tutorials to get started and improve your C++ programming skills.</p>
+</div>
+
+<!-- Courses Section -->
+<div class="sub-section" onclick="window.location.href='/cpp'">
+  <h3>C++ Courses</h3>
+  <p>Take these highly recommended courses to gain hands-on experience and deepen your knowledge in C++.</p>
+</div>
+
+    <a href="/mock" class="take-quiz-btn">Take C++ Quiz</a>
+    <div class="progress-bar"><span></span></div>
+    <div class="badge">Completed</div>
+  </div>
+
+   <!-- Python Language -->
+  <div class="language-section">
+    <div class="language-title">Python</div>
+    
+    <!-- Syllabus Section -->
+<div class="sub-section" onclick="window.location.href='/python'">
+  <h3>Python Syllabus</h3>
+  <p>Introduction to Python, Object-Oriented Programming, Data Structures & Algorithms, File Handling, and more.</p>
+</div>
+
+<!-- Video Tutorials Section -->
+<div class="sub-section" onclick="window.location.href='/python'">
+  <h3>Python Video Tutorials</h3>
+  <p>Watch these essential video tutorials to get started and improve your Python programming skills.</p>
+</div>
+
+<!-- Courses Section -->
+<div class="sub-section" onclick="window.location.href='/python'">
+  <h3>Python Courses</h3>
+  <p>Take these highly recommended courses to gain hands-on experience and deepen your knowledge in Python.</p>
+</div>
+
+    <a href="/mock" class="take-quiz-btn">Take Python Quiz</a>
+    <div class="progress-bar"><span></span></div>
+    <div class="badge">Completed</div>
+  </div>
+ 
+   <!-- JAVA Language -->
+  <div class="language-section">
+    <div class="language-title">Java</div>
+    
+    <!-- Syllabus Section -->
+<div class="sub-section" onclick="window.location.href='/java'">
+  <h3>Java Syllabus</h3>
+  <p>Introduction to Java, Object-Oriented Programming, Data Structures & Algorithms, File Handling, and more.</p>
+</div>
+
+<!-- Video Tutorials Section -->
+<div class="sub-section" onclick="window.location.href='/java'">
+  <h3>Java Video Tutorials</h3>
+  <p>Watch these essential video tutorials to get started and improve your Java programming skills.</p>
+</div>
+
+<!-- Courses Section -->
+<div class="sub-section" onclick="window.location.href='/java'">
+  <h3>Java Courses</h3>
+  <p>Take these highly recommended courses to gain hands-on experience and deepen your knowledge in Java.</p>
+</div>
+
+    <a href="/mock" class="take-quiz-btn">Take Java Quiz</a>
+    <div class="progress-bar"><span></span></div>
+    <div class="badge">Completed</div>
+  </div>
+
+
+
+
+  <!-- JAVA Language -->
+  <div class="language-section">
+    <div class="language-title">Web Development</div>
+    
+    <!-- Syllabus Section -->
+<div class="sub-section" onclick="window.location.href='/webdevelopment'">
+  <h3>Web Development Syllabus</h3>
+  <p>Follow the complete web development syllabus through free courses designed for beginners and  one line code at a time.</p>
+</div>
+
+<!-- Video Tutorials Section -->
+<div class="sub-section" onclick="window.location.href='webdevelopment'">
+  <h3>Web Development Video Tutorials</h3>
+  <p>Explore our step-by-step video tutorials and hands-on projects and explore more and more.</p>
+</div>
+
+<!-- Courses Section -->
+<div class="sub-section" onclick="window.location.href='webdevelopment'">
+  <h3>Web Development Courses</h3>
+  <p>Our curated web development courses cover HTML, CSS, JavaScript, and more.</p>
+</div>
+
+    <a href="/mock" class="take-quiz-btn">Take Quiz</a>
+    <div class="progress-bar"><span></span></div>
+    <div class="badge">Completed</div>
+  </div>
+ </div>
+ </div>
+  <!-- Discussion Forum -->
+<div class="discussion-forum">
+  <h3>Discussion Forum</h3>
+  <textarea placeholder="Ask your question or share your thoughts here"></textarea>
+  <button type="submit">Post Question</button>
+</div>
+
+<!-- JavaScript -->
+<script>
+  // Show Content Function
+  function showContent(topic) {
+    alert("You clicked on: " + topic + "\n(You can expand this to show content or redirect)");
+  }
+
+  // Search Functionality
+  function searchTopics() {
+    let input = document.getElementById('search-bar').value.toLowerCase();
+    let sections = document.querySelectorAll('.sub-section');
+    sections.forEach(function(section) {
+      let title = section.querySelector('h3').textContent.toLowerCase();
+      if (title.indexOf(input) > -1) {
+        section.style.display = '';
+      } else {
+        section.style.display = 'none';
+      }
+    });
+  }
+</script>
+
+</body>
+</html>

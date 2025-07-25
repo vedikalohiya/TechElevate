@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Interpretation Questions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .question {
+            background-color: #eaeaea;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+
+        .question h3 {
+            color: #0A2647;
+        }
+
+        .solution {
+            display: none;
+            padding: 10px;
+            background-color: #d4edda;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+
+        .show-answer {
+            background-color: #0A2647;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .show-answer:hover {
+            background-color: #06203B;
+        }
+
+        .back-btn {
+            background-color: #0A2647;
+            color: white;
+            padding: 10px 20px;
+            margin: 20px 0;
+            cursor: pointer;
+            border-radius: 5px;
+            text-align: center;
+            display: block;
+            width: 200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .back-btn:hover {
+            background-color: #06203B;
+        }
+    </style>    
+</head>
+<body>
+
+    <div class="container">
+        <h1>Data Interpretation Questions</h1>
+
+        <!-- Question 1 -->
+        <div class="question">
+            <h3>1. A survey shows 40% of people prefer A, 30% prefer B, and 30% prefer C. What is the probability of picking someone who prefers A?</h3>
+            <button class="show-answer" onclick="toggleSolution(1)">Show Answer</button>
+            <div class="solution" id="solution-1">
+                Answer: 0.40 or 40%
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question">
+            <h3>2. If the average of five numbers is 20, what is the sum of the numbers?</h3>
+            <button class="show-answer" onclick="toggleSolution(2)">Show Answer</button>
+            <div class="solution" id="solution-2">
+                Answer: 100
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question">
+            <h3>3. The average of 10 numbers is 15. If one number is removed, the average becomes 14. What is the removed number?</h3>
+            <button class="show-answer" onclick="toggleSolution(3)">Show Answer</button>
+            <div class="solution" id="solution-3">
+                Answer: 25
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question">
+            <h3>4. A class has 30 students. 18 of them passed in Mathematics, 20 passed in Science, and 15 passed in both subjects. How many students failed in both subjects?</h3>
+            <button class="show-answer" onclick="toggleSolution(4)">Show Answer</button>
+            <div class="solution" id="solution-4">
+                Answer: 5
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question">
+            <h3>5. In a company, 60% of employees are male and 40% are female. If 30% of the males and 50% of the females work in the marketing department, what percentage of employees work in marketing?</h3>
+            <button class="show-answer" onclick="toggleSolution(5)">Show Answer</button>
+            <div class="solution" id="solution-5">
+                Answer: 42%
+            </div>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="question">
+            <h3>6. A student scored 75%, 85%, and 90% in three subjects. What is the average percentage?</h3>
+            <button class="show-answer" onclick="toggleSolution(6)">Show Answer</button>
+            <div class="solution" id="solution-6">
+                Answer: 83.33%
+            </div>
+        </div>
+
+        <!-- Question 7 -->
+        <div class="question">
+            <h3>7. The average of five numbers is 50. If one number is 70, what is the average of the remaining numbers?</h3>
+            <button class="show-answer" onclick="toggleSolution(7)">Show Answer</button>
+            <div class="solution" id="solution-7">
+                Answer: 40
+            </div>
+        </div>
+
+        <!-- Question 8 -->
+        <div class="question">
+            <h3>8. A survey shows that 60% of people like chocolate, 40% like vanilla, and 10% like both. What is the probability that a randomly chosen person likes either chocolate or vanilla?</h3>
+            <button class="show-answer" onclick="toggleSolution(8)">Show Answer</button>
+            <div class="solution" id="solution-8">
+                Answer: 0.90 or 90%
+            </div>
+        </div>
+
+        <!-- Question 9 -->
+        <div class="question">
+            <h3>9. If the price of a product increases by 20%, what is the new price if the original price was 500?</h3>
+            <button class="show-answer" onclick="toggleSolution(9)">Show Answer</button>
+            <div class="solution" id="solution-9">
+                Answer: 600
+            </div>
+        </div>
+
+        <!-- Question 10 -->
+        <div class="question">
+            <h3>10. A shopkeeper offers a 25% discount on an item. If the item’s original price is 400, what is the selling price?</h3>
+            <button class="show-answer" onclick="toggleSolution(10)">Show Answer</button>
+            <div class="solution" id="solution-10">
+                Answer: 300
+            </div>
+        </div>
+
+        <!-- Question 11 -->
+        <div class="question">
+            <h3>11. A train travels 120 km in 2 hours. What is the speed of the train?</h3>
+            <button class="show-answer" onclick="toggleSolution(11)">Show Answer</button>
+            <div class="solution" id="solution-11">
+                Answer: 60 km/h
+            </div>
+        </div>
+
+        <!-- Question 12 -->
+        <div class="question">
+            <h3>12. A person invests $1000 at an annual interest rate of 5%. What is the interest after 2 years?</h3>
+            <button class="show-answer" onclick="toggleSolution(12)">Show Answer</button>
+            <div class="solution" id="solution-12">
+                Answer: $100
+            </div>
+        </div>
+
+        <!-- Question 13 -->
+        <div class="question">
+            <h3>13. The sum of the ages of a father and son is 50 years. If the father is four times as old as the son, how old are they?</h3>
+            <button class="show-answer" onclick="toggleSolution(13)">Show Answer</button>
+            <div class="solution" id="solution-13">
+                Answer: Father is 40 years old, Son is 10 years old.
+            </div>
+        </div>
+
+        <!-- Question 14 -->
+        <div class="question">
+            <h3>14. If the median of five numbers is 10, and the numbers are in increasing order, what is the third number?</h3>
+            <button class="show-answer" onclick="toggleSolution(14)">Show Answer</button>
+            <div class="solution" id="solution-14">
+                Answer: 10
+            </div>
+        </div>
+
+        <!-- Question 15 -->
+        <div class="question">
+            <h3>15. A car travels 200 km in 4 hours. What is its average speed?</h3>
+            <button class="show-answer" onclick="toggleSolution(15)">Show Answer</button>
+            <div class="solution" id="solution-15">
+                Answer: 50 km/h
+            </div>
+        </div>
+
+        <!-- Question 16 -->
+        <div class="question">
+            <h3>16. If the ratio of the ages of two friends is 5:6, and the sum of their ages is 55, what are their ages?</h3>
+            <button class="show-answer" onclick="toggleSolution(16)">Show Answer</button>
+            <div class="solution" id="solution-16">
+                Answer: 25 years and 30 years.
+            </div>
+        </div>
+
+        <!-- Question 17 -->
+        <div class="question">
+            <h3>17. If a number is increased by 25%, the new number becomes 125. What is the original number?</h3>
+            <button class="show-answer" onclick="toggleSolution(17)">Show Answer</button>
+            <div class="solution" id="solution-17">
+                Answer: 100
+            </div>
+        </div>
+
+        <!-- Question 18 -->
+        <div class="question">
+            <h3>18. What is the average of 12, 15, 18, 22, and 25?</h3>
+            <button class="show-answer" onclick="toggleSolution(18)">Show Answer</button>
+            <div class="solution" id="solution-18">
+                Answer: 18.4
+            </div>
+        </div>
+
+        <!-- Question 19 -->
+        <div class="question">
+            <h3>19. A company’s revenue for the last 5 years has been 100, 120, 150, 130, and 160 million. What is the average revenue?</h3>
+            <button class="show-answer" onclick="toggleSolution(19)">Show Answer</button>
+            <div class="solution" id="solution-19">
+                Answer: 132 million
+            </div>
+        </div>
+
+        <!-- Question 20 -->
+        <div class="question">
+            <h3>20. A person saves 30% of his income. If his income is $2000, how much does he save?</h3>
+            <button class="show-answer" onclick="toggleSolution(20)">Show Answer</button>
+            <div class="solution" id="solution-20">
+                Answer: $600
+            </div>
+        </div>
+
+        <button class="back-btn" onclick="window.location.href='/apti'">Back to Home</button>
+    </div>
+
+    <script>
+        function toggleSolution(questionId) {
+            var solution = document.getElementById('solution-' + questionId);
+            if (solution.style.display === 'block') {
+                solution.style.display = 'none';
+            } else {
+                solution.style.display = 'block';
+            }
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speed and Distance Questions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .question {
+            background-color: #eaeaea;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+
+        .question h3 {
+            color: #0A2647;
+        }
+
+        .solution {
+            display: none;
+            padding: 10px;
+            background-color: #d4edda;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+
+        .show-answer {
+            background-color: #0A2647;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .show-answer:hover {
+            background-color: #06203B;
+        }
+
+        .back-btn {
+            background-color: #0A2647;
+            color: white;
+            padding: 10px 20px;
+            margin: 20px 0;
+            cursor: pointer;
+            border-radius: 5px;
+            text-align: center;
+            display: block;
+            width: 200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .back-btn:hover {
+            background-color: #06203B;
+        }
+    </style>    
+</head>
+<body>
+
+    <div class="container">
+        <h1>Speed and Distance Questions</h1>
+
+        <!-- Question 1 -->
+        <div class="question">
+            <h3>1. A car travels at a speed of 60 km/h. How long will it take to travel 150 kilometers?</h3>
+            <button class="show-answer" onclick="toggleSolution(1)">Show Answer</button>
+            <div class="solution" id="solution-1">
+                Answer: The time taken is 2.5 hours. (Time = Distance / Speed; 150 / 60 = 2.5 hours).
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question">
+            <h3>2. A train runs at a speed of 80 km/h. How much time will it take to cover a distance of 320 kilometers?</h3>
+            <button class="show-answer" onclick="toggleSolution(2)">Show Answer</button>
+            <div class="solution" id="solution-2">
+                Answer: The time taken is 4 hours. (Time = Distance / Speed; 320 / 80 = 4 hours).
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question">
+            <h3>3. A plane travels at 900 km/h. How much time will it take to cover a distance of 1800 kilometers?</h3>
+            <button class="show-answer" onclick="toggleSolution(3)">Show Answer</button>
+            <div class="solution" id="solution-3">
+                Answer: The time taken is 2 hours. (Time = Distance / Speed; 1800 / 900 = 2 hours).
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question">
+            <h3>4. A cyclist travels at 30 km/h. How much time will it take to cover 120 kilometers?</h3>
+            <button class="show-answer" onclick="toggleSolution(4)">Show Answer</button>
+            <div class="solution" id="solution-4">
+                Answer: The time taken is 4 hours. (Time = Distance / Speed; 120 / 30 = 4 hours).
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question">
+            <h3>5. A bus travels at a speed of 50 km/h. How much time will it take to cover 200 kilometers?</h3>
+            <button class="show-answer" onclick="toggleSolution(5)">Show Answer</button>
+            <div class="solution" id="solution-5">
+                Answer: The time taken is 4 hours. (Time = Distance / Speed; 200 / 50 = 4 hours).
+            </div>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="question">
+            <h3>6. A boat travels at 40 km/h. How much time will it take to cover 200 kilometers?</h3>
+            <button class="show-answer" onclick="toggleSolution(6)">Show Answer</button>
+            <div class="solution" id="solution-6">
+                Answer: The time taken is 5 hours. (Time = Distance / Speed; 200 / 40 = 5 hours).
+            </div>
+        </div>
+
+        <!-- Question 7 -->
+        <div class="question">
+            <h3>7. A person runs at a speed of 10 km/h. How much time will it take to run 50 kilometers?</h3>
+            <button class="show-answer" onclick="toggleSolution(7)">Show Answer</button>
+            <div class="solution" id="solution-7">
+                Answer: The time taken is 5 hours. (Time = Distance / Speed; 50 / 10 = 5 hours).
+            </div>
+        </div>
+
+        <!-- Question 8 -->
+        <div class="question">
+            <h3>8. A car is traveling at 72 km/h. How much time will it take to cover 144 kilometers?</h3>
+            <button class="show-answer" onclick="toggleSolution(8)">Show Answer</button>
+            <div class="solution" id="solution-8">
+                Answer: The time taken is 2 hours. (Time = Distance / Speed; 144 / 72 = 2 hours).
+            </div>
+        </div>
+
+        <!-- Question 9 -->
+        <div class="question">
+            <h3>9. A train travels at 120 km/h. How much time will it take to cover 480 kilometers?</h3>
+            <button class="show-answer" onclick="toggleSolution(9)">Show Answer</button>
+            <div class="solution" id="solution-9">
+                Answer: The time taken is 4 hours. (Time = Distance / Speed; 480 / 120 = 4 hours).
+            </div>
+        </div>
+
+        <!-- Question 10 -->
+        <div class="question">
+            <h3>10. A motorcycle travels at 90 km/h. How much time will it take to cover 360 kilometers?</h3>
+            <button class="show-answer" onclick="toggleSolution(10)">Show Answer</button>
+            <div class="solution" id="solution-10">
+                Answer: The time taken is 4 hours. (Time = Distance / Speed; 360 / 90 = 4 hours).
+            </div>
+        </div>
+
+        <!-- Question 11 -->
+        <div class="question">
+            <h3>11. A swimmer swims at a speed of 3 km/h. How long will it take to swim 6 kilometers?</h3>
+            <button class="show-answer" onclick="toggleSolution(11)">Show Answer</button>
+            <div class="solution" id="solution-11">
+                Answer: The time taken is 2 hours. (Time = Distance / Speed; 6 / 3 = 2 hours).
+            </div>
+        </div>
+
+        <!-- Question 12 -->
+        <div class="question">
+            <h3>12. A runner runs at 12 km/h. How much time will it take to run 96 kilometers?</h3>
+            <button class="show-answer" onclick="toggleSolution(12)">Show Answer</button>
+            <div class="solution" id="solution-12">
+                Answer: The time taken is 8 hours. (Time = Distance / Speed; 96 / 12 = 8 hours).
+            </div>
+        </div>
+
+        <!-- Question 13 -->
+        <div class="question">
+            <h3>13. A cyclist rides at 25 km/h. How much time will it take to cover 75 kilometers?</h3>
+            <button class="show-answer" onclick="toggleSolution(13)">Show Answer</button>
+            <div class="solution" id="solution-13">
+                Answer: The time taken is 3 hours. (Time = Distance / Speed; 75 / 25 = 3 hours).
+            </div>
+        </div>
+
+        <!-- Question 14 -->
+        <div class="question">
+            <h3>14. A car covers a distance of 200 kilometers in 4 hours. What is its speed?</h3>
+            <button class="show-answer" onclick="toggleSolution(14)">Show Answer</button>
+            <div class="solution" id="solution-14">
+                Answer: The speed is 50 km/h. (Speed = Distance / Time; 200 / 4 = 50 km/h).
+            </div>
+        </div>
+
+        <!-- Question 15 -->
+        <div class="question">
+            <h3>15. A train travels a distance of 180 kilometers in 3 hours. What is its speed?</h3>
+            <button class="show-answer" onclick="toggleSolution(15)">Show Answer</button>
+            <div class="solution" id="solution-15">
+                Answer: The speed is 60 km/h. (Speed = Distance / Time; 180 / 3 = 60 km/h).
+            </div>
+        </div>
+
+        <!-- Question 16 -->
+        <div class="question">
+            <h3>16. A bus travels 100 kilometers in 2 hours. What is its speed?</h3>
+            <button class="show-answer" onclick="toggleSolution(16)">Show Answer</button>
+            <div class="solution" id="solution-16">
+                Answer: The speed is 50 km/h. (Speed = Distance / Time; 100 / 2 = 50 km/h).
+            </div>
+        </div>
+
+        <!-- Question 17 -->
+        <div class="question">
+            <h3>17. A plane travels at 600 km/h. How much time will it take to cover 2400 kilometers?</h3>
+            <button class="show-answer" onclick="toggleSolution(17)">Show Answer</button>
+            <div class="solution" id="solution-17">
+                Answer: The time taken is 4 hours. (Time = Distance / Speed; 2400 / 600 = 4 hours).
+            </div>
+        </div>
+
+        <!-- Question 18 -->
+        <div class="question">
+            <h3>18. A person drives at 45 km/h. How long will it take to cover 135 kilometers?</h3>
+            <button class="show-answer" onclick="toggleSolution(18)">Show Answer</button>
+            <div class="solution" id="solution-18">
+                Answer: The time taken is 3 hours. (Time = Distance / Speed; 135 / 45 = 3 hours).
+            </div>
+        </div>
+
+        <!-- Question 19 -->
+        <div class="question">
+            <h3>19. A ship travels 600 kilometers in 12 hours. What is its speed?</h3>
+            <button class="show-answer" onclick="toggleSolution(19)">Show Answer</button>
+            <div class="solution" id="solution-19">
+                Answer: The speed is 50 km/h. (Speed = Distance / Time; 600 / 12 = 50 km/h).
+                </div>
+                </div>
+                    <!-- Question 20 -->
+    <div class="question">
+        <h3>20. A cyclist travels 150 kilometers in 5 hours. What is his speed?</h3>
+        <button class="show-answer" onclick="toggleSolution(20)">Show Answer</button>
+        <div class="solution" id="solution-20">
+            Answer: The speed is 30 km/h. (Speed = Distance / Time; 150 / 5 = 30 km/h).
+        </div>
+    </div>
+
+        <button class="back-btn" onclick="window.location.href='/apti'">Back to Home</button>
+</div>
+
+<script>
+    function toggleSolution(questionId) {
+        var solution = document.getElementById('solution-' + questionId);
+        if (solution.style.display === 'block') {
+            solution.style.display = 'none';
+        } else {
+            solution.style.display = 'block';
+        }
+    }
+</script>

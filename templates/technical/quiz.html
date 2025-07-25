@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mock Test</title>
+    <style>
+      body {
+        background: url("https://media.istockphoto.com/photos/laptop-with-job-search-engine-on-screen-in-modern-office-picture-id1352380090?b=1&k=20&m=1352380090&s=170667a&w=0&h=eM_nRFyGk4uQe5_WV9ZGOF4Oujohh-IIL0lyAcfrgak=")
+          no-repeat center center fixed;
+        background-size: cover;
+        position: relative;
+        margin: 0;
+        font-family: sans-serif;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(202, 169, 169, 0.7);
+        z-index: -1;
+      }
+
+      h1 {
+        text-align: center;
+        font-size: xxx-large;
+        color: #002246;
+      }
+
+      .tabs {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+      }
+
+      .tabs button {
+        background: #0a2647;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        margin: 5px;
+        border-radius: 5px;
+        font-size: xx-large;
+      }
+
+      .tabs button.active {
+        background-color: #144272;
+      }
+
+      .container {
+        max-width: 700px;
+        margin: auto;
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      #timer {
+        text-align: center;
+        font-size: 1.3em;
+        font-weight: bold;
+        margin-top: 10px;
+        color: #002246;
+      }
+
+      .question {
+        font-weight: bold;
+        margin-top: 10px;
+      }
+
+      .options {
+        margin: 10px 0 20px;
+      }
+
+      .options label {
+        display: block;
+        margin-bottom: 8px;
+        cursor: pointer;
+      }
+
+      .correct {
+        background-color: #d4edda;
+      }
+
+      .incorrect {
+        background-color: #f8d7da;
+      }
+
+      #submit {
+        background-color: #0a2647;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 5px;
+        display: block;
+        margin: 20px auto 0;
+        font-size: large;
+      }
+
+      #submit:disabled {
+        background-color: gray;
+        cursor: not-allowed;
+      }
+
+      #result {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 1.2em;
+        font-weight: bold;
+      }
+
+      .correction {
+        background-color: #ffe0e0;
+        border-left: 4px solid red;
+        padding: 10px;
+        margin-top: 10px;
+      }
+
+      @media (max-width: 768px) {
+        .tabs button {
+          font-size: large;
+          padding: 8px 12px;
+        }
+
+        .container {
+          margin: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Mock Test</h1>
+    <div class="tabs">
+      <button onclick="loadQuestions('html', event)" class="active">HTML</button>
+      <button onclick="loadQuestions('css', event)">CSS</button>
+      <button onclick="loadQuestions('js', event)">JavaScript</button>
+    </div>
+
+    <div class="container">
+      <div id="timer">Time Left: <span id="time-left">05:00</span></div>
+      <div id="quiz-container"></div>
+      <div id="result"></div>
+    </div>
+
+    <script>
+      const data = {
+        html: [
+          {
+            q: "What does HTML stand for?",
+            options: [
+              "Hyper Trainer Marking Language",
+              "HyperText Markup Language",
+              "HyperText Marketing Language",
+              "HighText Machine Language"
+            ],
+            answer: 1
+          },
+          {
+            q: "Which tag is used to create a hyperlink in HTML?",
+            options: ["&lt;a&gt;", "&lt;link&gt;", "&lt;href&gt;", "&lt;url&gt;"],
+            answer: 0
+          },
+          {
+            q: "Which HTML element is used to define a paragraph?",
+            options: ["&lt;paragraph&gt;", "&lt;para&gt;", "&lt;p&gt;", "&lt;pg&gt;"],
+            answer: 2
+          },
+          {
+            q: "What is the correct HTML tag for inserting a line break?",
+            options: ["&lt;break&gt;", "&lt;lb&gt;", "&lt;br&gt;", "&lt;newline&gt;"],
+            answer: 2
+          },
+          {
+            q: "Which attribute is used to provide an alternative text for an image?",
+            options: ["src", "alt", "title", "href"],
+            answer: 1
+          }
+        ],
+        css: [
+          {
+            q: "What does CSS stand for?",
+            options: [
+              "Creative Style Sheets",
+              "Cascading Style Sheets",
+              "Computer Style Sheets",
+              "Colorful Style Sheets"
+            ],
+            answer: 1
+          },
+          {
+            q: "Which property is used to change the background color?",
+            options: ["color", "bgcolor", "background-color", "background"],
+            answer: 2
+          },
+          {
+            q: "Which CSS property controls the text size?",
+            options: ["font-style", "text-size", "font-size", "text-style"],
+            answer: 2
+          },
+          {
+            q: "How do you make a list not display bullets?",
+            options: [
+              "list-style: none;",
+              "text-decoration: none;",
+              "display: none;",
+              "list-type: none;"
+            ],
+            answer: 0
+          },
+          {
+            q: "Which CSS property is used to make text bold?",
+            options: ["font-weight", "font-style", "text-decoration", "bold"],
+            answer: 0
+          }
+        ],
+        js: [
+          {
+            q: "What is JavaScript primarily used for?",
+            options: [
+              "Styling pages",
+              "Structuring content",
+              "Making pages interactive",
+              "None"
+            ],
+            answer: 2
+          },
+          {
+            q: "How do you declare a variable in JavaScript?",
+            options: ["var", "let", "const", "All of the above"],
+            answer: 3
+          },
+          {
+            q: "Which symbol is used for comments in JavaScript?",
+            options: ["//", "&lt;!-- --&gt;", "/* */", "#"],
+            answer: 0
+          },
+          {
+            q: "What is the correct syntax to call a function in JS?",
+            options: [
+              "call myFunction()",
+              "call function myFunction()",
+              "myFunction()",
+              "function.myFunction()"
+            ],
+            answer: 2
+          },
+          {
+            q: "Which of the following is not a data type in JS?",
+            options: ["number", "string", "float", "boolean"],
+            answer: 2
+          }
+        ]
+      };
+
+      let currentLang = "html";
+      let timerInterval;
+
+      function loadQuestions(lang, event) {
+        currentLang = lang;
+        clearInterval(timerInterval);
+
+        document.querySelectorAll(".tabs button").forEach((btn) =>
+          btn.classList.remove("active")
+        );
+        event.target.classList.add("active");
+
+        const quiz = document.getElementById("quiz-container");
+        const questions = data[lang];
+        let html = "";
+        questions.forEach((q, i) => {
+          html += `<div class="question">${i + 1}. ${q.q}</div><div class="options">`;
+          q.options.forEach((opt, j) => {
+            html += `<label><input type="radio" name="q${i}" value="${j}"> ${opt}</label>`;
+          });
+          html += `</div>`;
+        });
+        html += `<button id="submit" onclick="submitQuiz()">Submit</button>`;
+        quiz.innerHTML = html;
+        document.getElementById("result").innerHTML = "";
+        startTimer();
+      }
+
+      function submitQuiz() {
+        const questions = data[currentLang];
+        let score = 0;
+        let feedback = "";
+
+        questions.forEach((q, i) => {
+          const radios = document.getElementsByName("q" + i);
+          let selected = -1;
+
+          for (const radio of radios) {
+            if (radio.checked) {
+              selected = parseInt(radio.value);
+              if (selected === q.answer) {
+                radio.parentElement.classList.add("correct");
+                score++;
+              } else {
+                radio.parentElement.classList.add("incorrect");
+              }
+            }
+
+            if (parseInt(radio.value) === q.answer) {
+              radio.parentElement.classList.add("correct");
+            }
+          }
+
+          if (selected !== q.answer) {
+            const correct = q.options[q.answer];
+            feedback += `<div class="correction"><strong>Q${i + 1}: ${q.q}</strong><br>Correct answer: <span style="color:green;">${correct}</span></div>`;
+          }
+        });
+
+        document.getElementById("result").innerHTML = `You scored ${score} out of ${questions.length}`;
+        document.getElementById("quiz-container").innerHTML += feedback;
+      }
+
+      function startTimer() {
+        let time = 300;
+        timerInterval = setInterval(() => {
+          const minutes = Math.floor(time / 60);
+          const seconds = time % 60;
+          document.getElementById("time-left").textContent =
+            `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+          if (time === 0) {
+            clearInterval(timerInterval);
+            submitQuiz();
+          }
+          time--;
+        }, 1000);
+      }
+
+      loadQuestions(currentLang, { target: document.querySelector(".tabs button") });
+    </script>
+  </body>
+</html>

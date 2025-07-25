@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logical Reasoning Questions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .question-box {
+            background-color: #0A2647;
+            color: #fff;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+
+        .question-box h3 {
+            margin-top: 0;
+        }
+
+        .cta {
+            background-color: #0A2647;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .cta:hover {
+            background-color: #06203B;
+        }
+
+        .solution {
+            display: none;
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #f4f4f4;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Logical Reasoning Questions</h1>
+
+        <!-- Question 1 -->
+        <div class="question-box">
+            <h3>1. If all cats are animals, and some animals are dogs, can we conclude that some cats are dogs?</h3>
+            <button class="cta" onclick="toggleSolution('solution1')">Show Answer</button>
+            <div class="solution" id="solution1">
+                <p>No, we cannot conclude that some cats are dogs. The statements do not provide enough information.</p>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question-box">
+            <h3>2. If all roses are flowers, and all flowers are plants, can we conclude that all roses are plants?</h3>
+            <button class="cta" onclick="toggleSolution('solution2')">Show Answer</button>
+            <div class="solution" id="solution2">
+                <p>Yes, all roses are plants because all roses are flowers, and all flowers are plants.</p>
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question-box">
+            <h3>3. If A is taller than B, and B is taller than C, who is the shortest?</h3>
+            <button class="cta" onclick="toggleSolution('solution3')">Show Answer</button>
+            <div class="solution" id="solution3">
+                <p>C is the shortest because A is taller than B, and B is taller than C.</p>
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question-box">
+            <h3>4. If two pencils cost $1, how much will five pencils cost?</h3>
+            <button class="cta" onclick="toggleSolution('solution4')">Show Answer</button>
+            <div class="solution" id="solution4">
+                <p>Five pencils will cost $2.50 because two pencils cost $1, so one pencil costs $0.50.</p>
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question-box">
+            <h3>5. A man is 4 times as old as his son. In 20 years, the man will be twice as old as his son. How old are they now?</h3>
+            <button class="cta" onclick="toggleSolution('solution5')">Show Answer</button>
+            <div class="solution" id="solution5">
+                <p>The man is 40 years old, and the son is 10 years old. (Let the son's age be x, then the man's age is 4x. In 20 years, the man's age will be 4x+20, and the son's age will be x+20. We set the equation 4x+20 = 2(x+20) and solve for x).</p>
+            </div>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="question-box">
+            <h3>6. If the day after tomorrow is two days before Friday, what day is it today?</h3>
+            <button class="cta" onclick="toggleSolution('solution6')">Show Answer</button>
+            <div class="solution" id="solution6">
+                <p>Today is Wednesday. The day after tomorrow is Thursday, which is two days before Friday.</p>
+            </div>
+        </div>
+
+        <!-- Question 7 -->
+        <div class="question-box">
+            <h3>7. If 3 cats catch 3 mice in 3 minutes, how many mice will 6 cats catch in 6 minutes?</h3>
+            <button class="cta" onclick="toggleSolution('solution7')">Show Answer</button>
+            <div class="solution" id="solution7">
+                <p>6 cats will catch 12 mice in 6 minutes because 1 cat catches 1 mouse in 3 minutes, so in 6 minutes, it will catch 2 mice. Thus, 6 cats will catch 12 mice.</p>
+            </div>
+        </div>
+
+        <!-- Question 8 -->
+        <div class="question-box">
+            <h3>8. If 5 workers can complete a task in 10 days, how many days will 10 workers take to complete the same task?</h3>
+            <button class="cta" onclick="toggleSolution('solution8')">Show Answer</button>
+            <div class="solution" id="solution8">
+                <p>10 workers will take 5 days to complete the task. The number of days taken is inversely proportional to the number of workers.</p>
+            </div>
+        </div>
+
+        <!-- Question 9 -->
+        <div class="question-box">
+            <h3>9. If it takes 3 minutes to boil an egg, how many minutes will it take to boil 5 eggs?</h3>
+            <button class="cta" onclick="toggleSolution('solution9')">Show Answer</button>
+            <div class="solution" id="solution9">
+                <p>It will take 3 minutes to boil 5 eggs, assuming all eggs are boiled at the same time.</p>
+            </div>
+        </div>
+
+        <!-- Question 10 -->
+        <div class="question-box">
+            <h3>10. A clock shows the time as 3:15. What angle is formed between the hour and minute hands?</h3>
+            <button class="cta" onclick="toggleSolution('solution10')">Show Answer</button>
+            <div class="solution" id="solution10">
+                <p>The angle between the hour and minute hands is 7.5 degrees.</p>
+            </div>
+        </div>
+
+        <!-- Question 11 -->
+        <div class="question-box">
+            <h3>11. If a square has a side length of 4 units, what is its area?</h3>
+            <button class="cta" onclick="toggleSolution('solution11')">Show Answer</button>
+            <div class="solution" id="solution11">
+                <p>The area of the square is 16 square units (Area = side × side).</p>
+            </div>
+        </div>
+
+        <!-- Question 12 -->
+        <div class="question-box">
+            <h3>12. How many months have 28 days?</h3>
+            <button class="cta" onclick="toggleSolution('solution12')">Show Answer</button>
+            <div class="solution" id="solution12">
+                <p>All 12 months have at least 28 days.</p>
+            </div>
+        </div>
+
+        <!-- Question 13 -->
+        <div class="question-box">
+            <h3>13. If you have a 10-liter tank, and you need to fill it with water, how many times do you need to fill the tank if you can only fill 2 liters at a time?</h3>
+            <button class="cta" onclick="toggleSolution('solution13')">Show Answer</button>
+            <div class="solution" id="solution13">
+                <p>You need to fill the tank 5 times, as each time you can fill 2 liters.</p>
+            </div>
+        </div>
+
+        <!-- Question 14 -->
+        <div class="question-box">
+            <h3>14. If a book has 200 pages, and you read 10 pages every day, how many days will it take to finish the book?</h3>
+            <button class="cta" onclick="toggleSolution('solution14')">Show Answer</button>
+            <div class="solution" id="solution14">
+                <p>It will take you 20 days to finish the book (200 pages ÷ 10 pages per day).</p>
+            </div>
+        </div>
+
+        <!-- Question 15 -->
+        <div class="question-box">
+            <h3>15. If you travel at 60 miles per hour, how long will it take to travel 120 miles?</h3>
+            <button class="cta" onclick="toggleSolution('solution15')">Show Answer</button>
+            <div class="solution" id="solution15">
+                <p>It will take 2 hours to travel 120 miles (Time = Distance ÷ Speed).</p>
+            </div>
+        </div>
+
+        <!-- Question 16 -->
+        <div class="question-box">
+            <h3>16. If the sum of two numbers is 20 and their difference is 4, what are the two numbers?</h3>
+            <button class="cta" onclick="toggleSolution('solution16')">Show Answer</button>
+            <div class="solution" id="solution16">
+                <p>The two numbers are 12 and 8 (x + y = 20 and x - y = 4, solve the system of equations).</p>
+            </div>
+        </div>
+
+        <!-- Question 17 -->
+        <div class="question-box">
+            <h3>17. What comes next in the sequence: 1, 4, 9, 16, ...?</h3>
+            <button class="cta" onclick="toggleSolution('solution17')">Show Answer</button>
+            <div class="solution" id="solution17">
+                <p>The next number is 25. The sequence consists of perfect squares (1^2, 2^2, 3^2, 4^2, etc.).</p>
+            </div>
+        </div>
+
+        <!-- Question 18 -->
+        <div class="question-box">
+            <h3>18. If 7 apples cost $14, how much will 5 apples cost?</h3>
+            <button class="cta" onclick="toggleSolution('solution18')">Show Answer</button>
+            <div class="solution" id="solution18">
+                <p>5 apples will cost $10, as each apple costs $2.</p>
+            </div>
+        </div>
+
+        <!-- Question 19 -->
+        <div class="question-box">
+            <h3>19. How many sides does a regular hexagon have?</h3>
+            <button class="cta" onclick="toggleSolution('solution19')">Show Answer</button>
+            <div class="solution" id="solution19">
+                <p>A regular hexagon has 6 sides.</p>
+            </div>
+        </div>
+
+        <!-- Question 20 -->
+        <div class="question-box">
+            <h3>20. If a train travels 100 miles in 2 hours, what is its speed?</h3>
+            <button class="cta" onclick="toggleSolution('solution20')">Show Answer</button>
+            <div class="solution" id="solution20">
+                <p>The speed of the train is 50 miles per hour (Speed = Distance ÷ Time).</p>
+            </div>
+        </div>
+
+        <button class="back-btn" onclick="window.location.href='/apti'">Back to Home</button>
+    </div>
+
+    <script>
+        function toggleSolution(solutionId) {
+            var solution = document.getElementById(solutionId);
+            if (solution.style.display === "none" || solution.style.display === "") {
+                solution.style.display = "block";
+            } else {
+                solution.style.display = "none";
+            }
+        }
+    </script>
+
+</body>
+</html>

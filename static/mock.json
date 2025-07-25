@@ -1,0 +1,457 @@
+{
+  "cpp": [
+    {
+      "q": "What is the size of int in C++?",
+      "options": ["2 bytes", "4 bytes", "8 bytes", "Depends on compiler"],
+      "answer": 1
+    },
+    {
+      "q": "Which operator cannot be overloaded?",
+      "options": ["+", "=", "::", "[]"],
+      "answer": 2
+    },
+    {
+      "q": "What is used to define a constant in C++?",
+      "options": ["const", "#define", "Both", "None"],
+      "answer": 2
+    },
+    {
+      "q": "Which keyword is used for exception handling in C++?",
+      "options": ["try", "throw", "catch", "All of these"],
+      "answer": 3
+    }
+  ],
+  "java": [
+   {
+      "q": "Which keyword is used to inherit a class in Java?",
+      "options": ["super", "this", "extends", "implements"],
+      "answer": 2
+    },
+    {
+      "q": "Which of these is not a Java feature?",
+      "options": ["Object-Oriented", "Platform Dependent", "Secure", "Robust"],
+      "answer": 1
+    },
+    {
+      "q": "What is JVM?",
+      "options": ["Java Virtual Machine", "Java Very Main", "Java Verified Mode", "None"],
+      "answer": 0
+    },
+    {
+      "q": "Which data type is used for a true/false value?",
+      "options": ["int", "boolean", "byte", "double"],
+      "answer": 1
+    },
+    {
+      "q": "Which method is the entry point for Java programs?",
+      "options": ["main()", "start()", "init()", "run()"],
+      "answer": 0
+    }
+
+  ],
+  "python": [
+    {
+      "q": "What is the output of print(2 ** 3)?",
+      "options": ["6", "8", "9", "5"],
+      "answer": 1
+    },
+    {
+      "q": "Which keyword is used to define a function in Python?",
+      "options": ["function", "fun", "def", "define"],
+      "answer": 2
+    },
+    {
+      "q": "Which of these is a mutable data type?",
+      "options": ["tuple", "list", "str", "int"],
+      "answer": 1
+    },
+    {
+      "q": "How do you comment a single line?",
+      "options": ["//", "#", "/* */", "--"],
+      "answer": 1
+    },
+    {
+      "q": "What is the output of len([1,2,3])?",
+      "options": ["2", "3", "1", "Error"],
+      "answer": 1
+    }
+  ],
+  "frontend": [
+  {
+    "q": "Which tag is used for inserting an image in HTML?",
+    "options": ["<image>", "<img>", "<src>", "<pic>"],
+    "answer": 1
+  },
+  {
+    "q": "What does CSS stand for?",
+    "options": ["Cascading Style Script", "Color Style Sheet", "Cascading Style Sheets", "Creative Style System"],
+    "answer": 2
+  },
+  {
+    "q": "Which is not a JavaScript framework?",
+    "options": ["React", "Vue", "Angular", "Django"],
+    "answer": 3
+  },
+  {
+    "q": "What is the default position of HTML elements?",
+    "options": ["relative", "static", "absolute", "fixed"],
+    "answer": 1
+  },
+  {
+    "q": "Which property is used to change text color in CSS?",
+    "options": ["text-color", "font-color", "color", "textStyle"],
+    "answer": 2
+  }
+],
+"backend": [
+    {
+      "q": "Which language is commonly used for backend development?",
+      "options": ["HTML", "CSS", "JavaScript", "Python"],
+      "answer": 3
+    },
+    {
+      "q": "Which of the following is a Node.js framework?",
+      "options": ["React", "Flask", "Express", "Django"],
+      "answer": 2
+    },
+    {
+      "q": "What does REST stand for?",
+      "options": ["Representational State Transfer", "Remote State Terminal", "Response System Transfer", "Read Evaluate Send Transfer"],
+      "answer": 0
+    },
+    {
+      "q": "Which database is NoSQL?",
+      "options": ["MySQL", "PostgreSQL", "Oracle", "MongoDB"],
+      "answer": 3
+    },
+    {
+      "q": "Which HTTP method is used to update data?",
+      "options": ["GET", "POST", "PUT", "DELETE"],
+      "answer": 2
+    }
+  ],
+  "web": [
+    {
+      "q": "Which protocol is used for web communication?",
+      "options": ["HTTP", "FTP", "SMTP", "TCP"],
+      "answer": 0
+    },
+    {
+      "q": "What does the acronym URL stand for?",
+      "options": ["Uniform Resource Locator", "Universal Record Locator", "Universal Resource Link", "Unique Resource Locator"],
+      "answer": 0
+    },
+    {
+      "q": "Which is not a web browser?",
+      "options": ["Chrome", "Firefox", "Safari", "Windows"],
+      "answer": 3
+    },
+    {
+      "q": "Which language is used for structuring web pages?",
+      "options": ["CSS", "JavaScript", "HTML", "Python"],
+      "answer": 2
+    },
+    {
+      "q": "Which part of a website handles user interaction and experience?",
+      "options": ["Backend", "Database", "Frontend", "Server"],
+      "answer": 2
+    }
+  ],
+  "fullstack": [
+    {
+      "q": "Which database is NoSQL?",
+      "options": ["MySQL", "MongoDB", "PostgreSQL", "Oracle"],
+      "answer": 1
+    },
+    {
+      "q": "Which tech is used for frontend?",
+      "options": ["React", "Node.js", "Django", "Flask"],
+      "answer": 0
+    },
+    {
+      "q": "What is REST API?",
+      "options": ["A database", "A UI component", "A communication protocol", "A server"],
+      "answer": 2
+    },
+    {
+      "q": "Which language is commonly used in both frontend and backend?",
+      "options": ["Python", "Java", "JavaScript", "C++"],
+      "answer": 2
+    },
+    {
+      "q": "Which HTTP method is used to create data?",
+      "options": ["GET", "POST", "PUT", "DELETE"],
+      "answer": 1
+    }
+  ],
+  "appdev": [
+    {
+      "q": "What does APK stand for?",
+      "options": ["Android Package Kit", "App Program Kernel", "Application Package", "Android Platform Kit"],
+      "answer": 0
+    },
+    {
+      "q": "Which language is used for Android native development?",
+      "options": ["Swift", "Java", "Kotlin", "Both 2 & 3"],
+      "answer": 3
+    },
+    {
+      "q": "What is Flutter based on?",
+      "options": ["React", "Vue", "Dart", "Java"],
+      "answer": 2
+    },
+    {
+      "q": "Which platform uses Swift?",
+      "options": ["Android", "Windows", "iOS", "Linux"],
+      "answer": 2
+    },
+    {
+      "q": "Which IDE is popular for Android?",
+      "options": ["Xcode", "Android Studio", "Visual Studio", "IntelliJ"],
+      "answer": 1
+    }
+  ],
+  "ai": [
+    {
+      "q": "Which of the following is the main goal of Artificial Intelligence?",
+      "options": ["To solve puzzles", "To make computers faster", "To mimic human intelligence", "To improve hardware design"],
+      "answer": 2
+    },
+    {
+      "q": "Which of the following is NOT a type of AI?",
+      "options": ["Reactive Machines", "Limited Memory", "Theory of Mind", "Full Stack AI"],
+      "answer": 3
+    },
+    {
+      "q": "What is the Turing Test used for?",
+      "options": ["To test machine performance", "To evaluate human behavior", "To determine if a machine can mimic human intelligence", "To benchmark AI hardware"],
+      "answer": 2
+    },
+    {
+      "q": "Which AI technique is inspired by the human brain?",
+      "options": ["Decision Trees", "Artificial Neural Networks", "Genetic Algorithms", "Support Vector Machines"],
+      "answer": 1
+    },
+    {
+      "q": "Which of the following is an example of Strong AI?",
+      "options": ["Siri", "Google Assistant", "Self-aware robot", "Chatbot"],
+      "answer": 2
+    }
+  ],
+  "ml": [
+    {
+      "q": "Which of these is a type of Machine Learning?",
+      "options": ["Supervised", "Organized", "Automated", "Predictive"],
+      "answer": 0
+    },
+    {
+      "q": "Which algorithm is used for classification problems?",
+      "options": ["Linear Regression", "K-Means", "K-Nearest Neighbors", "PCA"],
+      "answer": 2
+    },
+    {
+      "q": "What is overfitting in Machine Learning?",
+      "options": ["Model is too simple", "Model performs well on all data", "Model performs well on training data but poorly on test data", "None of the above"],
+      "answer": 2
+    },
+    {
+      "q": "Which of these is a Python ML library?",
+      "options": ["NumPy", "Pandas", "TensorFlow", "Matplotlib"],
+      "answer": 2
+    },
+    {
+      "q": "Which metric is used to evaluate classification models?",
+      "options": ["RMSE", "Accuracy", "MAE", "MSE"],
+      "answer": 1
+    }
+  ],
+  "ds": [
+    {
+      "q": "What is the first step in Data Science?",
+      "options": ["Data Visualization", "Modeling", "Data Collection", "Prediction"],
+      "answer": 2
+    },
+    {
+      "q": "Which of the following is used for data cleaning in Python?",
+      "options": ["NumPy", "Matplotlib", "Pandas", "SciPy"],
+      "answer": 2
+    },
+    {
+      "q": "Which graph is best for showing the distribution of a dataset?",
+      "options": ["Line Chart", "Histogram", "Pie Chart", "Bar Chart"],
+      "answer": 1
+    },
+    {
+      "q": "What does CSV stand for?",
+      "options": ["Common Separated Values", "Comma Separated Values", "Code Separated Values", "Column Separated View"],
+      "answer": 1
+    },
+    {
+      "q": "Which algorithm is commonly used in recommendation systems?",
+      "options": ["Linear Regression", "Collaborative Filtering", "Naive Bayes", "K-Means"],
+      "answer": 1
+    }
+  ],
+  "cloud": [
+    {
+      "q": "Which is a cloud computing service model?",
+      "options": ["PaaS", "SaaS", "IaaS", "All of these"],
+      "answer": 3
+    },
+    {
+      "q": "AWS stands for?",
+      "options": ["Advanced Web Server", "Amazon Web Services", "App Web Service", "None"],
+      "answer": 1
+    },
+    {
+      "q": "Which company offers Azure?",
+      "options": ["Google", "Amazon", "Microsoft", "IBM"],
+      "answer": 2
+    },
+    {
+      "q": "Which is not a cloud provider?",
+      "options": ["AWS", "Azure", "Google Cloud", "Oracle SQL"],
+      "answer": 3
+    },
+    {
+      "q": "What is the full form of VM?",
+      "options": ["Virtual Model", "Verified Machine", "Virtual Machine", "Virtual Module"],
+      "answer": 2
+    }
+  ],
+  "cyber": [
+    {
+      "q": "Which of these is a strong password?",
+      "options": ["123456", "password", "Admin@123", "abcdef"],
+      "answer": 2
+    },
+    {
+      "q": "Which attack involves encrypting files for ransom?",
+      "options": ["Phishing", "DDoS", "Ransomware", "SQL Injection"],
+      "answer": 2
+    },
+    {
+      "q": "HTTPS is secure because of?",
+      "options": ["HTML", "JavaScript", "SSL/TLS", "Firewall"],
+      "answer": 2
+    },
+    {
+      "q": "What is a firewall?",
+      "options": ["Virus", "Security device", "Software bug", "None"],
+      "answer": 1
+    },
+    {
+      "q": "Two-factor authentication includes?",
+      "options": ["Password only", "Biometrics only", "Password + OTP", "Captcha"],
+      "answer": 2
+    }
+  ],
+  "devops": [
+    {
+      "q": "What does CI/CD stand for?",
+      "options": ["Code Integration / Code Deployment", "Continuous Integration / Continuous Deployment", "Critical Infrastructure / Continuous Delivery", "None"],
+      "answer": 1
+    },
+    {
+      "q": "Which tool is used for version control?",
+      "options": ["Jenkins", "Git", "Docker", "Ansible"],
+      "answer": 1
+    },
+    {
+      "q": "Docker is used for?",
+      "options": ["CI", "Containers", "Monitoring", "Testing"],
+      "answer": 1
+    },
+    {
+      "q": "What does YAML stand for?",
+      "options": ["Yet Another Markup Language", "Your Application Markup Language", "None", "Yellow App Mark Language"],
+      "answer": 0
+    },
+    {
+      "q": "Which is not a DevOps tool?",
+      "options": ["Kubernetes", "Git", "Photoshop", "Jenkins"],
+      "answer": 2
+    }
+  ],
+  "blockchain": [
+    {
+      "q": "Blockchain is a type of?",
+      "options": ["Database", "Protocol", "Network", "API"],
+      "answer": 0
+    },
+    {
+      "q": "What is Bitcoin?",
+      "options": ["Blockchain", "Cryptocurrency", "Company", "Protocol"],
+      "answer": 1
+    },
+    {
+      "q": "Ethereum uses what for contracts?",
+      "options": ["Java", "Solidity", "Python", "Swift"],
+      "answer": 1
+    },
+    {
+      "q": "Which of these is decentralized?",
+      "options": ["Central Bank", "PayPal", "Blockchain", "Bank Account"],
+      "answer": 2
+    },
+    {
+      "q": "Block contains?",
+      "options": ["Header only", "Transactions only", "Header + Transactions", "None"],
+      "answer": 2
+    }
+  ],
+  "gamedev": [
+    {
+      "q": "Which engine is used in Unity?",
+      "options": ["Unreal", "Godot", "C#", "Unity Engine"],
+      "answer": 3
+    },
+    {
+      "q": "Which language is used in Unity?",
+      "options": ["Java", "C++", "C#", "Python"],
+      "answer": 2
+    },
+    {
+      "q": "What is FPS in games?",
+      "options": ["First Person Shooter", "Frame Per Second", "File Processing Speed", "Fast Player Setup"],
+      "answer": 0
+    },
+    {
+      "q": "Which engine uses Blueprints?",
+      "options": ["Unity", "Unreal", "Godot", "CryEngine"],
+      "answer": 1
+    },
+    {
+      "q": "Which of the following is 2D engine?",
+      "options": ["Unity", "Godot", "Unreal", "CryEngine"],
+      "answer": 1
+    }
+  ],
+  "uiux": [
+    {
+      "q": "UI stands for?",
+      "options": ["User Intelligence", "User Interface", "Universal Input", "Unit Interface"],
+      "answer": 1
+    },
+    {
+      "q": "UX stands for?",
+      "options": ["User Express", "User Experience", "Usage Exchange", "User Explorer"],
+      "answer": 1
+    },
+    {
+      "q": "Which tool is used for prototyping?",
+      "options": ["Photoshop", "Illustrator", "Figma", "After Effects"],
+      "answer": 2
+    },
+    {
+      "q": "Which is not a UX principle?",
+      "options": ["Usability", "Consistency", "Performance", "Aesthetics"],
+      "answer": 2
+    },
+    {
+      "q": "Wireframes are used for?",
+      "options": ["Frontend code", "Backend flow", "UI layout planning", "Testing"],
+      "answer": 2
+    }
+  ]
+}

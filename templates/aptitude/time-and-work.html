@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time and Work Questions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .question-box {
+            background-color: #0A2647;
+            color: #fff;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+
+        .question-box h3 {
+            margin-top: 0;
+        }
+
+        .cta {
+            background-color: #0A2647;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .cta:hover {
+            background-color: #06203B;
+        }
+
+        .solution {
+            display: none;
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #f4f4f4;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Time and Work Questions</h1>
+
+        <!-- Question 1 -->
+        <div class="question-box">
+            <h3>1. A can complete a work in 12 days and B can complete it in 18 days. How long will they take to complete the work together?</h3>
+            <button class="cta" onclick="toggleSolution('solution1')">Show Answer</button>
+            <div class="solution" id="solution1">
+                <p>They will complete the work together in 7.2 days. (1/12 + 1/18 = 5/36; Total work = 36/5 = 7.2 days).</p>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question-box">
+            <h3>2. A can complete a task in 15 hours, B in 25 hours, and C in 30 hours. How long will they take to complete the task if all work together?</h3>
+            <button class="cta" onclick="toggleSolution('solution2')">Show Answer</button>
+            <div class="solution" id="solution2">
+                <p>They will complete the task in 8 hours. (1/15 + 1/25 + 1/30 = 31/150; Total work = 150/31 = 8 hours).</p>
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question-box">
+            <h3>3. A and B can finish a job in 8 days and 12 days respectively. How long will they take to complete the job together?</h3>
+            <button class="cta" onclick="toggleSolution('solution3')">Show Answer</button>
+            <div class="solution" id="solution3">
+                <p>A and B together will complete the work in 4.8 days. (1/8 + 1/12 = 5/24; Total work = 24/5 = 4.8 days).</p>
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question-box">
+            <h3>4. A can do a piece of work in 10 days. If A and B can finish the work together in 6 days, how long will B take to do the work alone?</h3>
+            <button class="cta" onclick="toggleSolution('solution4')">Show Answer</button>
+            <div class="solution" id="solution4">
+                <p>B will take 15 days to complete the work alone. (1/10 + 1/b = 1/6; b = 15).</p>
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question-box">
+            <h3>5. If A and B together can complete a work in 8 days, and A alone can complete the work in 12 days, how long will B take to complete the work alone?</h3>
+            <button class="cta" onclick="toggleSolution('solution5')">Show Answer</button>
+            <div class="solution" id="solution5">
+                <p>B will take 24 days. (1/8 - 1/12 = 1/24).</p>
+            </div>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="question-box">
+            <h3>6. A can do a job in 20 days, B in 30 days. How long will they take to complete the job together?</h3>
+            <button class="cta" onclick="toggleSolution('solution6')">Show Answer</button>
+            <div class="solution" id="solution6">
+                <p>A and B together will complete the job in 12 days. (1/20 + 1/30 = 5/60; Total work = 60/5 = 12 days).</p>
+            </div>
+        </div>
+
+        <!-- Question 7 -->
+        <div class="question-box">
+            <h3>7. A and B can finish a work in 16 days and 24 days respectively. How long will they take to complete the work together?</h3>
+            <button class="cta" onclick="toggleSolution('solution7')">Show Answer</button>
+            <div class="solution" id="solution7">
+                <p>A and B together will complete the work in 9.6 days. (1/16 + 1/24 = 5/48; Total work = 48/5 = 9.6 days).</p>
+            </div>
+        </div>
+
+        <!-- Question 8 -->
+        <div class="question-box">
+            <h3>8. A can do a piece of work in 5 days. B can do the same work in 8 days. How long will they take to finish the work together?</h3>
+            <button class="cta" onclick="toggleSolution('solution8')">Show Answer</button>
+            <div class="solution" id="solution8">
+                <p>A and B together will finish the work in 3.14 days. (1/5 + 1/8 = 13/40; Total work = 40/13 ≈ 3.14 days).</p>
+            </div>
+        </div>
+
+        <!-- Question 9 -->
+        <div class="question-box">
+            <h3>9. A can complete a work in 12 days. B can complete the same work in 15 days. How long will they take to complete the work if they work together for 4 days?</h3>
+            <button class="cta" onclick="toggleSolution('solution9')">Show Answer</button>
+            <div class="solution" id="solution9">
+                <p>They will complete 7/10 of the work. (1/12 + 1/15 = 3/20; In 4 days, they complete 12/20 = 7/10 of the work).</p>
+            </div>
+        </div>
+
+        <!-- Question 10 -->
+        <div class="question-box">
+            <h3>10. A can do a job in 25 days. How long will it take for A to complete 3/5 of the work?</h3>
+            <button class="cta" onclick="toggleSolution('solution10')">Show Answer</button>
+            <div class="solution" id="solution10">
+                <p>A will complete 3/5 of the work in 15 days. (25 days for full work, so 3/5 of it = 15 days).</p>
+            </div>
+        </div>
+
+        <!-- Question 11 -->
+        <div class="question-box">
+            <h3>11. A can complete a task in 6 days, B in 8 days. How long will they take to complete the task together?</h3>
+            <button class="cta" onclick="toggleSolution('solution11')">Show Answer</button>
+            <div class="solution" id="solution11">
+                <p>A and B together will complete the work in 3.43 days. (1/6 + 1/8 = 7/24; Total work = 24/7 ≈ 3.43 days).</p>
+            </div>
+        </div>
+
+        <!-- Question 12 -->
+        <div class="question-box">
+            <h3>12. A and B together can do a piece of work in 12 days, and B can do it alone in 18 days. How long will A take to do the work alone?</h3>
+            <button class="cta" onclick="toggleSolution('solution12')">Show Answer</button>
+            <div class="solution" id="solution12">
+                <p>A will take 36 days to complete the work alone. (1/12 - 1/18 = 1/36).</p>
+            </div>
+        </div>
+
+        <!-- Question 13 -->
+        <div class="question-box">
+            <h3>13. A can complete a task in 20 days, B can do the same in 30 days. How long will they take to finish the task if A works alone for 10 days and B works alone for 5 days?</h3>
+            <button class="cta" onclick="toggleSolution('solution13')">Show Answer</button>
+            <div class="solution" id ="solution13">
+                <p>The task will be completed in 12.5 days. A completes 10/20 in 10 days and B completes 5/30 in 5 days, so total = 15/20 of work, requiring 12.5 days for the remaining work.</p>
+                </div>
+                </div>
+
+                <!-- Question 14 -->
+    <div class="question-box">
+        <h3>14. A can finish a task in 12 days and B in 16 days. If they work together, how long will it take to finish the task?</h3>
+        <button class="cta" onclick="toggleSolution('solution14')">Show Answer</button>
+        <div class="solution" id="solution14">
+            <p>A and B will finish the work together in 6.86 days. (1/12 + 1/16 = 7/48; Total work = 48/7 ≈ 6.86 days).</p>
+        </div>
+    </div>
+
+    <!-- Question 15 -->
+    <div class="question-box">
+        <h3>15. A can complete a task in 8 days, and B can complete the same task in 12 days. How long will they take to finish the task together?</h3>
+        <button class="cta" onclick="toggleSolution('solution15')">Show Answer</button>
+        <div class="solution" id="solution15">
+            <p>A and B together will finish the task in 4.8 days. (1/8 + 1/12 = 5/24; Total work = 24/5 = 4.8 days).</p>
+        </div>
+    </div>
+
+    <!-- Question 16 -->
+    <div class="question-box">
+        <h3>16. If A and B can finish a job in 9 days, and A works alone for 5 days, how long will it take B to finish the remaining work?</h3>
+        <button class="cta" onclick="toggleSolution('solution16')">Show Answer</button>
+        <div class="solution" id="solution16">
+            <p>B will complete the remaining work in 7.5 days. (1/9 = 1/5 + 1/x; x ≈ 7.5).</p>
+        </div>
+    </div>
+
+    <!-- Question 17 -->
+    <div class="question-box">
+        <h3>17. A can complete a task in 10 days and B in 15 days. How long will they take to finish the work together?</h3>
+        <button class="cta" onclick="toggleSolution('solution17')">Show Answer</button>
+        <div class="solution" id="solution17">
+            <p>A and B together will finish the task in 6 days. (1/10 + 1/15 = 5/30; Total work = 30/5 = 6 days).</p>
+        </div>
+    </div>
+
+    <!-- Question 18 -->
+    <div class="question-box">
+        <h3>18. A completes a job in 20 days, and B completes the same job in 25 days. How long will they take to complete the job together?</h3>
+        <button class="cta" onclick="toggleSolution('solution18')">Show Answer</button>
+        <div class="solution" id="solution18">
+            <p>A and B together will complete the job in 11.43 days. (1/20 + 1/25 = 9/100; Total work = 100/9 ≈ 11.43 days).</p>
+        </div>
+    </div>
+
+    <!-- Question 19 -->
+    <div class="question-box">
+        <h3>19. A can do a job in 10 hours, and B can do the same job in 15 hours. How long will they take to finish the work together?</h3>
+        <button class="cta" onclick="toggleSolution('solution19')">Show Answer</button>
+        <div class="solution" id="solution19">
+            <p>A and B together will complete the work in 6 hours. (1/10 + 1/15 = 5/30; Total work = 30/5 = 6 hours).</p>
+        </div>
+    </div>
+
+    <!-- Question 20 -->
+    <div class="question-box">
+        <h3>20. A can complete a task in 16 days, and B can complete the same task in 24 days. How long will they take to finish the task together?</h3>
+        <button class="cta" onclick="toggleSolution('solution20')">Show Answer</button>
+        <div class="solution" id="solution20">
+            <p>A and B together will complete the work in 9.6 days. (1/16 + 1/24 = 5/48; Total work = 48/5 = 9.6 days).</p>
+        </div>
+    </div>
+
+        <button class="back-btn" onclick="window.location.href='/apti'">Back to Home</button>
+</div>
+
+<script>
+    function toggleSolution(id) {
+        var solution = document.getElementById(id);
+        if (solution.style.display === "none" || solution.style.display === "") {
+            solution.style.display = "block";
+        } else {
+            solution.style.display = "none";
+        }
+    }
+</script>
+</body> </html>

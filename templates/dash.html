@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard - Vedika</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    :root {
+      --bg-light: #f4f7fa;
+      --bg-dark: #1e1e2f;
+      --card-light: rgba(28, 22, 22, 0.15);
+      --card-dark: rgba(46, 46, 62, 0.3);
+      --text-light: #94a9bd;
+      --text-dark: #ecf0f1;
+      --accent: #ed28d6;
+      --accent-hover: #081e37;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Roboto", sans-serif;
+      background: url('/static/img/main.webp') no-repeat center center fixed;
+      background-size: cover;
+      color: var(--text-light);
+      overflow-x: hidden;
+      transition: background 0.5s, color 0.5s;
+    }
+
+    body.dark-mode {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+ .navbar {
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+      background: rgba(10, 38, 71, 0.6);
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+
+    .nav-links li a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      padding: 6px 12px;
+      border-radius: 8px;
+    }
+
+    .nav-links li a:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #00bcd4;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+    }
+
+    .hamburger span {
+      height: 3px;
+      width: 25px;
+      background-color: #fff;
+      border-radius: 5px;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        right: 30px;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+    }
+
+    .large-icon {
+      font-size: 1.4rem;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+    }
+
+    .theme-toggle {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background-color: var(--accent);
+      border: none;
+      color: white;
+      font-size: 22px;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      z-index: 999;
+      transition: transform 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.1);
+    }
+
+    .wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 30px;
+    }
+
+    .content {
+      width: 100%;
+      max-width: 1400px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+      position: relative;
+      z-index: 2;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to right, rgba(255,255,255,0.1), rgba(0,0,0,0.2));
+      backdrop-filter: blur(10px);
+      z-index: -1;
+      border-radius: 20px;
+    }
+
+    header h1 {
+      font-size: 34px;
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    header p {
+      font-size: 18px;
+      color: #65f5ff;
+      font-weight: bold;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      padding: 30px;
+    }
+
+    .card {
+      background: var(--card-light);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      padding: 25px;
+      text-align: center;
+      transition: transform 0.4s ease, background-color 0.5s;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .dark-mode .card {
+      background: var(--card-dark);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      left: -20%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.05), transparent 60%);
+      transform: rotate(45deg);
+      pointer-events: none;
+    }
+
+    .card.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .card:hover::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(255, 255, 255, 0.08);
+      pointer-events: none;
+      animation: pulse 1s ease-out;
+    }
+
+    @keyframes pulse {
+      0% {opacity: 1;}
+      100% {opacity: 0;}
+    }
+
+    .card i {
+      font-size: 42px;
+      margin-bottom: 15px;
+      color: var(--accent);
+    }
+
+    .card h3 {
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+
+    .card .cta {
+      background-color: var(--accent);
+      border: none;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 6px;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .card .cta:hover {
+      background-color: var(--accent-hover);
+      transform: scale(1.03);
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 28px;
+      }
+
+      .card h3 {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">TechElevate</div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/profile"><i class="fa-solid fa-user large-icon"></i></a></li>
+    </ul>
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </nav>
+
+  <button class="theme-toggle" onclick="toggleDarkMode()" id="toggleBtn" title="Toggle Dark Mode">🌙</button>
+
+  <div class="wrapper">
+    <div class="content">
+      <header>
+        <h1>Hello {{ user_name }}</h1>
+        <p><b>Work Hard Till You Succeed</b></p>
+      </header>
+
+      <div class="container">
+        <div class="card" title="Start practicing mock exams">
+          <i class="fas fa-pencil-ruler"></i>
+          <h3>Mock Test</h3>
+          <a href="/mockstart"><button class="cta">Start Mock Test</button></a>
+        </div>
+
+        <div class="card" title="Analyze your resume strength">
+          <i class="fas fa-file-alt"></i>
+          <h3>Roadmap Generator</h3>
+          <a href="/roadmap"><button class="cta">Generate</button></a>
+        </div>
+
+        <div class="card" title="Sharpen your skills">
+          <i class="fas fa-dumbbell"></i>
+          <h3>Skill Practice</h3>
+          <a href="/skillset"><button class="cta">Practice</button></a>
+        </div>
+
+        <div class="card" title="Prep technically and stay focused">
+          <i class="fas fa-brain"></i>
+          <h3>Technical Preparation</h3>
+          <a href="/technical"><button class="cta">Start Preparation</button></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Dark mode
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark-mode");
+      const btn = document.getElementById("toggleBtn");
+      btn.textContent = document.body.classList.contains("dark-mode") ? "☀️" : "🌙";
+    }
+
+    // Animate cards on scroll
+    const cards = document.querySelectorAll(".card");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+          }
+        });
+      },
+      {
+        threshold: 0.2,
+      }
+    );
+
+    cards.forEach((card) => {
+      observer.observe(card);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Technical Skills</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f4f4;
+    }
+
+    header {
+      background-color: #0A2647;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 2em;
+    }
+
+    .container {
+      padding: 30px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .language-section {
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .language-title {
+      text-align: center;
+      font-size: 1.5em;
+      color: #0A2647;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+
+    .sub-section {
+      background-color: #e3ecf9;
+      border-left: 5px solid #0A2647;
+      margin: 10px 0;
+      padding: 15px;
+      border-radius: 5px;
+      transition: transform 0.2s ease;
+      cursor: pointer;
+    }
+
+    .sub-section:hover {
+      transform: scale(1.02);
+    }
+
+    .sub-section h3 {
+      margin: 0 0 10px 0;
+      color: #0A2647;
+    }
+
+    .sub-section p {
+      margin: 0;
+      font-size: 0.95em;
+    }
+
+    .search-bar {
+      margin: 20px auto;
+      display: block;
+      padding: 10px;
+      width: 50%;
+      font-size: 1.1em;
+    }
+
+    .progress-bar {
+      width: 100%;
+      background-color: #e3ecf9;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+
+    .progress-bar span {
+      display: block;
+      height: 10px;
+      background-color: #0A2647;
+      border-radius: 10px;
+      width: 50%; /* Example progress */
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 5px 10px;
+      background-color: #0A2647;
+      color: white;
+      border-radius: 20px;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .discussion-forum textarea {
+      width: 100%;
+      height: 80px;
+      padding: 10px;
+      font-size: 1em;
+      border: 1px solid #0A2647;
+      border-radius: 5px;
+    }
+
+    .discussion-forum button {
+      background-color: #0A2647;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .discussion-forum button:hover {
+      background-color: #08304a;
+    }
+
+    .discussion-forum {
+      margin-top: 30px;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .take-quiz-btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 15px;
+      background-color: #0A2647;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.2s ease;
+    }
+
+    .take-quiz-btn:hover {
+      background-color: #08304a;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        font-size: 1.5em;
+      }
+      .search-bar {
+        width: 90%;
+      }
+    }
+
+    /* New Web Development Overview Styling */
+    .webdev-overview {
+      background: linear-gradient(to bottom right, #f0f7ff, #ffffff);
+      padding: 40px 30px;
+      border-radius: 20px;
+      margin: 40px auto;
+      max-width: 1000px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .webdev-heading {
+      text-align: center;
+      font-size: 2em;
+      color: #0A2647;
+      margin-bottom: 20px;
+    }
+
+    .webdev-desc {
+      text-align: center;
+      font-size: 1.1em;
+      color: #333;
+      margin-bottom: 30px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    .webdev-card {
+      background-color: #ffffff;
+      border-left: 6px solid #0A2647;
+      padding: 20px 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .webdev-card h3 {
+      color: #0A2647;
+      font-size: 1.4em;
+      margin-bottom: 10px;
+    }
+
+    .webdev-card p {
+      font-size: 1em;
+      color: #444;
+      line-height: 1.5;
+      margin-bottom: 15px;
+    }
+
+  </style>
+</head>
+<body>
+
+<header>Web Development Skills</header>
+
+<input type="text" id="search-bar" class="search-bar" placeholder="Search for a topic..." onkeyup="searchTopics()">
+
+<div class="container">
+  <div class="language-section">
+    <div class="language-title">HTML</div>
+    <div class="sub-section" onclick="window.location.href='/html'">
+      <h3>HTML Syllabus</h3>
+      <p>"HTML is not about making things pretty — it's about making things possible."</p>
+    </div>
+    <div class="sub-section" onclick="window.location.href='/html'">
+      <h3>HTML Video Tutorials</h3>
+      <p>"Learn HTML step-by-step with easy video tutorials — no coding experience needed!"</p>
+    </div>
+    <div class="sub-section" onclick="window.location.href='/html'">
+      <h3>HTML Courses</h3>
+      <p>Take these highly recommended courses to gain hands-on experience and deepen your knowledge in HTML.</p>
+    </div>
+    <a href="/mock" class="take-quiz-btn">Take HTML Quiz</a>
+    <div class="progress-bar"><span></span></div>
+    <div class="badge">Completed</div>
+  </div>
+
+  <div class="language-section">
+    <div class="language-title">CSS</div>
+    <div class="sub-section" onclick="window.location.href='/css'">
+      <h3>CSS Syllabus</h3>
+      <p>Master the language of design with a structured CSS syllabus built for clarity and creativity.</p>
+    </div>
+    <div class="sub-section" onclick="window.location.href='/css'">
+      <h3>CSS Video Tutorials</h3>
+      <p>Visual learners thrive — explore CSS through engaging video tutorials that bring styles to life.</p>
+    </div>
+    <div class="sub-section" onclick="window.location.href='/css'">
+      <h3>CSS Courses</h3>
+      <p>Learn CSS the smart way with beginner-friendly courses from top educators, all in one place.</p>
+    </div>
+    <a href="/mock" class="take-quiz-btn">Take CSS Quiz</a>
+    <div class="progress-bar"><span></span></div>
+    <div class="badge">Completed</div>
+  </div>
+
+  <div class="language-section">
+    <div class="language-title">JavaScript</div>
+    <div class="sub-section" onclick="window.location.href='/js'">
+      <h3>JavaScript Syllabus</h3>
+      <p>From syntax to interactivity — our JavaScript syllabus guides you from basics to breakthroughs.</p>
+    </div>
+    <div class="sub-section" onclick="window.location.href='/js'">
+      <h3>JavaScript Video Tutorials</h3>
+      <p>Watch JavaScript in action with video tutorials that turn code into clear concepts.</p>
+    </div>
+    <div class="sub-section" onclick="window.location.href='/js'">
+      <h3>JavaScript Courses</h3>
+      <p>Explore hands-on JavaScript courses designed to help you build real projects and real skills.</p>
+    </div>
+    <a href="/mock" class="take-quiz-btn">Take JavaScript Quiz</a>
+    <div class="progress-bar"><span></span></div>
+    <div class="badge">Completed</div>
+  </div>
+</div>
+
+<!-- ✅ Web Development Overview Section -->
+<div class="webdev-overview">
+  <h2 class="webdev-heading">🌐 ALL IN ONE</h2>
+  <p class="webdev-desc">
+    Web development includes building websites using both frontend (HTML, CSS, JavaScript) and backend 
+    (server-side logic, databases, APIs) technologies. Together, they enable full-stack development.
+  </p>
+  <div class="webdev-card">
+    <h3>🎨 Frontend Development</h3>
+    <p>Frontend includes the structure, style, and behavior of websites. Learn how HTML, CSS, and JavaScript work together to build interactive experiences.</p>
+  <iframe width="300" height="170" src="https://www.youtube.com/embed/kUJPZbUPqro?si=-12FVN-XmL6FRWfj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="300" height="170" src="https://www.youtube.com/embed/zJSY8tbf_ys?si=Ei7J-iWcXRo5QeGS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="300" height="170" src="https://www.youtube.com/embed/HBqWsrqK89U?si=awFYPrKesP7INAOQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+   <iframe width="300" height="170" src="https://www.youtube.com/embed/5nUxK4QrUE4?si=F09ZzK99V1XidV8K" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> 
+  <iframe width="300" height="170" src="https://www.youtube.com/embed/z5d0z-eB28M?si=rhGFmmc3qotdznoI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="300" height="170" src="https://www.youtube.com/embed/jgfq8OybWZQ?si=y-QTSns07Y7Uu3qe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  </div>
+  <div class="webdev-card">
+    <h3>🛠️ Backend Development</h3>
+    <p>Backend development handles databases, server logic, and APIs. Explore how data is managed and served to frontend apps.</p>
+    <iframe width="300" height="170" src="https://www.youtube.com/embed/vfaRzV3P92o?si=rRpba2yKO5UjivLz" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="300" height="170" src="https://www.youtube.com/embed/jBzwzrDvZ18?si=6tmoVf4HVtUjQwc5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="300" height="170" src="https://www.youtube.com/embed/fmX84zu-5gs?si=ocD_M_gS-CLpyBCR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="300" height="170" src="https://www.youtube.com/embed/7fjOw8ApZ1I?si=NsMIlpK9ZBBtyxMY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>  
+<iframe width="300" height="170" src="https://www.youtube.com/embed/Q-icS7yZz5k?si=-f0LKd5ddRw2tJTv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="300" height="170" src="https://www.youtube.com/embed/gxHXPmePnvo?si=agcPRSEkwVFV4cPU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+</div>
+
+<!-- Discussion Forum -->
+<div class="discussion-forum">
+  <h3>Discussion Forum</h3>
+  <textarea placeholder="Ask your question or share your thoughts here"></textarea>
+  <button type="submit">Post Question</button>
+</div>
+
+<script>
+  function showContent(topic) {
+    alert("You clicked on: " + topic + "\n(You can expand this to show content or redirect)");
+  }
+
+  function searchTopics() {
+    let input = document.getElementById('search-bar').value.toLowerCase();
+    let sections = document.querySelectorAll('.sub-section');
+    sections.forEach(function(section) {
+      let title = section.querySelector('h3').textContent.toLowerCase();
+      section.style.display = title.includes(input) ? '' : 'none';
+    });
+  }
+</script>
+
+</body>
+</html>

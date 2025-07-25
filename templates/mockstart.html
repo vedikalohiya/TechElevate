@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TechElevate | Start Mock Test</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: url('static/img/mock.webp') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .start-box {
+      background: rgba(10, 38, 71, 0.7);
+      backdrop-filter: blur(12px);
+      padding: 60px 40px;
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      max-width: 400px;
+    }
+
+    .start-box h1 {
+      margin-bottom: 20px;
+      font-size: 32px;
+      color: #ffe600;
+    }
+
+    .start-btn {
+      background-color: #ffe600;
+      color: #000;
+      border: none;
+      padding: 14px 30px;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 15px #ffe600aa;
+    }
+
+    .start-btn:hover {
+      background-color: #fff048;
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 500px) {
+      .start-box {
+        width: 90%;
+        padding: 40px 20px;
+      }
+      .start-box h1 {
+        font-size: 26px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="start-box">
+    <h1>Ready for Your Mock Test?</h1>
+    <button class="start-btn" onclick="startTest()">Start</button>
+  </div>
+
+  <script>
+    function startTest() {
+      window.location.href = '/mock'; // Replace with your actual mock test topic page
+    }
+  </script>
+
+</body>
+</html>
