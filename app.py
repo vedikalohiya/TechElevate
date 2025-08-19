@@ -1,47 +1,28 @@
 import os
-from flask import Flask, render_template, request, jsonify, session, redirect, url_for
+from flask import Flask, render_template
 from flask_pymongo import PyMongo
-from werkzeug.security import generate_password_hash, check_password_hash
 from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
 
-app.secret_key = '7fa97ae2ee731f742f0760d3042b3c57'
 app.config["MONGO_URI"] = "mongodb://localhost:27017/techelevate"
 mongo = PyMongo(app)
 
 
+# === HOME & PAGES ===
 @app.route('/')
-def index():
-    return render_template('register.html')
-
-@app.route('/sign.html')
-def signin():
-    return render_template('sign.html')
-
 @app.route('/home')
 def home():
     return render_template('home.html')
 
 @app.route('/profile')
 def show_profile():
-    email = session.get('user_email')
-    if not email:
-        return redirect(url_for('signin'))
-
-    user = mongo.db.users.find_one({'email': email})
-    if not user:
-        return redirect(url_for('signin'))
-
-    return render_template('profile.html', user_name=user.get('name'))
+    return render_template('profile.html', user_name="Guest")  # No login required
 
 @app.route('/dashboard')
 def show_dashboard():
-    user_name = session.get('user_name')
-    if not user_name:
-        return redirect(url_for('signin'))
-    return render_template('dash.html', user_name=user_name)
+    return render_template('dash.html', user_name="Guest")
 
 @app.route('/mockstart')
 def start_mock():
@@ -146,52 +127,6 @@ def show_css():
 @app.route('/js')
 def show_js():
     return render_template('technical/js.html')
-
-
-# === REGISTER API ===
-@app.route('/api/register', methods=['POST'])
-def signup():
-    data = request.get_json()
-    if not data:
-        return jsonify({'status': 'fail', 'message': 'Missing data.'}), 400
-
-    email = data.get('email')
-    if mongo.db.users.find_one({'email': email}):
-        return jsonify({'status': 'fail', 'message': 'Email already registered.'}), 400
-
-    hashed_password = generate_password_hash(data['password'])
-
-    user_data = {
-        'name': data.get('name'),
-        'email': email,
-        'password': hashed_password,
-        'phone': data.get('phone'),
-        'college': data.get('college'),
-        'branch': data.get('branch'),
-        'passingYear': data.get('passingYear')
-    }
-
-    mongo.db.users.insert_one(user_data)
-    return jsonify({'status': 'success', 'message': 'User registered successfully.'}), 201
-
-
-# === LOGIN API ===
-@app.route('/api/login', methods=['POST'])
-def login():
-    data = request.get_json()
-    if not data:
-        return jsonify({'status': 'fail', 'message': 'Missing data.'}), 400
-
-    email = data.get('email')
-    password = data.get('password')
-
-    user = mongo.db.users.find_one({'email': email})
-    if user and check_password_hash(user['password'], password):
-        session['user_email'] = email
-        session['user_name'] = user['name']
-        return jsonify({'status': 'success', 'message': 'Login successful.', 'redirect': '/home'}), 200
-    else:
-        return jsonify({'status': 'fail', 'message': 'Invalid credentials.'}), 401
 
 
 # === RUN APP ===
