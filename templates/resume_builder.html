@@ -1789,6 +1789,545 @@
             border-color: #cbd5e1;
         }
 
+        /* Resume Management */
+        .resume-management-btn {
+            position: fixed;
+            left: 20px;
+            bottom: 20px;
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4);
+            transition: all 0.3s ease;
+            z-index: 9998;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+        }
+
+        .resume-management-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(139, 92, 246, 0.5);
+        }
+
+        .resume-management-btn i {
+            font-size: 18px;
+        }
+
+        .resume-management-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 10003;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .resume-management-modal.active {
+            display: flex;
+        }
+
+        .resume-management-content {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            max-width: 700px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.3);
+        }
+
+        .resume-management-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .resume-management-header h3 {
+            color: #1e293b;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 0;
+        }
+
+        .resume-management-header h3 i {
+            color: #8b5cf6;
+            font-size: 28px;
+        }
+
+        .close-resume-modal {
+            background: #f1f5f9;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            color: #64748b;
+            font-size: 18px;
+        }
+
+        .close-resume-modal:hover {
+            background: #e2e8f0;
+            color: #1e293b;
+        }
+
+        .save-current-resume {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .save-current-resume:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4);
+        }
+
+        .resume-list {
+            display: grid;
+            gap: 15px;
+        }
+
+        .resume-item {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .resume-item:hover {
+            border-color: #8b5cf6;
+            background: #faf5ff;
+            transform: translateX(5px);
+        }
+
+        .resume-item.active {
+            background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%);
+            border-color: #8b5cf6;
+        }
+
+        .resume-item-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .resume-item-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .resume-item-title i {
+            color: #8b5cf6;
+        }
+
+        .resume-item-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .resume-action-btn {
+            background: white;
+            border: 2px solid #e2e8f0;
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            color: #64748b;
+        }
+
+        .resume-action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .resume-action-btn.load:hover {
+            background: #dbeafe;
+            border-color: #3b82f6;
+            color: #3b82f6;
+        }
+
+        .resume-action-btn.rename:hover {
+            background: #fef3c7;
+            border-color: #f59e0b;
+            color: #f59e0b;
+        }
+
+        .resume-action-btn.delete:hover {
+            background: #fee2e2;
+            border-color: #ef4444;
+            color: #ef4444;
+        }
+
+        .resume-item-info {
+            display: flex;
+            gap: 20px;
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        .resume-item-info span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .resume-item-info i {
+            font-size: 12px;
+        }
+
+        .no-resumes {
+            text-align: center;
+            padding: 40px 20px;
+            color: #94a3b8;
+        }
+
+        .no-resumes i {
+            font-size: 48px;
+            margin-bottom: 15px;
+            opacity: 0.5;
+        }
+
+        .no-resumes p {
+            font-size: 15px;
+        }
+
+        .resume-count-badge {
+            background: #8b5cf6;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        /* Cover Letter Generator */
+        .cover-letter-btn {
+            position: fixed;
+            right: 20px;
+            bottom: 180px;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.4);
+            transition: all 0.3s ease;
+            z-index: 9998;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cover-letter-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 30px rgba(245, 158, 11, 0.5);
+        }
+
+        .cover-letter-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 10004;
+            align-items: center;
+            justify-content: center;
+            overflow-y: auto;
+        }
+
+        .cover-letter-modal.active {
+            display: flex;
+        }
+
+        .cover-letter-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 900px;
+            width: 95%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.3);
+            margin: 20px;
+        }
+
+        .cover-letter-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #f59e0b;
+        }
+
+        .cover-letter-header h2 {
+            color: #1e293b;
+            font-size: 28px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 0;
+        }
+
+        .cover-letter-header h2 i {
+            color: #f59e0b;
+            font-size: 32px;
+        }
+
+        .cover-letter-form {
+            display: grid;
+            gap: 25px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-weight: 700;
+            color: #1e293b;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-group label i {
+            color: #f59e0b;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #f59e0b;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .generate-cover-btn {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            border: none;
+            padding: 18px 30px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .generate-cover-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+        }
+
+        .cover-letter-preview {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 40px;
+            margin-top: 30px;
+            display: none;
+            font-family: 'Times New Roman', serif;
+            line-height: 1.8;
+            color: #1e293b;
+        }
+
+        .cover-letter-preview.active {
+            display: block;
+        }
+
+        .cover-letter-preview h3 {
+            color: #f59e0b;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .cover-letter-text {
+            white-space: pre-wrap;
+            font-size: 15px;
+        }
+
+        .cover-letter-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .cover-letter-actions button {
+            flex: 1;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-copy-cover {
+            background: #3b82f6;
+            color: white;
+            border: none;
+        }
+
+        .btn-copy-cover:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+        }
+
+        .btn-download-cover {
+            background: #10b981;
+            color: white;
+            border: none;
+        }
+
+        .btn-download-cover:hover {
+            background: #059669;
+            transform: translateY(-2px);
+        }
+
+        .ai-enhance-btn {
+            background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            margin-top: 5px;
+        }
+
+        .ai-enhance-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(236, 72, 153, 0.4);
+        }
+
+        .template-select {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .template-card {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .template-card:hover {
+            border-color: #f59e0b;
+            background: #fef3c7;
+            transform: translateY(-2px);
+        }
+
+        .template-card.selected {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-color: #f59e0b;
+        }
+
+        .template-card i {
+            font-size: 28px;
+            color: #f59e0b;
+            margin-bottom: 8px;
+        }
+
+        .template-card span {
+            display: block;
+            font-weight: 600;
+            color: #1e293b;
+            font-size: 13px;
+        }
+
         .section-order-info {
             background: #e0f2fe;
             border-left: 4px solid #0284c7;
@@ -2292,6 +2831,123 @@
         </div>
     </div>
 
+    <!-- Cover Letter Generator Modal -->
+    <div class="cover-letter-modal" id="coverLetterModal">
+        <div class="cover-letter-content">
+            <div class="cover-letter-header">
+                <h2>
+                    <i class="fas fa-envelope-open-text"></i>
+                    Cover Letter Generator
+                </h2>
+                <button class="close-resume-modal" onclick="closeCoverLetterGenerator()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <form class="cover-letter-form" onsubmit="generateCoverLetter(event)">
+                <div class="form-group">
+                    <label><i class="fas fa-lightbulb"></i> Cover Letter Style</label>
+                    <div class="template-select">
+                        <div class="template-card selected" data-style="professional" onclick="selectCoverStyle('professional')">
+                            <i class="fas fa-briefcase"></i>
+                            <span>Professional</span>
+                        </div>
+                        <div class="template-card" data-style="creative" onclick="selectCoverStyle('creative')">
+                            <i class="fas fa-palette"></i>
+                            <span>Creative</span>
+                        </div>
+                        <div class="template-card" data-style="enthusiastic" onclick="selectCoverStyle('enthusiastic')">
+                            <i class="fas fa-star"></i>
+                            <span>Enthusiastic</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label><i class="fas fa-building"></i> Company Name *</label>
+                        <input type="text" id="coverCompanyName" placeholder="Tech Corp Inc." required />
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-user-tie"></i> Hiring Manager Name</label>
+                        <input type="text" id="coverHiringManager" placeholder="John Smith (Optional)" />
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label><i class="fas fa-briefcase"></i> Job Title *</label>
+                        <input type="text" id="coverJobTitle" placeholder="Senior Software Engineer" required />
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-map-marker-alt"></i> Company Location</label>
+                        <input type="text" id="coverCompanyLocation" placeholder="San Francisco, CA" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-bullseye"></i> Key Skills/Requirements (comma-separated)</label>
+                    <input type="text" id="coverKeySkills" placeholder="React, Node.js, Python, Team Leadership" />
+                    <button type="button" class="ai-enhance-btn" onclick="extractSkillsFromResume()">
+                        <i class="fas fa-magic"></i> Extract from Resume
+                    </button>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-trophy"></i> Key Achievements to Highlight</label>
+                    <textarea id="coverAchievements" placeholder="Example:\n• Led a team of 5 developers in building a high-traffic web application\n• Reduced page load time by 40% through optimization\n• Implemented CI/CD pipeline improving deployment efficiency"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-heart"></i> Why This Company? (Optional)</label>
+                    <textarea id="coverWhyCompany" placeholder="What excites you about this company? (e.g., innovative products, company culture, mission)"></textarea>
+                </div>
+
+                <button type="submit" class="generate-cover-btn">
+                    <i class="fas fa-magic"></i>
+                    Generate Cover Letter
+                </button>
+            </form>
+
+            <div class="cover-letter-preview" id="coverLetterPreview">
+                <h3><i class="fas fa-file-alt"></i> Your Cover Letter</h3>
+                <div class="cover-letter-text" id="coverLetterText"></div>
+                <div class="cover-letter-actions">
+                    <button class="btn-copy-cover" onclick="copyCoverLetter()">
+                        <i class="fas fa-copy"></i> Copy to Clipboard
+                    </button>
+                    <button class="btn-download-cover" onclick="downloadCoverLetter()">
+                        <i class="fas fa-download"></i> Download as Text
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Resume Management Modal -->
+    <div class="resume-management-modal" id="resumeManagementModal">
+        <div class="resume-management-content">
+            <div class="resume-management-header">
+                <h3>
+                    <i class="fas fa-folder-open"></i>
+                    My Resumes
+                </h3>
+                <button class="close-resume-modal" onclick="closeResumeManagement()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <button class="save-current-resume" onclick="saveNewResume()">
+                <i class="fas fa-save"></i>
+                Save Current Resume
+            </button>
+
+            <div id="resumeListContainer">
+                <!-- Resume list will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
     <!-- LinkedIn Import Modal -->
     <div class="linkedin-modal" id="linkedinModal">
         <div class="linkedin-modal-content">
@@ -2381,6 +3037,18 @@
             </div>
         </div>
     </div>
+
+    <!-- Cover Letter Generator Button -->
+    <button class="cover-letter-btn" onclick="openCoverLetterGenerator()" title="Generate Cover Letter">
+        <i class="fas fa-envelope"></i>
+    </button>
+
+    <!-- Resume Management Button -->
+    <button class="resume-management-btn" onclick="openResumeManagement()">
+        <i class="fas fa-folder-open"></i>
+        <span>My Resumes</span>
+        <span class="resume-count-badge" id="resumeCountBadge">0</span>
+    </button>
 
     <!-- ATS Score Panel -->
     <button class="ats-score-toggle" id="atsToggle" onclick="toggleATSPanel()">
@@ -3961,6 +4629,467 @@
             const modal = document.getElementById('linkedinModal');
             if (modal && e.target === modal) {
                 closeLinkedInImport();
+            }
+        });
+
+        // ================== RESUME MANAGEMENT ==================
+        
+        let savedResumes = [];
+
+        function loadSavedResumes() {
+            const stored = localStorage.getItem('saved_resumes');
+            savedResumes = stored ? JSON.parse(stored) : [];
+            updateResumeCount();
+        }
+
+        function updateResumeCount() {
+            const badge = document.getElementById('resumeCountBadge');
+            if (badge) {
+                badge.textContent = savedResumes.length;
+            }
+        }
+
+        function openResumeManagement() {
+            document.getElementById('resumeManagementModal').classList.add('active');
+            displayResumeList();
+        }
+
+        function closeResumeManagement() {
+            document.getElementById('resumeManagementModal').classList.remove('active');
+        }
+
+        function saveNewResume() {
+            const resumeName = prompt('Enter a name for this resume:', 'Resume ' + (savedResumes.length + 1));
+            
+            if (!resumeName) return;
+
+            const resumeData = {
+                id: Date.now(),
+                name: resumeName,
+                template: currentTemplate,
+                theme: currentTheme,
+                data: {
+                    name: document.getElementById('name').value,
+                    title: document.getElementById('title').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    location: document.getElementById('location').value,
+                    linkedin: document.getElementById('linkedin').value,
+                    summary: document.getElementById('summary').value,
+                    experiences: collectItems('.exp-role', '.exp-dates', '.exp-desc'),
+                    educations: collectItems('.edu-role', '.edu-dates', '.edu-desc'),
+                    skills: Array.from(document.querySelectorAll('#skills .chip')).map(s => s.textContent.replace('×', '').trim())
+                },
+                savedAt: new Date().toISOString(),
+                lastModified: new Date().toISOString()
+            };
+
+            savedResumes.push(resumeData);
+            localStorage.setItem('saved_resumes', JSON.stringify(savedResumes));
+            
+            updateResumeCount();
+            displayResumeList();
+
+            showNotification('Resume saved successfully!', 'success');
+        }
+
+        function displayResumeList() {
+            const container = document.getElementById('resumeListContainer');
+            
+            if (savedResumes.length === 0) {
+                container.innerHTML = `
+                    <div class="no-resumes">
+                        <i class="fas fa-folder-open"></i>
+                        <p>No saved resumes yet. Save your current resume to get started!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = '<div class="resume-list">' + savedResumes.map(resume => {
+                const savedDate = new Date(resume.savedAt);
+                const dateStr = savedDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                const timeStr = savedDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+                
+                return `
+                    <div class="resume-item" data-resume-id="${resume.id}">
+                        <div class="resume-item-header">
+                            <div class="resume-item-title">
+                                <i class="fas fa-file-alt"></i>
+                                ${resume.name}
+                            </div>
+                            <div class="resume-item-actions">
+                                <button class="resume-action-btn load" onclick="loadResume(${resume.id})" title="Load Resume">
+                                    <i class="fas fa-upload"></i>
+                                </button>
+                                <button class="resume-action-btn rename" onclick="renameResume(${resume.id})" title="Rename">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="resume-action-btn delete" onclick="deleteResume(${resume.id})" title="Delete">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="resume-item-info">
+                            <span><i class="fas fa-palette"></i> ${resume.template}</span>
+                            <span><i class="fas fa-clock"></i> ${dateStr} at ${timeStr}</span>
+                        </div>
+                    </div>
+                `;
+            }).join('') + '</div>';
+        }
+
+        function loadResume(resumeId) {
+            const resume = savedResumes.find(r => r.id === resumeId);
+            if (!resume) return;
+
+            if (!confirm(`Load "${resume.name}"? This will replace your current resume data.`)) {
+                return;
+            }
+
+            // Load template and theme
+            currentTemplate = resume.template;
+            currentTheme = resume.theme || 'purple';
+            applyTheme(currentTheme);
+            
+            // Update template selector
+            document.querySelectorAll('.template-option').forEach(opt => {
+                opt.classList.remove('active');
+                if (opt.dataset.template === currentTemplate) {
+                    opt.classList.add('active');
+                }
+            });
+
+            // Load personal info
+            const data = resume.data;
+            document.getElementById('name').value = data.name || '';
+            document.getElementById('title').value = data.title || '';
+            document.getElementById('email').value = data.email || '';
+            document.getElementById('phone').value = data.phone || '';
+            document.getElementById('location').value = data.location || '';
+            document.getElementById('linkedin').value = data.linkedin || '';
+            document.getElementById('summary').value = data.summary || '';
+
+            // Load experiences
+            const expContainer = document.getElementById('experiences');
+            expContainer.innerHTML = '';
+            if (data.experiences && data.experiences.length > 0) {
+                data.experiences.forEach(exp => {
+                    addExperience();
+                    const expItems = document.querySelectorAll('.exp-item');
+                    const lastItem = expItems[expItems.length - 1];
+                    if (lastItem) {
+                        lastItem.querySelector('.exp-role').value = exp.role;
+                        lastItem.querySelector('.exp-dates').value = exp.dates;
+                        lastItem.querySelector('.exp-desc').value = exp.desc;
+                    }
+                });
+            } else {
+                addExperience();
+            }
+
+            // Load educations
+            const eduContainer = document.getElementById('educations');
+            eduContainer.innerHTML = '';
+            if (data.educations && data.educations.length > 0) {
+                data.educations.forEach(edu => {
+                    addEducation();
+                    const eduItems = document.querySelectorAll('.edu-item');
+                    const lastItem = eduItems[eduItems.length - 1];
+                    if (lastItem) {
+                        lastItem.querySelector('.edu-role').value = edu.role;
+                        lastItem.querySelector('.edu-dates').value = edu.dates;
+                        lastItem.querySelector('.edu-desc').value = edu.desc;
+                    }
+                });
+            } else {
+                addEducation();
+            }
+
+            // Load skills
+            document.getElementById('skills').innerHTML = '';
+            if (data.skills && data.skills.length > 0) {
+                data.skills.forEach(skill => {
+                    if (skill) {
+                        const chip = document.createElement('span');
+                        chip.className = 'chip';
+                        chip.innerHTML = skill + ' <i class="fas fa-times" onclick="this.parentElement.remove()"></i>';
+                        document.getElementById('skills').appendChild(chip);
+                    }
+                });
+            }
+
+            closeResumeManagement();
+            generateResume();
+            showNotification(`Loaded "${resume.name}" successfully!`, 'success');
+        }
+
+        function renameResume(resumeId) {
+            const resume = savedResumes.find(r => r.id === resumeId);
+            if (!resume) return;
+
+            const newName = prompt('Enter new name:', resume.name);
+            if (!newName || newName === resume.name) return;
+
+            resume.name = newName;
+            resume.lastModified = new Date().toISOString();
+            localStorage.setItem('saved_resumes', JSON.stringify(savedResumes));
+            
+            displayResumeList();
+            showNotification('Resume renamed successfully!', 'success');
+        }
+
+        function deleteResume(resumeId) {
+            const resume = savedResumes.find(r => r.id === resumeId);
+            if (!resume) return;
+
+            if (!confirm(`Delete "${resume.name}"? This action cannot be undone.`)) {
+                return;
+            }
+
+            savedResumes = savedResumes.filter(r => r.id !== resumeId);
+            localStorage.setItem('saved_resumes', JSON.stringify(savedResumes));
+            
+            updateResumeCount();
+            displayResumeList();
+            showNotification('Resume deleted successfully!', 'warning');
+        }
+
+        function showNotification(message, type = 'success') {
+            const colors = {
+                success: { bg: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', icon: 'fa-check-circle' },
+                warning: { bg: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)', icon: 'fa-exclamation-circle' },
+                error: { bg: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)', icon: 'fa-times-circle' }
+            };
+
+            const color = colors[type] || colors.success;
+
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${color.bg};
+                color: white;
+                padding: 20px 30px;
+                border-radius: 12px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+                z-index: 10004;
+                font-weight: 600;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                animation: slideIn 0.4s ease;
+            `;
+            notification.innerHTML = `
+                <i class="fas ${color.icon}" style="font-size: 24px;"></i>
+                <span>${message}</span>
+            `;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.animation = 'fadeOut 0.4s ease';
+                setTimeout(() => notification.remove(), 400);
+            }, 3000);
+        }
+
+        // Close modal when clicking outside
+        document.addEventListener('click', function(e) {
+            const modal = document.getElementById('resumeManagementModal');
+            if (modal && e.target === modal) {
+                closeResumeManagement();
+            }
+        });
+
+        // Load saved resumes on page load
+        loadSavedResumes();
+
+        // ================== COVER LETTER GENERATOR ==================
+        
+        let selectedCoverStyle = 'professional';
+        let generatedCoverLetter = '';
+
+        function openCoverLetterGenerator() {
+            document.getElementById('coverLetterModal').classList.add('active');
+            // Auto-fill from resume data
+            const name = document.getElementById('name').value;
+            if (name) {
+                // Pre-populate if resume data exists
+                document.getElementById('coverJobTitle').value = document.getElementById('title').value || '';
+            }
+        }
+
+        function closeCoverLetterGenerator() {
+            document.getElementById('coverLetterModal').classList.remove('active');
+        }
+
+        function selectCoverStyle(style) {
+            selectedCoverStyle = style;
+            document.querySelectorAll('.template-card').forEach(card => {
+                card.classList.remove('selected');
+                if (card.dataset.style === style) {
+                    card.classList.add('selected');
+                }
+            });
+        }
+
+        function extractSkillsFromResume() {
+            const skills = Array.from(document.querySelectorAll('#skills .chip'))
+                .map(s => s.textContent.replace('×', '').trim());
+            
+            if (skills.length > 0) {
+                document.getElementById('coverKeySkills').value = skills.join(', ');
+                showNotification('Skills extracted from resume!', 'success');
+            } else {
+                showNotification('No skills found in resume. Please add skills first.', 'warning');
+            }
+        }
+
+        function generateCoverLetter(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value || 'Your Name';
+            const email = document.getElementById('email').value || 'your.email@example.com';
+            const phone = document.getElementById('phone').value || '(555) 123-4567';
+            const location = document.getElementById('location').value || 'Your City, State';
+            
+            const companyName = document.getElementById('coverCompanyName').value;
+            const hiringManager = document.getElementById('coverHiringManager').value;
+            const jobTitle = document.getElementById('coverJobTitle').value;
+            const companyLocation = document.getElementById('coverCompanyLocation').value;
+            const keySkills = document.getElementById('coverKeySkills').value;
+            const achievements = document.getElementById('coverAchievements').value;
+            const whyCompany = document.getElementById('coverWhyCompany').value;
+
+            if (!companyName || !jobTitle) {
+                alert('Please fill in Company Name and Job Title');
+                return;
+            }
+
+            const today = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+
+            // Generate cover letter based on style
+            let coverLetter = '';
+
+            // Header
+            coverLetter += `${name}\n`;
+            coverLetter += `${email} | ${phone} | ${location}\n`;
+            coverLetter += `\n${today}\n\n`;
+            
+            if (hiringManager) {
+                coverLetter += `${hiringManager}\n`;
+            }
+            if (companyLocation) {
+                coverLetter += `${companyName}\n${companyLocation}\n\n`;
+            } else {
+                coverLetter += `${companyName}\n\n`;
+            }
+
+            // Salutation
+            if (hiringManager) {
+                coverLetter += `Dear ${hiringManager},\n\n`;
+            } else {
+                coverLetter += `Dear Hiring Manager,\n\n`;
+            }
+
+            // Opening paragraph - varies by style
+            if (selectedCoverStyle === 'professional') {
+                coverLetter += `I am writing to express my strong interest in the ${jobTitle} position at ${companyName}. With my proven expertise in ${keySkills || 'relevant technologies'} and a track record of delivering high-quality results, I am confident in my ability to contribute effectively to your team.\n\n`;
+            } else if (selectedCoverStyle === 'creative') {
+                coverLetter += `Imagine a ${jobTitle} who doesn't just write code, but crafts solutions that transform user experiences. That's exactly what I bring to ${companyName}. My passion for ${keySkills || 'innovative technology'} and creative problem-solving makes me an ideal fit for this role.\n\n`;
+            } else if (selectedCoverStyle === 'enthusiastic') {
+                coverLetter += `I am thrilled to apply for the ${jobTitle} position at ${companyName}! Your company's innovative approach and commitment to excellence perfectly align with my professional goals and values. I am excited about the opportunity to contribute my skills in ${keySkills || 'technology and development'} to your dynamic team.\n\n`;
+            }
+
+            // Body - achievements
+            if (achievements) {
+                coverLetter += `Throughout my career, I have achieved significant milestones that demonstrate my capabilities:\n\n`;
+                const achievementLines = achievements.split('\n').filter(line => line.trim());
+                achievementLines.forEach(achievement => {
+                    if (!achievement.trim().startsWith('•')) {
+                        coverLetter += `• ${achievement.trim()}\n`;
+                    } else {
+                        coverLetter += `${achievement.trim()}\n`;
+                    }
+                });
+                coverLetter += `\n`;
+            }
+
+            // Why this company
+            if (whyCompany) {
+                coverLetter += `I am particularly drawn to ${companyName} because ${whyCompany.trim()}. This alignment of values and vision motivates me to contribute meaningfully to your organization's continued success.\n\n`;
+            }
+
+            // Skills paragraph
+            if (keySkills) {
+                const skillsArray = keySkills.split(',').map(s => s.trim());
+                if (skillsArray.length > 0) {
+                    coverLetter += `My technical expertise includes ${skillsArray.slice(0, -1).join(', ')}`;
+                    if (skillsArray.length > 1) {
+                        coverLetter += `, and ${skillsArray[skillsArray.length - 1]}`;
+                    }
+                    coverLetter += `. I am committed to staying current with industry trends and continuously expanding my skill set to deliver innovative solutions.\n\n`;
+                }
+            }
+
+            // Closing paragraph - varies by style
+            if (selectedCoverStyle === 'professional') {
+                coverLetter += `I would welcome the opportunity to discuss how my background, skills, and enthusiasm align with the needs of ${companyName}. Thank you for considering my application. I look forward to the possibility of contributing to your team's success.\n\n`;
+            } else if (selectedCoverStyle === 'creative') {
+                coverLetter += `Let's create something amazing together. I'd love to discuss how my unique perspective and technical skills can help ${companyName} reach new heights. Thank you for your consideration, and I'm excited about the possibility of joining your innovative team.\n\n`;
+            } else if (selectedCoverStyle === 'enthusiastic') {
+                coverLetter += `I am genuinely excited about the opportunity to bring my passion and expertise to ${companyName}. I would be thrilled to discuss how I can contribute to your team's continued success. Thank you so much for your time and consideration!\n\n`;
+            }
+
+            // Signature
+            coverLetter += `Sincerely,\n${name}`;
+
+            // Display the cover letter
+            generatedCoverLetter = coverLetter;
+            document.getElementById('coverLetterText').textContent = coverLetter;
+            document.getElementById('coverLetterPreview').classList.add('active');
+
+            // Scroll to preview
+            document.getElementById('coverLetterPreview').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+            showNotification('Cover letter generated successfully!', 'success');
+        }
+
+        function copyCoverLetter() {
+            navigator.clipboard.writeText(generatedCoverLetter).then(() => {
+                showNotification('Cover letter copied to clipboard!', 'success');
+            }).catch(() => {
+                // Fallback method
+                const textArea = document.createElement('textarea');
+                textArea.value = generatedCoverLetter;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showNotification('Cover letter copied to clipboard!', 'success');
+            });
+        }
+
+        function downloadCoverLetter() {
+            const blob = new Blob([generatedCoverLetter], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            const companyName = document.getElementById('coverCompanyName').value.replace(/\s+/g, '_');
+            const jobTitle = document.getElementById('coverJobTitle').value.replace(/\s+/g, '_');
+            a.download = `CoverLetter_${companyName}_${jobTitle}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showNotification('Cover letter downloaded!', 'success');
+        }
+
+        // Close modal when clicking outside
+        document.addEventListener('click', function(e) {
+            const modal = document.getElementById('coverLetterModal');
+            if (modal && e.target === modal) {
+                closeCoverLetterGenerator();
             }
         });
 
