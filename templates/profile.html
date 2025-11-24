@@ -221,24 +221,24 @@
       </div>
 
       <div class="form-group">
-        <input type="text" id="fullName" value="Vedika Lohiya" disabled />
+        <input type="text" id="fullName" disabled />
       </div>
 
       <div class="form-group">
-        <input type="email" id="email" value="vedika@example.com" disabled />
+        <input type="email" id="email" disabled />
       </div>
 
       <div class="form-group">
-        <input type="password" id="password" value="Password123!" disabled />
+        <input type="password" id="password"  disabled />
         <i class="fa-solid fa-eye toggle-password" onclick="togglePassword('password')"></i>
       </div>
 
       <div class="form-group">
-        <input type="tel" id="phone" value="9876543210" disabled />
+        <input type="tel" id="phone"  disabled />
       </div>
 
       <div class="form-group">
-        <input type="text" id="college" value="M.G.M.'s COE Nanded" disabled />
+        <input type="text" id="college"  disabled />
       </div>
 
       <div class="form-group">
@@ -281,13 +281,13 @@
     function saveProfile(e) {
       e.preventDefault();
       const data = {
-        fullName: document.getElementById("fullName").value,
-        email: document.getElementById("email").value,
-        password: document.getElementById("password").value,
-        phone: document.getElementById("phone").value,
-        college: document.getElementById("college").value,
-        branch: document.getElementById("branch").value,
-        year: document.getElementById("year").value
+        fullName: document.getElementById("fullName"),
+        email: document.getElementById("email"),
+        password: document.getElementById("password"),
+        phone: document.getElementById("phone"),
+        college: document.getElementById("college"),
+        branch: document.getElementById("branch"),
+        year: document.getElementById("year")
       };
       alert("Profile updated successfully!");
       console.log("Updated Info:", data);

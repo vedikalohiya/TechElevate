@@ -9,12 +9,11 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
     <style>
+      /* Light background version for roadmap */
       body {
-        background: url("static/img/roadmap.jpg") no-repeat
-          center center fixed;
-        background-size: cover;
+        background-color: #f5f8fc; /* soft, light blue-gray */
         font-family: "Segoe UI", sans-serif;
-        color: #fff;
+        color: #092130; /* dark slate for readability */
         margin: 0;
         padding: 20px;
       }
@@ -24,17 +23,18 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        color: #fff;
+        color: #092130;
         position: sticky;
         top: 0;
         z-index: 1000;
-        backdrop-filter: blur(10px);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        background: rgba(255, 255, 255, 0.85);
+        border-bottom: 1px solid rgba(9, 33, 48, 0.06);
+        box-shadow: 0 4px 20px rgba(15, 41, 60, 0.05);
+        backdrop-filter: blur(6px);
       }
 
       .glass {
-        background: rgba(10, 38, 71, 0.6);
+        background: rgba(255, 255, 255, 0.9);
         border-radius: 0;
       }
 
@@ -51,19 +51,19 @@
 
       .nav-links li a {
         text-decoration: none;
-        color: #fff;
+        color: #092130;
         font-weight: 500;
         display: flex;
         align-items: center;
         gap: 8px;
-        transition: all 0.3s ease;
+        transition: all 0.2s ease;
         padding: 6px 12px;
         border-radius: 8px;
       }
 
       .nav-links li a:hover {
-        background-color: rgba(255, 255, 255, 0.1);
-        color: #00bcd4;
+        background-color: rgba(11, 107, 255, 0.08);
+        color: #0b6bff;
       }
 
       .hamburger {
@@ -76,7 +76,7 @@
       .hamburger span {
         height: 3px;
         width: 25px;
-        background-color: #fff;
+        background-color: #092130;
         border-radius: 5px;
       }
 
@@ -88,10 +88,10 @@
           position: absolute;
           top: 65px;
           right: 30px;
-          background: rgba(10, 38, 71, 0.95);
+          background: rgba(255, 255, 255, 0.98);
           padding: 20px;
           border-radius: 12px;
-          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+          box-shadow: 0 8px 20px rgba(15, 41, 60, 0.08);
         }
 
         .nav-links.active {
@@ -103,14 +103,14 @@
         }
       }
       .large-icon {
-        font-size: 1.4rem; /* Try 1.6rem or 2rem if you want bigger */
+        font-size: 1.4rem;
       }
 
       h1 {
         text-align: center;
         margin-bottom: 20px;
         font-size: 2.5rem;
-        color: #00ffcc;
+        color: #0b6bff;
       }
 
       .search-bar {
@@ -123,8 +123,10 @@
         width: 60%;
         max-width: 400px;
         border-radius: 8px;
-        border: none;
+        border: 1px solid rgba(9, 33, 48, 0.08);
         font-size: 1rem;
+        background: #fff;
+        color: #092130;
       }
 
       .roadmap-container {
@@ -134,24 +136,25 @@
       }
 
       .card {
-        background: #1f1f1f;
+        background: #ffffff;
         padding: 20px;
         border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0, 255, 150, 0.1);
-        transition: all 0.3s ease;
+        box-shadow: 0 6px 18px rgba(9, 33, 48, 0.06);
+        transition: all 0.25s ease;
         cursor: pointer;
-        border-left: 4px solid #00ffc3;
+        border-left: 4px solid #0ea5a4;
+        color: #092130;
       }
 
       .card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 6px 20px rgba(0, 255, 150, 0.2);
+        box-shadow: 0 10px 30px rgba(9, 33, 48, 0.08);
       }
 
       .card h2 {
         margin: 0 0 10px 0;
         font-size: 1.3rem;
-        color: #00ffc3;
+        color: #0b7170;
       }
 
       .card h2 i {
@@ -177,7 +180,7 @@
       }
 
       .card a {
-        color: #00e1ff;
+        color: #0b6bff;
         text-decoration: none;
       }
 
@@ -225,7 +228,7 @@
         }
       }
       .card:hover {
-        background-color: rgba(0, 255, 200, 0.05);
+        background-color: rgba(11, 107, 255, 0.02);
       }
     </style>
   </head>

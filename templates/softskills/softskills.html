@@ -112,11 +112,18 @@
 
 <section class="tracker">
   <h2>📅 Daily Soft Skills Habit Tracker</h2>
-  <label><input type="checkbox"> Practice 15 mins English speaking</label>
-  <label><input type="checkbox"> Watch 1 soft skills video</label>
-  <label><input type="checkbox"> Reflect on one communication mistake</label>
-  <label><input type="checkbox"> Practice positive body language</label>
-  <label><input type="checkbox"> Give positive feedback to a peer</label>
+  <div id="habit-list">
+    <label><input type="checkbox" data-key="habit_speak"> Practice 15 mins English speaking</label>
+    <label><input type="checkbox" data-key="habit_video"> Watch 1 soft skills video</label>
+    <label><input type="checkbox" data-key="habit_reflect"> Reflect on one communication mistake</label>
+    <label><input type="checkbox" data-key="habit_body"> Practice positive body language</label>
+    <label><input type="checkbox" data-key="habit_feedback"> Give positive feedback to a peer</label>
+  </div>
+  <div style="margin-top:10px;">
+    <button onclick="clearHabits()">Clear Today</button>
+    <button onclick="saveSoftskillsServer()" style="margin-left:10px;">Save to account</button>
+    <button onclick="exportHabits()" style="margin-left:10px;">Export Checklist</button>
+  </div>
 </section>
 
 <section class="tracker">
@@ -125,6 +132,42 @@
   <a href="soft-skills-checklist.pdf" download class="download-link">
     <button>Download PDF</button>
   </a>
+</section>
+
+<section>
+  <h2>🗂️ Two-week Study Plan (Suggested)</h2>
+  <ol>
+    <li>Week 1 — Foundations: Daily 15 min speaking + 1 video + 10 min reflection.</li>
+    <li>Week 2 — Practice: Role-play interviews, give feedback to peers, record one mock talk.</li>
+    <li>Daily: Keep a 3-line journal — one thing I learned, one improvement, one action.</li>
+  </ol>
+</section>
+
+<section>
+  <h2>💬 Behavioral Interview Practice</h2>
+  <p>Practice answers using STAR (Situation, Task, Action, Result). Pick a question and record a 2-minute answer.</p>
+  <ul>
+    <li>Tell me about a time you had a conflict at work/study and how you resolved it.</li>
+    <li>Describe a situation where you showed leadership.</li>
+    <li>Give an example of when you had to take initiative.</li>
+  </ul>
+  <div class="quiz">
+    <h3>Try a quick role-play:</h3>
+    <p><strong>Interviewer:</strong> "Describe a time when you missed a deadline."</p>
+    <textarea id="roleAnswer" rows="4" style="width:100%; padding:8px; border-radius:6px; border:1px solid #ddd;"></textarea>
+    <button onclick="saveRole()">Save Answer</button>
+    <button onclick="saveSoftskillsServer()" style="margin-left:10px;">Save to account</button>
+    <div id="roleSaved" class="result" style="color:#064C6C; display:none;">Saved locally.</div>
+  </div>
+</section>
+
+<section>
+  <h2>🔗 Further Resources</h2>
+  <ul>
+    <li><a href="https://www.mindtools.com/pages/main/newMN_TCS.htm" target="_blank">MindTools — Communication & Teamwork</a></li>
+    <li><a href="https://www.hbr.org/topic/communication" target="_blank">Harvard Business Review — Communication</a></li>
+    <li><a href="https://www.toastmasters.org/" target="_blank">Toastmasters (Public speaking practice)</a></li>
+  </ul>
 </section>
 
 <script>
@@ -137,6 +180,108 @@
     const resultText = `You scored ${score}/2 🎯`;
     document.getElementById("quizResult").innerText = resultText;
   }
+
+  // Persist habit tracker state in localStorage
+  const habitInputs = document.querySelectorAll('#habit-list input[type="checkbox"]');
+  habitInputs.forEach(cb => {
+    const key = cb.dataset.key;
+    const saved = localStorage.getItem(key);
+    if (saved === 'true') cb.checked = true;
+    cb.addEventListener('change', () => {
+      localStorage.setItem(key, cb.checked);
+    });
+  });
+
+  // Load saved softskills data from server if available
+  async function loadSoftskills(){
+    try{
+      const res = await fetch('/api/softskills');
+      if(!res.ok){
+        // if email not provided, server will return 400. Ignore silently.
+        return;
+      }
+      const j = await res.json();
+      const data = j.data || {};
+      if(data.habits){
+        habitInputs.forEach(cb => {
+          const key = cb.dataset.key;
+          if(data.habits.hasOwnProperty(key)) cb.checked = !!data.habits[key];
+        });
+      }
+      if(data.role_play_answer){
+        document.getElementById('roleAnswer').value = data.role_play_answer;
+      }
+    }catch(err){
+      console.debug('loadSoftskills error', err);
+    }
+  }
+
+  function clearHabits(){
+    habitInputs.forEach(cb => {
+      cb.checked = false;
+      localStorage.removeItem(cb.dataset.key);
+    });
+  }
+
+  function exportHabits(){
+    const data = {};
+    habitInputs.forEach(cb => data[cb.dataset.key] = cb.checked);
+    const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'softskills-habits.json';
+    document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+  }
+
+  // Role-play save (simple localStorage)
+  function saveRole(){
+    const val = document.getElementById('roleAnswer').value.trim();
+    if(!val) return alert('Please type your answer before saving.');
+    localStorage.setItem('role_play_answer', val);
+    const el = document.getElementById('roleSaved');
+    el.style.display = 'block';
+    setTimeout(()=> el.style.display = 'none', 2000);
+    // try to save to server (will require login or email)
+    saveSoftskillsServer();
+  }
+
+  // collect current habit state and role answer and POST to server
+  async function saveSoftskillsServer(){
+    const habits = {};
+    habitInputs.forEach(cb => habits[cb.dataset.key] = cb.checked);
+    const role = document.getElementById('roleAnswer').value.trim() || localStorage.getItem('role_play_answer') || '';
+    const payload = {habits: habits, role_play_answer: role};
+    try{
+      const res = await fetch('/api/softskills', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify(payload)
+      });
+      const j = await res.json();
+      if(res.ok){
+        alert(j.message || 'Saved to account.');
+      } else if (j && j.message && j.message.includes('Email')){
+        // ask user for email to save when not logged in
+        const email = prompt('Enter your email to save data to your account:');
+        if(email){
+          payload.email = email;
+          const r2 = await fetch('/api/softskills', {
+            method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload)
+          });
+          const j2 = await r2.json();
+          if(r2.ok) alert(j2.message || 'Saved.'); else alert(j2.message || 'Save failed.');
+        }
+      } else {
+        alert(j.message || 'Save failed.');
+      }
+    }catch(err){
+      console.error('saveSoftskillsServer error', err);
+      alert('Unable to save to server.');
+    }
+  }
+
+  // load on page ready
+  window.addEventListener('DOMContentLoaded', loadSoftskills);
 </script>
 
 </body>
