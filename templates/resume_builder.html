@@ -8,6 +8,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <style>
+        :root {
+            /* Default Theme - Purple */
+            --primary-color: #667eea;
+            --primary-dark: #764ba2;
+            --accent-color: #667eea;
+            --accent-light: #e0e7ff;
+        }
+
+        /* Color Themes */
+        body.theme-purple { --primary-color: #667eea; --primary-dark: #764ba2; --accent-color: #667eea; --accent-light: #e0e7ff; }
+        body.theme-blue { --primary-color: #3b82f6; --primary-dark: #1e40af; --accent-color: #3b82f6; --accent-light: #dbeafe; }
+        body.theme-green { --primary-color: #10b981; --primary-dark: #059669; --accent-color: #10b981; --accent-light: #d1fae5; }
+        body.theme-orange { --primary-color: #f59e0b; --primary-dark: #d97706; --accent-color: #f59e0b; --accent-light: #fef3c7; }
+        body.theme-red { --primary-color: #ef4444; --primary-dark: #dc2626; --accent-color: #ef4444; --accent-light: #fee2e2; }
+        body.theme-teal { --primary-color: #14b8a6; --primary-dark: #0d9488; --accent-color: #14b8a6; --accent-light: #ccfbf1; }
+        body.theme-indigo { --primary-color: #6366f1; --primary-dark: #4f46e5; --accent-color: #6366f1; --accent-light: #e0e7ff; }
+        body.theme-pink { --primary-color: #ec4899; --primary-dark: #db2777; --accent-color: #ec4899; --accent-light: #fce7f3; }
+
         * {
             margin: 0;
             padding: 0;
@@ -16,11 +34,12 @@
 
         body {
             font-family: 'Inter', system-ui, -apple-system, Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
             color: #1e293b;
             min-height: 100vh;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            transition: background 0.5s ease;
         }
 
         .wrapper {
@@ -50,34 +69,80 @@
         }
 
         .template-selector {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin: 25px 0;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 25px auto;
+            padding: 0 20px;
         }
 
         .template-option {
-            padding: 12px 24px;
+            padding: 20px;
             background: rgba(255, 255, 255, 0.15);
             border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 12px;
+            border-radius: 16px;
             color: white;
             cursor: pointer;
             font-weight: 600;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .template-option::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, white, transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         .template-option:hover {
             background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-2px);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .template-option:hover::before {
+            opacity: 1;
         }
 
         .template-option.active {
             background: white;
             color: #667eea;
             border-color: white;
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+        }
+
+        .template-option.active::before {
+            opacity: 1;
+            background: linear-gradient(90deg, #667eea, #764ba2, #667eea);
+        }
+
+        .template-option i {
+            display: block;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .template-option .template-name {
+            display: block;
+            font-size: 15px;
+            margin-bottom: 5px;
+        }
+
+        .template-option .template-desc {
+            display: block;
+            font-size: 11px;
+            opacity: 0.8;
+            font-weight: 400;
         }
 
         .layout {
@@ -101,20 +166,97 @@
 
         .form-section {
             margin-bottom: 25px;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 12px;
+            border: 2px dashed transparent;
+            transition: all 0.3s ease;
+            cursor: move;
+            position: relative;
+        }
+
+        .form-section:hover {
+            background: #f1f5f9;
+            border-color: #cbd5e1;
+        }
+
+        .form-section.dragging {
+            opacity: 0.5;
+            border-color: #667eea;
+            transform: scale(0.98);
+        }
+
+        .form-section.drag-over {
+            border-color: #667eea;
+            background: #e0e7ff;
+        }
+
+        .form-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
         }
 
         .form-section-title {
             font-size: 18px;
             font-weight: 700;
             color: #667eea;
-            margin-bottom: 15px;
             display: flex;
             align-items: center;
             gap: 10px;
+            flex: 1;
         }
 
         .form-section-title i {
             font-size: 20px;
+        }
+
+        .section-controls {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .section-toggle-btn,
+        .section-delete-btn,
+        .drag-handle {
+            background: white;
+            border: 1px solid #e2e8f0;
+            color: #475569;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .section-toggle-btn:hover,
+        .drag-handle:hover {
+            background: #f1f5f9;
+            border-color: #cbd5e1;
+        }
+
+        .section-delete-btn:hover {
+            background: #fee2e2;
+            border-color: #fecaca;
+            color: #dc2626;
+        }
+
+        .drag-handle {
+            cursor: move;
+        }
+
+        .drag-handle:active {
+            cursor: grabbing;
+        }
+
+        .form-section.collapsed .form-section-content {
+            display: none;
         }
 
         label {
@@ -259,24 +401,280 @@
             min-height: 500px;
         }
 
-        /* Template Styles */
+        /* ========== TEMPLATE STYLES ========== */
+        
+        /* Modern - Bold with bottom border */
         .paper.modern .r-header {
-            border-bottom: 3px solid #667eea;
+            border-bottom: 4px solid #667eea;
             padding-bottom: 20px;
             margin-bottom: 25px;
         }
 
+        .paper.modern .section-title {
+            color: #667eea;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .paper.modern .chip {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        /* Classic - Traditional centered */
         .paper.classic .r-header {
             text-align: center;
             border-bottom: 2px solid #1e293b;
             padding-bottom: 20px;
             margin-bottom: 25px;
+            flex-direction: column;
+            align-items: center;
         }
 
+        .paper.classic .r-contact {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .paper.classic .r-name {
+            color: #0f172a;
+        }
+
+        .paper.classic .r-title {
+            color: #475569;
+            font-style: italic;
+        }
+
+        .paper.classic .section-title {
+            text-align: center;
+            color: #0f172a;
+            border-bottom: 1px solid #cbd5e1;
+        }
+
+        .paper.classic .chip {
+            background: #e2e8f0;
+            color: #1e293b;
+        }
+
+        /* Minimal - Clean with side accent */
         .paper.minimal .r-header {
             border-left: 5px solid #667eea;
             padding-left: 20px;
             margin-bottom: 25px;
+        }
+
+        .paper.minimal .section-title {
+            border-bottom: none;
+            border-left: 4px solid #667eea;
+            padding-left: 15px;
+            color: #1e293b;
+        }
+
+        .paper.minimal .chip {
+            background: transparent;
+            border: 2px solid #667eea;
+            color: #667eea;
+        }
+
+        /* Creative - Two-column layout */
+        .paper.creative {
+            display: grid;
+            grid-template-columns: 35% 1fr;
+            gap: 30px;
+            padding: 0;
+        }
+
+        .paper.creative .sidebar {
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 25px;
+            color: white;
+        }
+
+        .paper.creative .main-content {
+            padding: 40px 30px 40px 0;
+        }
+
+        .paper.creative .r-header {
+            flex-direction: column;
+            margin-bottom: 30px;
+        }
+
+        .paper.creative .r-name {
+            color: white;
+            font-size: 28px;
+        }
+
+        .paper.creative .r-title {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .paper.creative .r-contact {
+            text-align: left;
+            color: rgba(255, 255, 255, 0.95);
+            margin-top: 20px;
+        }
+
+        .paper.creative .r-contact i {
+            color: white;
+        }
+
+        .paper.creative .section-title {
+            color: white;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .paper.creative .sidebar .section-title {
+            font-size: 16px;
+        }
+
+        .paper.creative .chip {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .paper.creative .main-content .section-title {
+            color: #667eea;
+            border-bottom: 2px solid #667eea;
+        }
+
+        /* Professional - Corporate style */
+        .paper.professional {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+        }
+
+        .paper.professional .r-header {
+            background: white;
+            padding: 30px;
+            margin: -40px -40px 30px -40px;
+            border-bottom: 3px solid #0f172a;
+        }
+
+        .paper.professional .r-name {
+            color: #0f172a;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .paper.professional .r-title {
+            color: #475569;
+            font-weight: 500;
+        }
+
+        .paper.professional .section-title {
+            background: #0f172a;
+            color: white;
+            padding: 8px 15px;
+            margin-left: -40px;
+            margin-right: -40px;
+            border: none;
+        }
+
+        .paper.professional .chip {
+            background: #0f172a;
+            color: white;
+        }
+
+        /* Elegant - Sophisticated serif */
+        .paper.elegant .r-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            color: #4a5568;
+        }
+
+        .paper.elegant .r-title {
+            font-family: 'Playfair Display', serif;
+            color: #718096;
+            font-style: italic;
+        }
+
+        .paper.elegant .r-header {
+            border-bottom: 1px solid #cbd5e1;
+            padding-bottom: 25px;
+        }
+
+        .paper.elegant .section-title {
+            font-family: 'Playfair Display', serif;
+            color: #4a5568;
+            border-bottom: 1px solid #cbd5e1;
+            font-size: 22px;
+            letter-spacing: 0;
+            text-transform: none;
+        }
+
+        .paper.elegant .chip {
+            background: #e2e8f0;
+            color: #4a5568;
+            font-weight: 500;
+        }
+
+        /* Bold - High contrast */
+        .paper.bold .r-header {
+            background: #0f172a;
+            color: white;
+            padding: 30px;
+            margin: -40px -40px 30px -40px;
+        }
+
+        .paper.bold .r-name {
+            color: white;
+            font-size: 38px;
+        }
+
+        .paper.bold .r-title {
+            color: #fbbf24;
+            font-size: 20px;
+        }
+
+        .paper.bold .r-contact {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .paper.bold .r-contact i {
+            color: #fbbf24;
+        }
+
+        .paper.bold .section-title {
+            background: linear-gradient(90deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            padding: 10px 15px;
+            margin-left: -40px;
+            margin-right: -40px;
+            border: none;
+        }
+
+        .paper.bold .chip {
+            background: #0f172a;
+            color: #fbbf24;
+        }
+
+        /* Compact - Space-efficient */
+        .paper.compact {
+            padding: 25px;
+            font-size: 13px;
+        }
+
+        .paper.compact .r-name {
+            font-size: 24px;
+        }
+
+        .paper.compact .r-title {
+            font-size: 15px;
+        }
+
+        .paper.compact .section-title {
+            font-size: 16px;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+        }
+
+        .paper.compact .section {
+            margin-top: 15px;
+        }
+
+        .paper.compact .chip {
+            padding: 4px 10px;
+            font-size: 11px;
+            margin: 4px 4px 0 0;
         }
 
         .r-header {
@@ -331,7 +729,7 @@
 
         .chip {
             display: inline-block;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
             color: white;
             padding: 8px 16px;
             border-radius: 20px;
@@ -371,7 +769,7 @@
         }
 
         .add-link {
-            color: #667eea;
+            color: var(--primary-color);
             cursor: pointer;
             font-weight: 600;
             font-size: 14px;
@@ -398,7 +796,7 @@
             padding: 15px;
             background: #f8fafc;
             border-radius: 12px;
-            border-left: 4px solid #667eea;
+            border-left: 4px solid var(--primary-color);
         }
 
         .delete-btn {
@@ -415,6 +813,450 @@
 
         .delete-btn:hover {
             background: #dc2626;
+        }
+
+        /* AI Suggestions Panel */
+        .ai-suggest-btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            margin-top: 8px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .ai-suggest-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(240, 147, 251, 0.4);
+        }
+
+        .ai-suggest-btn i {
+            animation: sparkle 2s infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        .suggestions-panel {
+            position: fixed;
+            right: -450px;
+            top: 0;
+            width: 450px;
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 30px rgba(0,0,0,0.3);
+            transition: right 0.4s ease;
+            z-index: 10000;
+            overflow-y: auto;
+        }
+
+        .suggestions-panel.active {
+            right: 0;
+        }
+
+        .suggestions-header {
+            padding: 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .suggestions-header h3 {
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .close-suggestions {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+
+        .close-suggestions:hover {
+            background: rgba(255,255,255,0.3);
+            transform: rotate(90deg);
+        }
+
+        .suggestions-content {
+            padding: 25px;
+        }
+
+        .suggestion-category {
+            margin-bottom: 30px;
+        }
+
+        .suggestion-category h4 {
+            color: #667eea;
+            font-size: 16px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .suggestion-item {
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border-left: 3px solid #667eea;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .suggestion-item:hover {
+            background: #e0e7ff;
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+
+        .suggestion-text {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #475569;
+        }
+
+        .suggestion-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        .power-words {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .power-word {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .power-word:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .ai-loading {
+            text-align: center;
+            padding: 30px;
+            color: #667eea;
+        }
+
+        .ai-loading i {
+            font-size: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .field-helper {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: 10px;
+        }
+
+        /* ATS Score Checker */
+        .ats-score-panel {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 380px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+            z-index: 9998;
+            transform: translateY(calc(100% + 40px));
+            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .ats-score-panel.show {
+            transform: translateY(0);
+        }
+
+        .ats-score-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border-radius: 50%;
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
+            transition: all 0.3s ease;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse-ats 2s infinite;
+        }
+
+        @keyframes pulse-ats {
+            0%, 100% { box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4); }
+            50% { box-shadow: 0 10px 40px rgba(16, 185, 129, 0.6), 0 0 0 10px rgba(16, 185, 129, 0.1); }
+        }
+
+        .ats-score-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(16, 185, 129, 0.5);
+        }
+
+        .ats-score-toggle.active {
+            bottom: 430px;
+        }
+
+        .ats-header {
+            padding: 20px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border-radius: 20px 20px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ats-header h3 {
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .ats-close {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .ats-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .ats-content {
+            padding: 20px;
+            max-height: 350px;
+            overflow-y: auto;
+        }
+
+        .ats-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .ats-content::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        .ats-content::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+
+        .ats-score-display {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .score-circle {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 15px;
+            position: relative;
+        }
+
+        .score-circle svg {
+            transform: rotate(-90deg);
+        }
+
+        .score-circle circle {
+            fill: none;
+            stroke-width: 10;
+        }
+
+        .score-circle .circle-bg {
+            stroke: #e2e8f0;
+        }
+
+        .score-circle .circle-progress {
+            stroke-linecap: round;
+            transition: stroke-dashoffset 1s ease, stroke 0.5s ease;
+        }
+
+        .score-circle .score-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 32px;
+            font-weight: 800;
+            color: #1e293b;
+        }
+
+        .score-label {
+            font-size: 16px;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 5px;
+        }
+
+        .score-rating {
+            font-size: 14px;
+            padding: 6px 16px;
+            border-radius: 20px;
+            display: inline-block;
+            font-weight: 600;
+        }
+
+        .score-rating.excellent {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .score-rating.good {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .score-rating.fair {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .score-rating.poor {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .ats-metrics {
+            margin-top: 20px;
+        }
+
+        .metric-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            background: #f8fafc;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .metric-label {
+            font-size: 13px;
+            color: #475569;
+            font-weight: 600;
+        }
+
+        .metric-value {
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .metric-value.good {
+            color: #10b981;
+        }
+
+        .metric-value.warning {
+            color: #f59e0b;
+        }
+
+        .metric-value.error {
+            color: #ef4444;
+        }
+
+        .ats-suggestions {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .ats-suggestions h4 {
+            font-size: 14px;
+            color: #1e293b;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .suggestion-list {
+            list-style: none;
+        }
+
+        .suggestion-list li {
+            padding: 10px;
+            background: #fef3c7;
+            border-left: 3px solid #f59e0b;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            font-size: 12px;
+            color: #78350f;
+            line-height: 1.5;
+        }
+
+        .suggestion-list li i {
+            margin-right: 6px;
+            color: #f59e0b;
+        }
+
+        @media (max-width: 640px) {
+            .ats-score-panel {
+                width: calc(100% - 40px);
+                right: 20px;
+                left: 20px;
+            }
+
+            .ats-score-toggle.active {
+                bottom: 450px;
+            }
         }
 
         @media (max-width: 1024px) {
@@ -494,7 +1336,537 @@
             .template-option {
                 width: 100%;
             }
+
+            .suggestions-panel {
+                width: 100%;
+                right: -100%;
+            }
+
+            .suggestions-panel.active {
+                right: 0;
+            }
         }
+
+        /* Custom Section Modal */
+        .custom-section-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 10001;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .custom-section-modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-content h3 {
+            color: #1e293b;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .section-type-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .section-type-option {
+            padding: 20px;
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .section-type-option:hover {
+            background: #e0e7ff;
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .section-type-option.selected {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #667eea;
+        }
+
+        .section-type-option i {
+            font-size: 28px;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .section-type-option span {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .add-section-btn {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .add-section-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+        }
+
+        .add-section-trigger {
+            background: white;
+            border: 2px dashed #cbd5e1;
+            color: #667eea;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .add-section-trigger:hover {
+            border-color: var(--primary-color);
+            background: #f8fafc;
+        }
+
+        .add-section-trigger i {
+            font-size: 20px;
+        }
+
+        /* Color Theme Selector */
+        .color-theme-selector {
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .theme-selector-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            color: #1e293b;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .theme-selector-header i {
+            color: var(--primary-color);
+            font-size: 20px;
+        }
+
+        .theme-options {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .theme-option {
+            position: relative;
+            height: 50px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .theme-option::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--theme-primary) 0%, var(--theme-dark) 100%);
+            z-index: 1;
+        }
+
+        .theme-option-check {
+            position: relative;
+            z-index: 2;
+            color: white;
+            font-size: 20px;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.3s ease;
+        }
+
+        .theme-option.active {
+            border-color: #1e293b;
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .theme-option.active .theme-option-check {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .theme-option:hover {
+            transform: scale(1.08);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .theme-option[data-theme="purple"] { --theme-primary: #667eea; --theme-dark: #764ba2; }
+        .theme-option[data-theme="blue"] { --theme-primary: #3b82f6; --theme-dark: #1e40af; }
+        .theme-option[data-theme="green"] { --theme-primary: #10b981; --theme-dark: #059669; }
+        .theme-option[data-theme="orange"] { --theme-primary: #f59e0b; --theme-dark: #d97706; }
+        .theme-option[data-theme="red"] { --theme-primary: #ef4444; --theme-dark: #dc2626; }
+        .theme-option[data-theme="teal"] { --theme-primary: #14b8a6; --theme-dark: #0d9488; }
+        .theme-option[data-theme="indigo"] { --theme-primary: #6366f1; --theme-dark: #4f46e5; }
+        .theme-option[data-theme="pink"] { --theme-primary: #ec4899; --theme-dark: #db2777; }
+
+        .theme-name {
+            text-align: center;
+            font-size: 11px;
+            color: #64748b;
+            margin-top: 8px;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .theme-options {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 10px;
+            }
+            .theme-option {
+                height: 45px;
+            }
+        }
+
+        /* LinkedIn Import */
+        .linkedin-import-btn {
+            background: linear-gradient(135deg, #0077b5 0%, #005885 100%);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 119, 181, 0.3);
+        }
+
+        .linkedin-import-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 119, 181, 0.4);
+        }
+
+        .linkedin-import-btn i {
+            font-size: 20px;
+        }
+
+        .linkedin-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 10002;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .linkedin-modal.active {
+            display: flex;
+        }
+
+        .linkedin-modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.4s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; transform: translateX(100px); }
+        }
+
+        .linkedin-modal-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .linkedin-modal-header i {
+            font-size: 32px;
+            color: #0077b5;
+        }
+
+        .linkedin-modal-header h3 {
+            color: #1e293b;
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .linkedin-modal-body {
+            margin-bottom: 25px;
+        }
+
+        .import-option {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .import-option:hover {
+            background: #e0f2fe;
+            border-color: #0077b5;
+            transform: translateX(5px);
+        }
+
+        .import-option i {
+            font-size: 24px;
+            color: #0077b5;
+            width: 40px;
+            text-align: center;
+        }
+
+        .import-option-content h4 {
+            margin: 0 0 5px 0;
+            color: #1e293b;
+            font-size: 16px;
+        }
+
+        .import-option-content p {
+            margin: 0;
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        .linkedin-paste-area {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: #f1f5f9;
+            border-radius: 12px;
+            border: 2px dashed #cbd5e1;
+        }
+
+        .linkedin-paste-area.active {
+            display: block;
+        }
+
+        .linkedin-paste-area textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            resize: vertical;
+        }
+
+        .linkedin-paste-area textarea:focus {
+            border-color: #0077b5;
+            outline: none;
+        }
+
+        .import-instructions {
+            background: #dbeafe;
+            border-left: 4px solid #0077b5;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .import-instructions h4 {
+            margin: 0 0 10px 0;
+            color: #075985;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .import-instructions ol {
+            margin: 0;
+            padding-left: 20px;
+            color: #0c4a6e;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .modal-actions button {
+            flex: 1;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-import {
+            background: linear-gradient(135deg, #0077b5 0%, #005885 100%);
+            color: white;
+            border: none;
+        }
+
+        .btn-import:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 119, 181, 0.3);
+        }
+
+        .btn-cancel {
+            background: white;
+            color: #64748b;
+            border: 2px solid #e2e8f0;
+        }
+
+        .btn-cancel:hover {
+            background: #f8fafc;
+            border-color: #cbd5e1;
+        }
+
+        .section-order-info {
+            background: #e0f2fe;
+            border-left: 4px solid #0284c7;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #075985;
+        }
+
+        .section-order-info i {
+            margin-right: 8px;
+        }
+
+        .section-content {
+            padding: 15px;
+        }
+
+        .form-section.collapsed .section-content,
+        .form-section.collapsed #experiences,
+        .form-section.collapsed #educations,
+        .form-section.collapsed #skills,
+        .form-section.collapsed label,
+        .form-section.collapsed input#skillInput {
+            display: none;
+        }
+
+        .custom-item {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f8fafc;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .custom-title {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .custom-title:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .custom-desc {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            min-height: 80px;
+            resize: vertical;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .custom-desc:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .delete-btn-section {
+            background: #ef4444 !important;
+        }
+
+        .delete-btn-section:hover {
+            background: #dc2626 !important;
+        }
+
         .navbar {
         padding: 15px 30px;
         display: flex;
@@ -616,13 +1988,78 @@
             
             <div class="template-selector">
                 <div class="template-option active" data-template="modern">
-                    <i class="fas fa-star"></i> Modern
+                    <i class="fas fa-star"></i>
+                    <span class="template-name">Modern</span>
+                    <span class="template-desc">Bold & contemporary</span>
                 </div>
                 <div class="template-option" data-template="classic">
-                    <i class="fas fa-briefcase"></i> Classic
+                    <i class="fas fa-briefcase"></i>
+                    <span class="template-name">Classic</span>
+                    <span class="template-desc">Traditional centered</span>
                 </div>
                 <div class="template-option" data-template="minimal">
-                    <i class="fas fa-layer-group"></i> Minimal
+                    <i class="fas fa-layer-group"></i>
+                    <span class="template-name">Minimal</span>
+                    <span class="template-desc">Clean & simple</span>
+                </div>
+                <div class="template-option" data-template="creative">
+                    <i class="fas fa-palette"></i>
+                    <span class="template-name">Creative</span>
+                    <span class="template-desc">Two-column design</span>
+                </div>
+                <div class="template-option" data-template="professional">
+                    <i class="fas fa-building"></i>
+                    <span class="template-name">Professional</span>
+                    <span class="template-desc">Corporate style</span>
+                </div>
+                <div class="template-option" data-template="elegant">
+                    <i class="fas fa-gem"></i>
+                    <span class="template-name">Elegant</span>
+                    <span class="template-desc">Sophisticated serif</span>
+                </div>
+                <div class="template-option" data-template="bold">
+                    <i class="fas fa-fire"></i>
+                    <span class="template-name">Bold</span>
+                    <span class="template-desc">High contrast</span>
+                </div>
+                <div class="template-option" data-template="compact">
+                    <i class="fas fa-compress"></i>
+                    <span class="template-name">Compact</span>
+                    <span class="template-desc">Space efficient</span>
+                </div>
+            </div>
+
+            <!-- Color Theme Selector -->
+            <div class="color-theme-selector">
+                <div class="theme-selector-header">
+                    <i class="fas fa-palette"></i>
+                    <span>Choose Your Color Theme</span>
+                </div>
+                <div class="theme-options">
+                    <div class="theme-option active" data-theme="purple" title="Purple">
+                        <i class="fas fa-check theme-option-check"></i>
+                    </div>
+                    <div class="theme-option" data-theme="blue" title="Blue">
+                        <i class="fas fa-check theme-option-check"></i>
+                    </div>
+                    <div class="theme-option" data-theme="green" title="Green">
+                        <i class="fas fa-check theme-option-check"></i>
+                    </div>
+                    <div class="theme-option" data-theme="orange" title="Orange">
+                        <i class="fas fa-check theme-option-check"></i>
+                    </div>
+                    <div class="theme-option" data-theme="red" title="Red">
+                        <i class="fas fa-check theme-option-check"></i>
+                    </div>
+                    <div class="theme-option" data-theme="teal" title="Teal">
+                        <i class="fas fa-check theme-option-check"></i>
+                    </div>
+                    <div class="theme-option" data-theme="indigo" title="Indigo">
+                        <i class="fas fa-check theme-option-check"></i>
+                    </div>
+                    <div class="theme-option" data-theme="pink" title="Pink">
+                        <i class="fas fa-check theme-option-check"></i>
+                    </div>
                 </div>
             </div>
         </div>
@@ -657,6 +2094,13 @@
 
         <div class="layout">
             <div class="card">
+                <!-- LinkedIn Import Button -->
+                <button class="linkedin-import-btn" onclick="openLinkedInImport()">
+                    <i class="fab fa-linkedin"></i>
+                    <span>Import from LinkedIn</span>
+                    <i class="fas fa-magic" style="font-size: 16px;"></i>
+                </button>
+
                 <div class="form-section">
                     <div class="form-section-title">
                         <i class="fas fa-user"></i> Personal Information
@@ -693,13 +2137,44 @@
                 <div class="form-section">
                     <div class="form-section-title">
                         <i class="fas fa-align-left"></i> Professional Summary
+                        <div class="field-helper">
+                            <button class="ai-suggest-btn" onclick="openAISuggestions('summary')">
+                                <i class="fas fa-magic"></i> AI Suggest
+                            </button>
+                        </div>
                     </div>
                     <textarea id="summary" placeholder="Write a compelling 2-3 sentence summary highlighting your expertise, achievements, and career goals..."></textarea>
                 </div>
 
-                <div class="form-section">
-                    <div class="form-section-title">
-                        <i class="fas fa-building"></i> Work Experience
+                <!-- Section Order Info -->
+                <div class="section-order-info">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>Drag & Drop:</strong> Click and drag the <i class="fas fa-grip-vertical"></i> icon to reorder sections. Add custom sections below!
+                </div>
+
+                <!-- Add Section Button -->
+                <div class="add-section-trigger" onclick="openCustomSectionModal()">
+                    <i class="fas fa-plus-square"></i>
+                    <span>Add Custom Section</span>
+                </div>
+
+                <div class="form-section" draggable="true" data-section-id="experience">
+                    <div class="form-section-header">
+                        <div class="section-controls">
+                            <button class="section-control-btn collapse-btn" onclick="toggleSection(this)" title="Collapse">
+                                <i class="fas fa-chevron-up"></i>
+                            </button>
+                            <button class="section-control-btn drag-handle" title="Drag to reorder">
+                                <i class="fas fa-grip-vertical"></i>
+                            </button>
+                        </div>
+                        <div class="form-section-title">
+                            <i class="fas fa-building"></i> Work Experience
+                        <div class="field-helper">
+                            <button class="ai-suggest-btn" onclick="openAISuggestions('experience')">
+                                <i class="fas fa-magic"></i> AI Suggest
+                            </button>
+                        </div>
                     </div>
                     <div id="experiences">
                         <div class="exp-item">
@@ -711,16 +2186,26 @@
                             </button>
                         </div>
                     </div>
-                    <div style="margin-top:12px;">
-                        <span class="add-link" onclick="addExperience()">
-                            <i class="fas fa-plus-circle"></i> Add Experience
-                        </span>
+                        <div style="margin-top:12px;">
+                            <span class="add-link" onclick="addExperience()">
+                                <i class="fas fa-plus-circle"></i> Add Experience
+                            </span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="form-section">
-                    <div class="form-section-title">
-                        <i class="fas fa-graduation-cap"></i> Education
+                <div class="form-section" draggable="true" data-section-id="education">
+                    <div class="form-section-header">
+                        <div class="section-controls">
+                            <button class="section-control-btn collapse-btn" onclick="toggleSection(this)" title="Collapse">
+                                <i class="fas fa-chevron-up"></i>
+                            </button>
+                            <button class="section-control-btn drag-handle" title="Drag to reorder">
+                                <i class="fas fa-grip-vertical"></i>
+                            </button>
+                        </div>
+                        <div class="form-section-title">
+                            <i class="fas fa-graduation-cap"></i> Education
                     </div>
                     <div id="educations">
                         <div class="edu-item">
@@ -732,20 +2217,38 @@
                             </button>
                         </div>
                     </div>
-                    <div style="margin-top:12px;">
-                        <span class="add-link" onclick="addEducation()">
-                            <i class="fas fa-plus-circle"></i> Add Education
-                        </span>
+                        <div style="margin-top:12px;">
+                            <span class="add-link" onclick="addEducation()">
+                                <i class="fas fa-plus-circle"></i> Add Education
+                            </span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="form-section">
-                    <div class="form-section-title">
-                        <i class="fas fa-tools"></i> Skills
+                <div class="form-section" draggable="true" data-section-id="skills">
+                    <div class="form-section-header">
+                        <div class="section-controls">
+                            <button class="section-control-btn collapse-btn" onclick="toggleSection(this)" title="Collapse">
+                                <i class="fas fa-chevron-up"></i>
+                            </button>
+                            <button class="section-control-btn drag-handle" title="Drag to reorder">
+                                <i class="fas fa-grip-vertical"></i>
+                            </button>
+                        </div>
+                        <div class="form-section-title">
+                            <i class="fas fa-tools"></i> Skills
+                            <div class="field-helper">
+                                <button class="ai-suggest-btn" onclick="openAISuggestions('skills')">
+                                    <i class="fas fa-magic"></i> AI Suggest
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    <label>Type a skill and press Enter</label>
-                    <input id="skillInput" type="text" placeholder="e.g., JavaScript, Python, Project Management..." />
-                    <div id="skills" style="margin-top:15px"></div>
+                    <div class="section-content">
+                        <label>Type a skill and press Enter</label>
+                        <input id="skillInput" type="text" placeholder="e.g., JavaScript, Python, Project Management..." />
+                        <div id="skills" style="margin-top:15px"></div>
+                    </div>
                 </div>
 
                 <div class="controls">
@@ -776,8 +2279,147 @@
         </div>
     </div>
 
+    <!-- AI Suggestions Panel -->
+    <div id="aiSuggestionsPanel" class="suggestions-panel">
+        <div class="suggestions-header">
+            <h3><i class="fas fa-magic"></i> AI Suggestions</h3>
+            <button class="close-suggestions" onclick="closeAISuggestions()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div id="suggestionsContent" class="suggestions-content">
+            <!-- Content will be dynamically loaded -->
+        </div>
+    </div>
+
+    <!-- LinkedIn Import Modal -->
+    <div class="linkedin-modal" id="linkedinModal">
+        <div class="linkedin-modal-content">
+            <div class="linkedin-modal-header">
+                <i class="fab fa-linkedin"></i>
+                <h3>Import from LinkedIn</h3>
+            </div>
+            
+            <div class="linkedin-modal-body">
+                <div class="import-instructions">
+                    <h4><i class="fas fa-info-circle"></i> How to Import:</h4>
+                    <ol>
+                        <li>Go to your LinkedIn profile page</li>
+                        <li>Click "More" → "Save to PDF"</li>
+                        <li>Open the PDF and copy all text (Ctrl+A, Ctrl+C)</li>
+                        <li>Paste the copied text below</li>
+                    </ol>
+                </div>
+
+                <div class="import-option" onclick="showPasteArea()">
+                    <i class="fas fa-paste"></i>
+                    <div class="import-option-content">
+                        <h4>Paste LinkedIn Profile Data</h4>
+                        <p>Copy your LinkedIn profile text and paste it here</p>
+                    </div>
+                </div>
+
+                <div class="linkedin-paste-area" id="linkedinPasteArea">
+                    <label style="font-weight: 600; color: #1e293b; margin-bottom: 10px; display: block;">
+                        <i class="fas fa-clipboard"></i> Paste Your LinkedIn Profile Text:
+                    </label>
+                    <textarea id="linkedinDataInput" placeholder="Paste your LinkedIn profile data here...&#10;&#10;Example:&#10;John Doe&#10;Software Engineer at Tech Company&#10;San Francisco, CA&#10;john.doe@email.com&#10;&#10;Experience:&#10;Software Engineer - Tech Company (2020-Present)&#10;..."onfocus></textarea>
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn-import" onclick="processLinkedInImport()">
+                    <i class="fas fa-download"></i> Import Data
+                </button>
+                <button class="btn-cancel" onclick="closeLinkedInImport()">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Section Modal -->
+    <div class="custom-section-modal" id="customSectionModal">
+        <div class="modal-content">
+            <h3><i class="fas fa-plus-circle"></i> Add Custom Section</h3>
+            <p style="color:#64748b; font-size:14px; margin-bottom:20px;">Choose a section type to add to your resume</p>
+            
+            <div class="section-type-grid">
+                <div class="section-type-option" data-section-type="projects">
+                    <i class="fas fa-code"></i>
+                    <span>Projects</span>
+                </div>
+                <div class="section-type-option" data-section-type="certifications">
+                    <i class="fas fa-certificate"></i>
+                    <span>Certifications</span>
+                </div>
+                <div class="section-type-option" data-section-type="awards">
+                    <i class="fas fa-trophy"></i>
+                    <span>Awards</span>
+                </div>
+                <div class="section-type-option" data-section-type="publications">
+                    <i class="fas fa-book"></i>
+                    <span>Publications</span>
+                </div>
+                <div class="section-type-option" data-section-type="languages">
+                    <i class="fas fa-language"></i>
+                    <span>Languages</span>
+                </div>
+                <div class="section-type-option" data-section-type="volunteer">
+                    <i class="fas fa-hands-helping"></i>
+                    <span>Volunteer</span>
+                </div>
+            </div>
+
+            <div style="display:flex; gap:10px; margin-top:20px;">
+                <button class="add-section-btn" onclick="addCustomSection()" style="flex:1;">
+                    <i class="fas fa-plus"></i> Add Section
+                </button>
+                <button class="btn btn-outline" onclick="closeCustomSectionModal()" style="flex:1;">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ATS Score Panel -->
+    <button class="ats-score-toggle" id="atsToggle" onclick="toggleATSPanel()">
+        <i class="fas fa-chart-line"></i>
+    </button>
+
+    <div class="ats-score-panel" id="atsPanel">
+        <div class="ats-header">
+            <h3><i class="fas fa-robot"></i> ATS Score</h3>
+            <button class="ats-close" onclick="toggleATSPanel()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="ats-content" id="atsContent">
+            <div class="ats-score-display">
+                <div class="score-circle">
+                    <svg width="120" height="120">
+                        <circle class="circle-bg" cx="60" cy="60" r="50"></circle>
+                        <circle class="circle-progress" cx="60" cy="60" r="50" id="scoreCircle"></circle>
+                    </svg>
+                    <div class="score-text" id="scoreText">--</div>
+                </div>
+                <div class="score-label">ATS Compatibility</div>
+                <span class="score-rating" id="scoreRating">Not Analyzed</span>
+            </div>
+
+            <div class="ats-metrics" id="atsMetrics">
+                <!-- Metrics will be populated by JavaScript -->
+            </div>
+
+            <div class="ats-suggestions" id="atsSuggestions">
+                <!-- Suggestions will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
     <script>
         let currentTemplate = 'modern';
+        let currentSuggestionContext = null;
 
         // Template switcher
         document.querySelectorAll('.template-option').forEach(opt => {
@@ -790,6 +2432,52 @@
                 }
             });
         });
+
+        // Color Theme Selector
+        let currentTheme = 'purple';
+        
+        function initColorTheme() {
+            // Load saved theme
+            const savedTheme = localStorage.getItem('resume_color_theme');
+            if (savedTheme) {
+                applyTheme(savedTheme);
+            } else {
+                applyTheme('purple');
+            }
+
+            // Setup theme click handlers
+            document.querySelectorAll('.theme-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const theme = this.dataset.theme;
+                    applyTheme(theme);
+                    localStorage.setItem('resume_color_theme', theme);
+                });
+            });
+        }
+
+        function applyTheme(theme) {
+            currentTheme = theme;
+            
+            // Update body class
+            document.body.className = '';
+            document.body.classList.add(`theme-${theme}`);
+            
+            // Update active theme option
+            document.querySelectorAll('.theme-option').forEach(opt => {
+                opt.classList.remove('active');
+                if (opt.dataset.theme === theme) {
+                    opt.classList.add('active');
+                }
+            });
+
+            // Regenerate preview if it exists
+            if (document.getElementById('previewArea').innerHTML.includes('paper')) {
+                generateResume();
+            }
+        }
+
+        // Initialize theme on load
+        initColorTheme();
 
         // Auto-save functionality
         function autoSave() {
@@ -924,6 +2612,17 @@
             const wrapper = document.createElement('div');
             wrapper.className = `paper ${currentTemplate}`;
 
+            // Special handling for creative template (two-column)
+            if (currentTemplate === 'creative') {
+                generateCreativeTemplate(wrapper, name, title, email, phone, location, linkedin, summary, exps, edus, skillChips);
+                p.appendChild(wrapper);
+                localStorage.setItem('resume_preview', p.innerHTML);
+                if (window.innerWidth <= 1024) {
+                    p.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                return;
+            }
+
             // Header
             const header = document.createElement('div');
             header.className = 'r-header';
@@ -1032,6 +2731,41 @@
                 wrapper.appendChild(s);
             }
 
+            // Custom Sections (in order they appear)
+            const customSections = document.querySelectorAll('.form-section[data-section-id^="custom-"]');
+            customSections.forEach(section => {
+                const sectionId = section.dataset.sectionId;
+                const titleElement = section.querySelector('.form-section-title');
+                const sectionTitle = titleElement ? titleElement.textContent.trim() : 'Custom Section';
+                const items = section.querySelectorAll('.custom-item');
+                
+                if (items.length > 0) {
+                    const s = document.createElement('div');
+                    s.className = 'section';
+                    s.innerHTML = `<div class="section-title">${escapeHtml(sectionTitle)}</div>`;
+                    
+                    items.forEach(item => {
+                        const titleInput = item.querySelector('.custom-title');
+                        const descTextarea = item.querySelector('.custom-desc');
+                        
+                        if (titleInput && titleInput.value) {
+                            const itemDiv = document.createElement('div');
+                            itemDiv.style.marginTop = '15px';
+                            let html = '<div style="font-weight:700;font-size:16px;color:#1e293b">' + escapeHtml(titleInput.value) + '</div>';
+                            
+                            if (descTextarea && descTextarea.value) {
+                                html += '<div style="color:#475569;margin-top:8px;line-height:1.8">' + escapeHtml(descTextarea.value).replace(/\n/g, '<br>') + '</div>';
+                            }
+                            
+                            itemDiv.innerHTML = html;
+                            s.appendChild(itemDiv);
+                        }
+                    });
+                    
+                    wrapper.appendChild(s);
+                }
+            });
+
             p.appendChild(wrapper);
             localStorage.setItem('resume_preview', p.innerHTML);
             
@@ -1039,6 +2773,134 @@
             if (window.innerWidth <= 1024) {
                 p.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
+        }
+
+        // Creative template generator (two-column layout)
+        function generateCreativeTemplate(wrapper, name, title, email, phone, location, linkedin, summary, exps, edus, skillChips) {
+            const sidebar = document.createElement('div');
+            sidebar.className = 'sidebar';
+            
+            // Header in sidebar
+            const header = document.createElement('div');
+            header.className = 'r-header';
+            header.innerHTML = `
+                <div class="r-name">${escapeHtml(name)}</div>
+                <div class="r-title">${escapeHtml(title)}</div>
+            `;
+            sidebar.appendChild(header);
+            
+            // Contact in sidebar
+            const contact = document.createElement('div');
+            contact.className = 'r-contact';
+            let contactHTML = '';
+            if (email) contactHTML += `<div><i class="fas fa-envelope"></i>${escapeHtml(email)}</div>`;
+            if (phone) contactHTML += `<div><i class="fas fa-phone"></i>${escapeHtml(phone)}</div>`;
+            if (location) contactHTML += `<div><i class="fas fa-map-marker-alt"></i>${escapeHtml(location)}</div>`;
+            if (linkedin) contactHTML += `<div><i class="fab fa-linkedin"></i>${escapeHtml(linkedin)}</div>`;
+            contact.innerHTML = contactHTML;
+            sidebar.appendChild(contact);
+            
+            // Skills in sidebar
+            if (skillChips.length) {
+                const skillSection = document.createElement('div');
+                skillSection.className = 'section';
+                skillSection.innerHTML = '<div class="section-title">Skills</div>';
+                const skillBox = document.createElement('div');
+                skillBox.style.marginTop = '15px';
+                skillChips.forEach(sk => {
+                    const chip = document.createElement('span');
+                    chip.className = 'chip';
+                    chip.textContent = sk;
+                    skillBox.appendChild(chip);
+                });
+                skillSection.appendChild(skillBox);
+                sidebar.appendChild(skillSection);
+            }
+            
+            // Education in sidebar
+            if (edus.length) {
+                const eduSection = document.createElement('div');
+                eduSection.className = 'section';
+                eduSection.innerHTML = '<div class="section-title">Education</div>';
+                edus.forEach(it => {
+                    const item = document.createElement('div');
+                    item.style.marginTop = '12px';
+                    let html = '<div style="font-weight:700;font-size:14px">' + escapeHtml(it.role) + '</div>';
+                    if (it.dates) html += '<div style="font-size:12px;margin-top:2px;opacity:0.9">' + escapeHtml(it.dates) + '</div>';
+                    if (it.desc) html += '<div style="font-size:12px;margin-top:4px;opacity:0.85;line-height:1.6">' + escapeHtml(it.desc).replace(/\n/g, '<br>') + '</div>';
+                    item.innerHTML = html;
+                    eduSection.appendChild(item);
+                });
+                sidebar.appendChild(eduSection);
+            }
+            
+            wrapper.appendChild(sidebar);
+            
+            // Main content area
+            const mainContent = document.createElement('div');
+            mainContent.className = 'main-content';
+            
+            // Summary in main
+            if (summary) {
+                const summarySection = document.createElement('div');
+                summarySection.className = 'section';
+                summarySection.innerHTML = '<div class="section-title">Professional Summary</div><div style="line-height:1.8;color:#475569;margin-top:10px">' + escapeHtml(summary).replace(/\n/g, '<br>') + '</div>';
+                mainContent.appendChild(summarySection);
+            }
+            
+            // Experience in main
+            if (exps.length) {
+                const expSection = document.createElement('div');
+                expSection.className = 'section';
+                expSection.innerHTML = '<div class="section-title">Work Experience</div>';
+                exps.forEach(it => {
+                    const item = document.createElement('div');
+                    item.style.marginTop = '15px';
+                    let html = '<div style="font-weight:700;font-size:16px;color:#1e293b">' + escapeHtml(it.role) + '</div>';
+                    if (it.dates) html += '<div style="color:#667eea;font-weight:600;font-size:14px;margin-top:4px">' + escapeHtml(it.dates) + '</div>';
+                    if (it.desc) html += '<div style="color:#475569;margin-top:8px;line-height:1.8">' + escapeHtml(it.desc).replace(/\n/g, '<br>') + '</div>';
+                    item.innerHTML = html;
+                    expSection.appendChild(item);
+                });
+                mainContent.appendChild(expSection);
+            }
+
+            // Custom Sections in main content
+            const customSections = document.querySelectorAll('.form-section[data-section-id^="custom-"]');
+            customSections.forEach(section => {
+                const sectionId = section.dataset.sectionId;
+                const titleElement = section.querySelector('.form-section-title');
+                const sectionTitle = titleElement ? titleElement.textContent.trim() : 'Custom Section';
+                const items = section.querySelectorAll('.custom-item');
+                
+                if (items.length > 0) {
+                    const s = document.createElement('div');
+                    s.className = 'section';
+                    s.innerHTML = `<div class="section-title">${escapeHtml(sectionTitle)}</div>`;
+                    
+                    items.forEach(item => {
+                        const titleInput = item.querySelector('.custom-title');
+                        const descTextarea = item.querySelector('.custom-desc');
+                        
+                        if (titleInput && titleInput.value) {
+                            const itemDiv = document.createElement('div');
+                            itemDiv.style.marginTop = '15px';
+                            let html = '<div style="font-weight:700;font-size:16px;color:#1e293b">' + escapeHtml(titleInput.value) + '</div>';
+                            
+                            if (descTextarea && descTextarea.value) {
+                                html += '<div style="color:#475569;margin-top:8px;line-height:1.8">' + escapeHtml(descTextarea.value).replace(/\n/g, '<br>') + '</div>';
+                            }
+                            
+                            itemDiv.innerHTML = html;
+                            s.appendChild(itemDiv);
+                        }
+                    });
+                    
+                    mainContent.appendChild(s);
+                }
+            });
+            
+            wrapper.appendChild(mainContent);
         }
 
         // safely escape user text before inserting into HTML
@@ -1099,6 +2961,465 @@
             localStorage.removeItem('resume_data');
             location.reload();
         }
+
+        // ============ AI SUGGESTIONS SYSTEM ============
+        
+        const aiSuggestionsData = {
+            summary: {
+                'Software Engineer': [
+                    'Innovative Software Engineer with 5+ years of experience building scalable web applications. Proven track record of reducing load times by 40% and improving user engagement through cutting-edge technologies.',
+                    'Results-driven Full Stack Developer specializing in cloud-native solutions. Successfully led cross-functional teams to deliver mission-critical projects 20% ahead of schedule.',
+                    'Passionate technologist with expertise in architecting robust systems. Delivered enterprise solutions serving 2M+ users with 99.9% uptime.'
+                ],
+                'Data Scientist': [
+                    'Data-driven professional with expertise in machine learning and statistical analysis. Developed predictive models that increased revenue by 25% through intelligent customer segmentation.',
+                    'Analytical thinker specializing in turning complex data into actionable insights. Built recommendation engines improving user retention by 35%.',
+                    'PhD-trained Data Scientist with proven ability to solve business challenges through advanced analytics. Implemented AI solutions reducing operational costs by $2M annually.'
+                ],
+                'Product Manager': [
+                    'Strategic Product Manager with track record of launching successful products from concept to market. Led initiatives generating $5M+ in annual revenue.',
+                    'Customer-focused leader skilled at translating market needs into product roadmaps. Increased user satisfaction scores by 45% through data-driven feature prioritization.',
+                    'Experienced PM combining technical expertise with business acumen. Successfully managed cross-functional teams of 15+ to deliver products used by millions.'
+                ],
+                'Marketing Manager': [
+                    'Creative Marketing strategist with expertise in digital campaigns and brand management. Drove 200% increase in online engagement through innovative multi-channel strategies.',
+                    'ROI-focused marketing professional with proven success in B2B and B2C environments. Orchestrated campaigns generating $3M in qualified leads.',
+                    'Data-driven marketer combining creative storytelling with analytical rigor. Achieved 150% growth in customer acquisition within 12 months.'
+                ],
+                'default': [
+                    'Accomplished professional with proven track record of exceeding goals and driving organizational success. Known for combining analytical thinking with creative problem-solving.',
+                    'Results-oriented leader with expertise in building high-performing teams and delivering complex projects. Consistently recognized for innovation and operational excellence.',
+                    'Dynamic professional bringing strong technical and interpersonal skills. Demonstrated ability to adapt quickly and drive measurable business impact.'
+                ]
+            },
+            experience: [
+                'Spearheaded development of enterprise platform serving 100K+ daily active users',
+                'Led cross-functional team of 8 engineers to deliver project 3 weeks ahead of schedule',
+                'Architected microservices solution reducing infrastructure costs by 35%',
+                'Implemented CI/CD pipeline decreasing deployment time from 4 hours to 15 minutes',
+                'Optimized database queries resulting in 60% improvement in application performance',
+                'Mentored 5 junior developers, improving team productivity by 25%',
+                'Collaborated with product team to define technical requirements for new features',
+                'Reduced bug count by 40% through implementation of automated testing framework',
+                'Migrated legacy monolith to cloud-native architecture, improving scalability 10x',
+                'Established coding standards and best practices adopted across engineering organization',
+                'Designed and launched customer-facing dashboard with 95% satisfaction rating',
+                'Streamlined development workflow reducing time-to-market by 30%',
+                'Conducted code reviews ensuring high-quality deliverables and knowledge sharing',
+                'Integrated third-party APIs enabling new revenue stream of $500K annually',
+                'Championed Agile methodologies leading to 50% faster sprint velocity'
+            ],
+            powerWords: {
+                leadership: ['Led', 'Managed', 'Directed', 'Coordinated', 'Supervised', 'Mentored', 'Guided', 'Orchestrated', 'Championed', 'Spearheaded'],
+                achievement: ['Achieved', 'Exceeded', 'Delivered', 'Accomplished', 'Attained', 'Surpassed', 'Completed', 'Realized', 'Secured', 'Generated'],
+                improvement: ['Improved', 'Enhanced', 'Optimized', 'Streamlined', 'Transformed', 'Revitalized', 'Upgraded', 'Modernized', 'Refined', 'Strengthened'],
+                technical: ['Developed', 'Engineered', 'Architected', 'Designed', 'Implemented', 'Built', 'Created', 'Programmed', 'Coded', 'Integrated'],
+                innovation: ['Pioneered', 'Innovated', 'Launched', 'Initiated', 'Established', 'Introduced', 'Founded', 'Conceptualized', 'Designed', 'Created'],
+                analysis: ['Analyzed', 'Assessed', 'Evaluated', 'Researched', 'Investigated', 'Examined', 'Diagnosed', 'Identified', 'Measured', 'Quantified']
+            },
+            skills: {
+                'Software Engineer': ['JavaScript', 'Python', 'React', 'Node.js', 'AWS', 'Docker', 'Git', 'PostgreSQL', 'REST APIs', 'Microservices', 'CI/CD', 'Agile'],
+                'Data Scientist': ['Python', 'Machine Learning', 'TensorFlow', 'SQL', 'Data Visualization', 'Statistics', 'Pandas', 'NumPy', 'Scikit-learn', 'Deep Learning', 'A/B Testing', 'Big Data'],
+                'Product Manager': ['Product Strategy', 'Roadmap Planning', 'User Research', 'Data Analysis', 'Agile', 'Stakeholder Management', 'A/B Testing', 'SQL', 'Wireframing', 'Market Research', 'Feature Prioritization'],
+                'Designer': ['UI/UX Design', 'Figma', 'Adobe XD', 'Sketch', 'Prototyping', 'User Research', 'Wireframing', 'Design Systems', 'HTML/CSS', 'Responsive Design', 'Usability Testing'],
+                'Marketing': ['Digital Marketing', 'SEO', 'Content Strategy', 'Social Media', 'Google Analytics', 'Email Marketing', 'Campaign Management', 'Marketing Automation', 'CRM', 'A/B Testing'],
+                'default': ['Communication', 'Leadership', 'Problem Solving', 'Team Collaboration', 'Project Management', 'Time Management', 'Critical Thinking', 'Adaptability', 'Creativity', 'Attention to Detail']
+            }
+        };
+
+        function openAISuggestions(context) {
+            currentSuggestionContext = context;
+            const panel = document.getElementById('aiSuggestionsPanel');
+            const content = document.getElementById('suggestionsContent');
+            
+            panel.classList.add('active');
+            content.innerHTML = '<div class="ai-loading"><i class="fas fa-magic"></i><p style="margin-top:15px;">Generating AI suggestions...</p></div>';
+            
+            setTimeout(() => {
+                content.innerHTML = generateSuggestionsHTML(context);
+            }, 800);
+        }
+
+        function closeAISuggestions() {
+            document.getElementById('aiSuggestionsPanel').classList.remove('active');
+        }
+
+        function generateSuggestionsHTML(context) {
+            let html = '';
+            const userTitle = document.getElementById('title').value || '';
+            
+            if (context === 'summary') {
+                html += '<div class="suggestion-category">';
+                html += '<h4><i class="fas fa-lightbulb"></i> Professional Summary Examples</h4>';
+                html += '<p style="color:#64748b;font-size:13px;margin-bottom:15px;">Click any suggestion to use it (you can edit after):</p>';
+                
+                const summaries = getSummariesForRole(userTitle);
+                summaries.forEach(text => {
+                    html += `<div class="suggestion-item" onclick="useSuggestion('summary', '${escapeForJS(text)}')">
+                        <div class="suggestion-text">${escapeHtml(text)}</div>
+                        <span class="suggestion-badge">Click to use</span>
+                    </div>`;
+                });
+                html += '</div>';
+                
+            } else if (context === 'experience') {
+                html += '<div class="suggestion-category">';
+                html += '<h4><i class="fas fa-star"></i> Achievement Examples</h4>';
+                html += '<p style="color:#64748b;font-size:13px;margin-bottom:15px;">Strong bullet points to inspire your descriptions:</p>';
+                
+                aiSuggestionsData.experience.slice(0, 10).forEach(text => {
+                    html += `<div class="suggestion-item" onclick="appendToExperience('${escapeForJS(text)}')">
+                        <div class="suggestion-text">• ${escapeHtml(text)}</div>
+                        <span class="suggestion-badge">Add to experience</span>
+                    </div>`;
+                });
+                html += '</div>';
+                
+                html += '<div class="suggestion-category">';
+                html += '<h4><i class="fas fa-bolt"></i> Power Words</h4>';
+                html += '<p style="color:#64748b;font-size:13px;margin-bottom:10px;">Use these action verbs to make your experience more impactful:</p>';
+                
+                Object.keys(aiSuggestionsData.powerWords).forEach(category => {
+                    html += `<div style="margin-bottom:15px;">`;
+                    html += `<div style="font-weight:600;font-size:13px;color:#667eea;margin-bottom:8px;text-transform:capitalize;">${category}</div>`;
+                    html += '<div class="power-words">';
+                    aiSuggestionsData.powerWords[category].forEach(word => {
+                        html += `<span class="power-word" onclick="copyToClipboard('${word}')" title="Click to copy">${word}</span>`;
+                    });
+                    html += '</div></div>';
+                });
+                html += '</div>';
+                
+            } else if (context === 'skills') {
+                html += '<div class="suggestion-category">';
+                html += '<h4><i class="fas fa-tools"></i> Recommended Skills</h4>';
+                html += '<p style="color:#64748b;font-size:13px;margin-bottom:15px;">Based on your role, these skills are commonly sought:</p>';
+                
+                const skills = getSkillsForRole(userTitle);
+                html += '<div class="power-words">';
+                skills.forEach(skill => {
+                    html += `<span class="power-word" onclick="addSkill('${escapeForJS(skill)}')">${escapeHtml(skill)}</span>`;
+                });
+                html += '</div>';
+                html += '</div>';
+            }
+            
+            return html;
+        }
+
+        function getSummariesForRole(title) {
+            const lowerTitle = title.toLowerCase();
+            if (lowerTitle.includes('software') || lowerTitle.includes('developer') || lowerTitle.includes('engineer')) {
+                return aiSuggestionsData.summary['Software Engineer'];
+            } else if (lowerTitle.includes('data') || lowerTitle.includes('scientist') || lowerTitle.includes('analyst')) {
+                return aiSuggestionsData.summary['Data Scientist'];
+            } else if (lowerTitle.includes('product') || lowerTitle.includes('manager')) {
+                return aiSuggestionsData.summary['Product Manager'];
+            } else if (lowerTitle.includes('marketing')) {
+                return aiSuggestionsData.summary['Marketing Manager'];
+            }
+            return aiSuggestionsData.summary['default'];
+        }
+
+        function getSkillsForRole(title) {
+            const lowerTitle = title.toLowerCase();
+            if (lowerTitle.includes('software') || lowerTitle.includes('developer') || lowerTitle.includes('engineer')) {
+                return aiSuggestionsData.skills['Software Engineer'];
+            } else if (lowerTitle.includes('data') || lowerTitle.includes('scientist')) {
+                return aiSuggestionsData.skills['Data Scientist'];
+            } else if (lowerTitle.includes('product') || lowerTitle.includes('manager')) {
+                return aiSuggestionsData.skills['Product Manager'];
+            } else if (lowerTitle.includes('design')) {
+                return aiSuggestionsData.skills['Designer'];
+            } else if (lowerTitle.includes('marketing')) {
+                return aiSuggestionsData.skills['Marketing'];
+            }
+            return aiSuggestionsData.skills['default'];
+        }
+
+        function useSuggestion(field, text) {
+            if (field === 'summary') {
+                document.getElementById('summary').value = text;
+                closeAISuggestions();
+                alert('✨ AI suggestion applied! Feel free to customize it.');
+            }
+        }
+
+        function appendToExperience(text) {
+            const expItems = document.querySelectorAll('.exp-desc');
+            if (expItems.length > 0) {
+                const lastExp = expItems[expItems.length - 1];
+                const currentText = lastExp.value.trim();
+                lastExp.value = currentText ? currentText + '\n• ' + text : '• ' + text;
+                alert('✨ Added to your most recent experience!');
+            } else {
+                alert('Please add an experience section first.');
+            }
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                const notification = document.createElement('div');
+                notification.textContent = `✓ "${text}" copied!`;
+                notification.style.cssText = 'position:fixed;top:20px;right:20px;background:#10b981;color:white;padding:12px 20px;border-radius:8px;font-weight:600;z-index:10001;animation:fadeInUp 0.3s ease;';
+                document.body.appendChild(notification);
+                setTimeout(() => notification.remove(), 2000);
+            });
+        }
+
+        function escapeForJS(str) {
+            return str.replace(/'/g, "\\'").replace(/"/g, '\\"').replace(/\n/g, '\\n');
+        }
+
+        // ============ END AI SUGGESTIONS SYSTEM ============
+
+        // ============ ATS SCORE CHECKER SYSTEM ============
+        
+        let atsScore = 0;
+        let atsAnalysisData = {};
+
+        function toggleATSPanel() {
+            const panel = document.getElementById('atsPanel');
+            const toggle = document.getElementById('atsToggle');
+            const isShown = panel.classList.contains('show');
+            
+            if (isShown) {
+                panel.classList.remove('show');
+                toggle.classList.remove('active');
+            } else {
+                panel.classList.add('show');
+                toggle.classList.add('active');
+                calculateATSScore();
+            }
+        }
+
+        function calculateATSScore() {
+            const name = document.getElementById('name').value.trim();
+            const title = document.getElementById('title').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const summary = document.getElementById('summary').value.trim();
+            const experiences = collectItems('.exp-role', '.exp-dates', '.exp-desc');
+            const educations = collectItems('.edu-role', '.edu-dates', '.edu-desc');
+            const skillChips = Array.from(document.querySelectorAll('#skills .chip')).map(s => s.textContent.replace('×', '').trim());
+
+            let score = 0;
+            let maxScore = 100;
+            const issues = [];
+            const metrics = {};
+
+            // Contact Information (20 points)
+            let contactScore = 0;
+            if (name && name !== 'Your Name') contactScore += 5;
+            if (email && email.includes('@')) contactScore += 5;
+            if (phone) contactScore += 5;
+            if (title && title !== 'Your Professional Title') contactScore += 5;
+            score += contactScore;
+            metrics.contact = { score: contactScore, max: 20 };
+            if (contactScore < 20) issues.push('Add complete contact information (name, email, phone, title)');
+
+            // Professional Summary (15 points)
+            let summaryScore = 0;
+            if (summary) {
+                const wordCount = summary.split(/\s+/).length;
+                if (wordCount >= 30 && wordCount <= 100) {
+                    summaryScore = 15;
+                } else if (wordCount >= 15 && wordCount < 30) {
+                    summaryScore = 10;
+                    issues.push('Professional summary is too short (aim for 30-100 words)');
+                } else if (wordCount > 100) {
+                    summaryScore = 10;
+                    issues.push('Professional summary is too long (aim for 30-100 words)');
+                } else {
+                    summaryScore = 5;
+                    issues.push('Add a professional summary (30-100 words recommended)');
+                }
+            } else {
+                issues.push('Add a professional summary to highlight your expertise');
+            }
+            score += summaryScore;
+            metrics.summary = { score: summaryScore, max: 15 };
+
+            // Work Experience (30 points)
+            let expScore = 0;
+            if (experiences.length === 0) {
+                issues.push('Add at least 2-3 relevant work experiences');
+            } else if (experiences.length === 1) {
+                expScore = 15;
+                issues.push('Add more work experiences (2-3 recommended)');
+            } else if (experiences.length >= 2) {
+                expScore = 25;
+                
+                // Check for quantified achievements
+                let hasQuantification = false;
+                experiences.forEach(exp => {
+                    if (exp.desc && /\d+/.test(exp.desc)) {
+                        hasQuantification = true;
+                    }
+                });
+                
+                if (hasQuantification) {
+                    expScore = 30;
+                } else {
+                    issues.push('Quantify your achievements with numbers and metrics');
+                }
+
+                // Check for action verbs
+                const actionVerbs = ['led', 'managed', 'developed', 'created', 'improved', 'increased', 'reduced', 'achieved', 'implemented', 'designed', 'built', 'launched'];
+                let hasActionVerbs = false;
+                experiences.forEach(exp => {
+                    if (exp.desc) {
+                        const lowerDesc = exp.desc.toLowerCase();
+                        if (actionVerbs.some(verb => lowerDesc.includes(verb))) {
+                            hasActionVerbs = true;
+                        }
+                    }
+                });
+                
+                if (!hasActionVerbs) {
+                    issues.push('Use strong action verbs (Led, Developed, Achieved, etc.)');
+                }
+            }
+            score += expScore;
+            metrics.experience = { score: expScore, max: 30 };
+
+            // Education (10 points)
+            let eduScore = 0;
+            if (educations.length > 0) {
+                eduScore = 10;
+            } else {
+                issues.push('Add your educational background');
+            }
+            score += eduScore;
+            metrics.education = { score: eduScore, max: 10 };
+
+            // Skills (20 points)
+            let skillScore = 0;
+            if (skillChips.length === 0) {
+                issues.push('Add 6-12 relevant skills');
+            } else if (skillChips.length < 5) {
+                skillScore = 10;
+                issues.push('Add more skills (6-12 recommended)');
+            } else if (skillChips.length >= 6 && skillChips.length <= 15) {
+                skillScore = 20;
+            } else {
+                skillScore = 15;
+                issues.push('Too many skills listed - focus on 6-12 most relevant');
+            }
+            score += skillScore;
+            metrics.skills = { score: skillScore, max: 20 };
+
+            // Formatting & ATS Compatibility (5 points)
+            let formatScore = 5; // Base score for using the builder
+            score += formatScore;
+            metrics.formatting = { score: formatScore, max: 5 };
+
+            // Calculate final score
+            atsScore = Math.round(score);
+            atsAnalysisData = { score: atsScore, metrics, issues };
+
+            displayATSScore();
+        }
+
+        function displayATSScore() {
+            const { score, metrics, issues } = atsAnalysisData;
+
+            // Update score circle
+            const scoreText = document.getElementById('scoreText');
+            const scoreCircle = document.getElementById('scoreCircle');
+            const scoreRating = document.getElementById('scoreRating');
+
+            scoreText.textContent = score;
+
+            // Animate circle
+            const circumference = 2 * Math.PI * 50;
+            const offset = circumference - (score / 100) * circumference;
+            scoreCircle.style.strokeDasharray = circumference;
+            scoreCircle.style.strokeDashoffset = offset;
+
+            // Set color based on score
+            let color, rating, ratingClass;
+            if (score >= 80) {
+                color = '#10b981';
+                rating = 'Excellent';
+                ratingClass = 'excellent';
+            } else if (score >= 60) {
+                color = '#3b82f6';
+                rating = 'Good';
+                ratingClass = 'good';
+            } else if (score >= 40) {
+                color = '#f59e0b';
+                rating = 'Fair';
+                ratingClass = 'fair';
+            } else {
+                color = '#ef4444';
+                rating = 'Needs Work';
+                ratingClass = 'poor';
+            }
+
+            scoreCircle.style.stroke = color;
+            scoreRating.textContent = rating;
+            scoreRating.className = `score-rating ${ratingClass}`;
+
+            // Display metrics
+            const metricsContainer = document.getElementById('atsMetrics');
+            metricsContainer.innerHTML = '';
+            
+            const metricNames = {
+                contact: 'Contact Info',
+                summary: 'Summary',
+                experience: 'Experience',
+                education: 'Education',
+                skills: 'Skills',
+                formatting: 'Format'
+            };
+
+            Object.keys(metrics).forEach(key => {
+                const metric = metrics[key];
+                const percentage = Math.round((metric.score / metric.max) * 100);
+                
+                let statusClass = 'good';
+                if (percentage < 50) statusClass = 'error';
+                else if (percentage < 75) statusClass = 'warning';
+
+                const metricHTML = `
+                    <div class="metric-item">
+                        <span class="metric-label">${metricNames[key]}</span>
+                        <span class="metric-value ${statusClass}">${metric.score}/${metric.max}</span>
+                    </div>
+                `;
+                metricsContainer.innerHTML += metricHTML;
+            });
+
+            // Display suggestions
+            const suggestionsContainer = document.getElementById('atsSuggestions');
+            if (issues.length > 0) {
+                let suggestionsHTML = '<h4><i class="fas fa-lightbulb"></i> Improvement Suggestions</h4><ul class="suggestion-list">';
+                issues.forEach(issue => {
+                    suggestionsHTML += `<li><i class="fas fa-exclamation-circle"></i>${issue}</li>`;
+                });
+                suggestionsHTML += '</ul>';
+                suggestionsContainer.innerHTML = suggestionsHTML;
+                suggestionsContainer.style.display = 'block';
+            } else {
+                suggestionsContainer.innerHTML = '<h4 style="color:#10b981;"><i class="fas fa-check-circle"></i> Your resume is ATS-optimized!</h4>';
+                suggestionsContainer.style.display = 'block';
+            }
+        }
+
+        // Auto-update ATS score when resume changes
+        ['name', 'title', 'email', 'phone', 'summary'].forEach(id => {
+            const elem = document.getElementById(id);
+            if (elem) {
+                elem.addEventListener('blur', () => {
+                    if (document.getElementById('atsPanel').classList.contains('show')) {
+                        calculateATSScore();
+                    }
+                });
+            }
+        });
+
+        // ============ END ATS SCORE CHECKER SYSTEM ============
     </script>
     <!-- Resume Rank modal -->
     <div id="rankModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center;">
@@ -1153,6 +3474,496 @@
                 try { modal.style.display = 'flex'; document.getElementById('rankFrame').contentWindow.focus(); } catch (e) { modal.style.display = 'flex'; }
             }
         })();
+
+        // ================== DRAG & DROP + CUSTOM SECTIONS ==================
+        
+        let draggedElement = null;
+        let selectedSectionType = null;
+        let customSectionCounter = 0;
+
+        // Initialize drag and drop
+        function initDragAndDrop() {
+            const sections = document.querySelectorAll('.form-section[draggable="true"]');
+            
+            sections.forEach(section => {
+                section.addEventListener('dragstart', handleDragStart);
+                section.addEventListener('dragover', handleDragOver);
+                section.addEventListener('drop', handleDrop);
+                section.addEventListener('dragend', handleDragEnd);
+                section.addEventListener('dragenter', handleDragEnter);
+                section.addEventListener('dragleave', handleDragLeave);
+            });
+        }
+
+        function handleDragStart(e) {
+            draggedElement = this;
+            this.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/html', this.innerHTML);
+        }
+
+        function handleDragOver(e) {
+            if (e.preventDefault) {
+                e.preventDefault();
+            }
+            e.dataTransfer.dropEffect = 'move';
+            return false;
+        }
+
+        function handleDragEnter(e) {
+            if (this !== draggedElement) {
+                this.classList.add('drag-over');
+            }
+        }
+
+        function handleDragLeave(e) {
+            this.classList.remove('drag-over');
+        }
+
+        function handleDrop(e) {
+            if (e.stopPropagation) {
+                e.stopPropagation();
+            }
+
+            if (draggedElement !== this) {
+                const allSections = [...document.querySelectorAll('.form-section[draggable="true"]')];
+                const draggedIndex = allSections.indexOf(draggedElement);
+                const targetIndex = allSections.indexOf(this);
+
+                if (draggedIndex < targetIndex) {
+                    this.parentNode.insertBefore(draggedElement, this.nextSibling);
+                } else {
+                    this.parentNode.insertBefore(draggedElement, this);
+                }
+            }
+
+            this.classList.remove('drag-over');
+            return false;
+        }
+
+        function handleDragEnd(e) {
+            this.classList.remove('dragging');
+            document.querySelectorAll('.form-section').forEach(section => {
+                section.classList.remove('drag-over');
+            });
+        }
+
+        // Toggle section collapse
+        function toggleSection(btn) {
+            const section = btn.closest('.form-section');
+            const content = section.querySelector('.section-content, #experiences, #educations, #skills');
+            const icon = btn.querySelector('i');
+            
+            section.classList.toggle('collapsed');
+            
+            if (section.classList.contains('collapsed')) {
+                icon.classList.remove('fa-chevron-up');
+                icon.classList.add('fa-chevron-down');
+            } else {
+                icon.classList.remove('fa-chevron-down');
+                icon.classList.add('fa-chevron-up');
+            }
+        }
+
+        // Delete custom section
+        function deleteCustomSection(btn) {
+            if (confirm('Are you sure you want to remove this section?')) {
+                btn.closest('.form-section').remove();
+            }
+        }
+
+        // Custom section modal functions
+        function openCustomSectionModal() {
+            const modal = document.getElementById('customSectionModal');
+            modal.classList.add('active');
+            selectedSectionType = null;
+
+            // Setup section type selection
+            document.querySelectorAll('.section-type-option').forEach(option => {
+                option.classList.remove('selected');
+                option.onclick = function() {
+                    document.querySelectorAll('.section-type-option').forEach(o => o.classList.remove('selected'));
+                    this.classList.add('selected');
+                    selectedSectionType = this.dataset.sectionType;
+                };
+            });
+        }
+
+        function closeCustomSectionModal() {
+            document.getElementById('customSectionModal').classList.remove('active');
+            selectedSectionType = null;
+        }
+
+        // Close modal when clicking outside
+        document.addEventListener('click', function(e) {
+            const modal = document.getElementById('customSectionModal');
+            if (modal && e.target === modal) {
+                closeCustomSectionModal();
+            }
+        });
+
+        function addCustomSection() {
+            if (!selectedSectionType) {
+                alert('Please select a section type');
+                return;
+            }
+
+            customSectionCounter++;
+            const sectionId = `custom-${selectedSectionType}-${customSectionCounter}`;
+            
+            const sectionData = {
+                projects: { icon: 'fa-code', title: 'Projects', placeholder: 'Project Name', descPlaceholder: '• Describe the project\n• Technologies used\n• Your role and contributions' },
+                certifications: { icon: 'fa-certificate', title: 'Certifications', placeholder: 'Certification Name — Issuing Organization', descPlaceholder: 'Issue Date, Credential ID (Optional)' },
+                awards: { icon: 'fa-trophy', title: 'Awards & Honors', placeholder: 'Award Name — Issuing Organization', descPlaceholder: 'Date received, Brief description' },
+                publications: { icon: 'fa-book', title: 'Publications', placeholder: 'Publication Title', descPlaceholder: 'Authors, Publication venue, Date' },
+                languages: { icon: 'fa-language', title: 'Languages', placeholder: 'Language — Proficiency Level', descPlaceholder: 'e.g., Spanish — Native, French — Professional Working' },
+                volunteer: { icon: 'fa-hands-helping', title: 'Volunteer Experience', placeholder: 'Role — Organization', descPlaceholder: '• Describe your volunteer activities\n• Impact and achievements' }
+            };
+
+            const data = sectionData[selectedSectionType];
+            
+            const sectionHTML = `
+                <div class="form-section" draggable="true" data-section-id="${sectionId}">
+                    <div class="form-section-header">
+                        <div class="section-controls">
+                            <button class="section-control-btn collapse-btn" onclick="toggleSection(this)" title="Collapse">
+                                <i class="fas fa-chevron-up"></i>
+                            </button>
+                            <button class="section-control-btn delete-btn-section" onclick="deleteCustomSection(this)" title="Delete section">
+                                <i class="fas fa-times"></i>
+                            </button>
+                            <button class="section-control-btn drag-handle" title="Drag to reorder">
+                                <i class="fas fa-grip-vertical"></i>
+                            </button>
+                        </div>
+                        <div class="form-section-title">
+                            <i class="fas ${data.icon}"></i> ${data.title}
+                        </div>
+                    </div>
+                    <div class="section-content">
+                        <div id="${sectionId}-items">
+                            <div class="custom-item">
+                                <input class="custom-title" type="text" placeholder="${data.placeholder}" />
+                                <textarea class="custom-desc" placeholder="${data.descPlaceholder}"></textarea>
+                                <button class="delete-btn" onclick="this.parentElement.remove()">
+                                    <i class="fas fa-trash"></i> Remove
+                                </button>
+                            </div>
+                        </div>
+                        <div style="margin-top:12px;">
+                            <span class="add-link" onclick="addCustomItem('${sectionId}', '${data.placeholder}', '${data.descPlaceholder}')">
+                                <i class="fas fa-plus-circle"></i> Add ${data.title}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            const controlsDiv = document.querySelector('.controls');
+            controlsDiv.insertAdjacentHTML('beforebegin', sectionHTML);
+
+            // Re-initialize drag and drop for new section
+            initDragAndDrop();
+
+            closeCustomSectionModal();
+        }
+
+        function addCustomItem(sectionId, placeholder, descPlaceholder) {
+            const container = document.getElementById(`${sectionId}-items`);
+            const itemHTML = `
+                <div class="custom-item">
+                    <input class="custom-title" type="text" placeholder="${placeholder}" />
+                    <textarea class="custom-desc" placeholder="${descPlaceholder}"></textarea>
+                    <button class="delete-btn" onclick="this.parentElement.remove()">
+                        <i class="fas fa-trash"></i> Remove
+                    </button>
+                </div>
+            `;
+            container.insertAdjacentHTML('beforeend', itemHTML);
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            initDragAndDrop();
+        });
+
+        // ================== LINKEDIN IMPORT ==================
+        
+        function openLinkedInImport() {
+            document.getElementById('linkedinModal').classList.add('active');
+            document.getElementById('linkedinPasteArea').classList.remove('active');
+            document.getElementById('linkedinDataInput').value = '';
+        }
+
+        function closeLinkedInImport() {
+            document.getElementById('linkedinModal').classList.remove('active');
+        }
+
+        function showPasteArea() {
+            document.getElementById('linkedinPasteArea').classList.add('active');
+            setTimeout(() => {
+                document.getElementById('linkedinDataInput').focus();
+            }, 100);
+        }
+
+        function processLinkedInImport() {
+            const linkedinData = document.getElementById('linkedinDataInput').value.trim();
+            
+            if (!linkedinData) {
+                alert('Please paste your LinkedIn profile data first!');
+                return;
+            }
+
+            // Parse LinkedIn data
+            const lines = linkedinData.split('\n').map(line => line.trim()).filter(line => line);
+            
+            if (lines.length === 0) {
+                alert('No data found. Please paste valid LinkedIn profile text.');
+                return;
+            }
+
+            // Extract information using pattern matching
+            let name = '', title = '', email = '', phone = '', location = '', linkedin = '', summary = '';
+            let experiences = [], educations = [], skills = [];
+            
+            // Extract name (usually first line or line with full name pattern)
+            name = lines[0] || '';
+            
+            // Extract title/headline (usually after name)
+            if (lines.length > 1) {
+                title = lines[1] || '';
+            }
+
+            // Extract location (look for city/state patterns)
+            for (let i = 0; i < Math.min(10, lines.length); i++) {
+                if (lines[i].match(/,\s*[A-Z]{2}/) || lines[i].match(/\d{5}/) || 
+                    lines[i].toLowerCase().includes('area') || lines[i].toLowerCase().includes('location')) {
+                    location = lines[i].replace(/location[:\s]*/gi, '').trim();
+                    break;
+                }
+            }
+
+            // Extract email (look for email pattern)
+            for (let line of lines) {
+                const emailMatch = line.match(/[\w.-]+@[\w.-]+\.\w+/);
+                if (emailMatch) {
+                    email = emailMatch[0];
+                    break;
+                }
+            }
+
+            // Extract phone (look for phone patterns)
+            for (let line of lines) {
+                const phoneMatch = line.match(/(\+?\d{1,3}[-.\s]?)?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}/);
+                if (phoneMatch) {
+                    phone = phoneMatch[0];
+                    break;
+                }
+            }
+
+            // Extract LinkedIn URL
+            for (let line of lines) {
+                if (line.toLowerCase().includes('linkedin.com/in/')) {
+                    linkedin = line;
+                    break;
+                }
+            }
+
+            // Extract summary/about (look for "About", "Summary" sections)
+            let summaryStart = -1;
+            let experienceStart = -1;
+            
+            for (let i = 0; i < lines.length; i++) {
+                const lowerLine = lines[i].toLowerCase();
+                if ((lowerLine === 'about' || lowerLine === 'summary' || lowerLine.includes('about me')) && summaryStart === -1) {
+                    summaryStart = i;
+                }
+                if ((lowerLine === 'experience' || lowerLine === 'work experience') && experienceStart === -1) {
+                    experienceStart = i;
+                    break;
+                }
+            }
+
+            if (summaryStart !== -1 && experienceStart !== -1) {
+                summary = lines.slice(summaryStart + 1, experienceStart).join(' ').substring(0, 500);
+            }
+
+            // Extract experiences (look for date patterns and company names)
+            let educationStart = -1;
+            for (let i = 0; i < lines.length; i++) {
+                if (lines[i].toLowerCase() === 'education') {
+                    educationStart = i;
+                    break;
+                }
+            }
+
+            if (experienceStart !== -1) {
+                const expEnd = educationStart !== -1 ? educationStart : lines.length;
+                const expLines = lines.slice(experienceStart + 1, expEnd);
+                
+                let currentExp = null;
+                for (let line of expLines) {
+                    // Date pattern (e.g., "2020 - Present", "Jan 2020 - Dec 2022")
+                    if (line.match(/\d{4}/) || line.match(/(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)/i)) {
+                        if (currentExp && currentExp.role) {
+                            experiences.push(currentExp);
+                        }
+                        currentExp = { role: '', dates: line, desc: '' };
+                    } else if (currentExp && !currentExp.role && line.length > 3) {
+                        currentExp.role = line;
+                    } else if (currentExp && currentExp.role && line.length > 10) {
+                        currentExp.desc += (currentExp.desc ? '\n' : '') + '• ' + line;
+                    }
+                }
+                if (currentExp && currentExp.role) {
+                    experiences.push(currentExp);
+                }
+            }
+
+            // Extract education
+            if (educationStart !== -1) {
+                const eduLines = lines.slice(educationStart + 1, Math.min(educationStart + 20, lines.length));
+                
+                let currentEdu = null;
+                for (let line of eduLines) {
+                    if (line.match(/\d{4}/) || line.match(/graduated|graduation/i)) {
+                        if (currentEdu && currentEdu.role) {
+                            educations.push(currentEdu);
+                        }
+                        currentEdu = { role: '', dates: line.match(/\d{4}/)?.[0] || line, desc: '' };
+                    } else if (currentEdu && !currentEdu.role && line.length > 3) {
+                        currentEdu.role = line;
+                    } else if (currentEdu && currentEdu.role && line.length > 5) {
+                        currentEdu.desc = line;
+                    }
+                    if (line.toLowerCase() === 'skills' || line.toLowerCase() === 'licenses') break;
+                }
+                if (currentEdu && currentEdu.role) {
+                    educations.push(currentEdu);
+                }
+            }
+
+            // Extract skills (look for "Skills" section)
+            let skillsStart = -1;
+            for (let i = 0; i < lines.length; i++) {
+                if (lines[i].toLowerCase() === 'skills' || lines[i].toLowerCase() === 'skills & expertise') {
+                    skillsStart = i;
+                    break;
+                }
+            }
+
+            if (skillsStart !== -1) {
+                const skillLines = lines.slice(skillsStart + 1, Math.min(skillsStart + 30, lines.length));
+                for (let line of skillLines) {
+                    if (line.length < 50 && !line.match(/\d{4}/) && 
+                        !line.toLowerCase().includes('experience') && 
+                        !line.toLowerCase().includes('education')) {
+                        // Split by common delimiters
+                        const skillsParts = line.split(/[•·,;|]/);
+                        for (let skill of skillsParts) {
+                            const cleanSkill = skill.trim();
+                            if (cleanSkill.length > 2 && cleanSkill.length < 40) {
+                                skills.push(cleanSkill);
+                            }
+                        }
+                    }
+                    if (line.toLowerCase().includes('recommendations') || 
+                        line.toLowerCase().includes('accomplishments')) break;
+                }
+            }
+
+            // Populate form fields
+            if (name) document.getElementById('name').value = name;
+            if (title) document.getElementById('title').value = title;
+            if (email) document.getElementById('email').value = email;
+            if (phone) document.getElementById('phone').value = phone;
+            if (location) document.getElementById('location').value = location;
+            if (linkedin) document.getElementById('linkedin').value = linkedin;
+            if (summary) document.getElementById('summary').value = summary;
+
+            // Clear existing experiences and add new ones
+            const expContainer = document.getElementById('experiences');
+            expContainer.innerHTML = '';
+            experiences.slice(0, 5).forEach((exp, index) => {
+                addExperience();
+                const expItems = document.querySelectorAll('.exp-item');
+                const lastItem = expItems[expItems.length - 1];
+                if (lastItem) {
+                    lastItem.querySelector('.exp-role').value = exp.role;
+                    lastItem.querySelector('.exp-dates').value = exp.dates;
+                    lastItem.querySelector('.exp-desc').value = exp.desc;
+                }
+            });
+
+            // Clear existing educations and add new ones
+            const eduContainer = document.getElementById('educations');
+            eduContainer.innerHTML = '';
+            educations.slice(0, 3).forEach((edu, index) => {
+                addEducation();
+                const eduItems = document.querySelectorAll('.edu-item');
+                const lastItem = eduItems[eduItems.length - 1];
+                if (lastItem) {
+                    lastItem.querySelector('.edu-role').value = edu.role;
+                    lastItem.querySelector('.edu-dates').value = edu.dates;
+                    if (edu.desc) lastItem.querySelector('.edu-desc').value = edu.desc;
+                }
+            });
+
+            // Add skills
+            document.getElementById('skills').innerHTML = '';
+            skills.slice(0, 15).forEach(skill => {
+                const chip = document.createElement('span');
+                chip.className = 'chip';
+                chip.innerHTML = skill + ' <i class="fas fa-times" onclick="this.parentElement.remove()"></i>';
+                document.getElementById('skills').appendChild(chip);
+            });
+
+            // Close modal and show success message
+            closeLinkedInImport();
+            
+            // Auto-generate preview
+            setTimeout(() => {
+                generateResume();
+            }, 500);
+
+            // Show success notification
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+                color: white;
+                padding: 20px 30px;
+                border-radius: 12px;
+                box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
+                z-index: 10003;
+                font-weight: 600;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                animation: slideIn 0.4s ease;
+            `;
+            notification.innerHTML = `
+                <i class="fas fa-check-circle" style="font-size: 24px;"></i>
+                <span>LinkedIn data imported successfully!</span>
+            `;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.animation = 'fadeOut 0.4s ease';
+                setTimeout(() => notification.remove(), 400);
+            }, 3000);
+        }
+
+        // Close modal when clicking outside
+        document.addEventListener('click', function(e) {
+            const modal = document.getElementById('linkedinModal');
+            if (modal && e.target === modal) {
+                closeLinkedInImport();
+            }
+        });
+
     </script>
 </body>
 
