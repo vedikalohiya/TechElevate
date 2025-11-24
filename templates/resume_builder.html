@@ -2065,6 +2065,738 @@
             box-shadow: 0 12px 30px rgba(245, 158, 11, 0.5);
         }
 
+        /* ===== JOB MATCH SCORE - BEAUTIFUL STYLING ===== */
+        
+        /* Job Match Button with Pulse Animation */
+        .job-match-btn {
+            position: fixed;
+            right: 20px;
+            bottom: 260px;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            border-radius: 50%;
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            box-shadow: 0 10px 35px rgba(59, 130, 246, 0.5), 0 0 0 0 rgba(59, 130, 246, 0.4);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 9997;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse-job-match 3s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .job-match-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .job-match-btn:hover::before {
+            width: 100px;
+            height: 100px;
+        }
+
+        @keyframes pulse-job-match {
+            0%, 100% { 
+                box-shadow: 0 10px 35px rgba(59, 130, 246, 0.5), 0 0 0 0 rgba(59, 130, 246, 0.4);
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 0 15px 45px rgba(59, 130, 246, 0.7), 0 0 0 15px rgba(59, 130, 246, 0.1);
+                transform: scale(1.05);
+            }
+        }
+
+        .job-match-btn:hover {
+            transform: scale(1.15) rotate(5deg);
+            box-shadow: 0 20px 50px rgba(59, 130, 246, 0.6), 0 0 30px rgba(59, 130, 246, 0.4);
+        }
+
+        .job-match-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Job Match Modal with Backdrop Blur */
+        .job-match-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(37, 99, 235, 0.15) 100%), 
+                        rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            z-index: 10005;
+            animation: fadeIn 0.4s ease;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .job-match-content {
+            background: linear-gradient(to bottom, #ffffff 0%, #f8fafc 100%);
+            width: 90%;
+            max-width: 950px;
+            margin: 40px auto;
+            border-radius: 24px;
+            box-shadow: 0 25px 70px rgba(59, 130, 246, 0.25), 
+                        0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            overflow: hidden;
+        }
+
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(50px) scale(0.95);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Beautiful Header with Gradient Orbs */
+        .job-match-header {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 50%, #1d4ed8 100%);
+            color: white;
+            padding: 30px 35px;
+            border-radius: 24px 24px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .job-match-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .job-match-header::after {
+            content: '';
+            position: absolute;
+            bottom: -50%;
+            left: -10%;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .job-match-header h2 {
+            margin: 0;
+            font-size: 26px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .job-match-header h2 i {
+            font-size: 28px;
+            animation: target-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes target-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .job-match-close {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .job-match-close:hover {
+            background: rgba(255, 255, 255, 0.35);
+            transform: rotate(90deg) scale(1.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Body with Gradient Background */
+        .job-match-body {
+            padding: 35px;
+            background: linear-gradient(to bottom, transparent 0%, rgba(59, 130, 246, 0.02) 100%);
+        }
+
+        .job-match-section {
+            margin-bottom: 35px;
+        }
+
+        .job-match-section h3 {
+            color: #1e293b;
+            font-size: 19px;
+            font-weight: 700;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid transparent;
+            border-image: linear-gradient(90deg, #3b82f6 0%, transparent 100%);
+            border-image-slice: 1;
+        }
+
+        .job-match-section h3 i {
+            color: #3b82f6;
+            font-size: 22px;
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(59, 130, 246, 0.2);
+        }
+
+        /* Beautiful Textarea */
+        .job-description-area {
+            width: 100%;
+            min-height: 280px;
+            padding: 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            font-size: 14px;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            resize: vertical;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: white;
+            line-height: 1.7;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .job-description-area:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), 0 8px 20px rgba(59, 130, 246, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .job-description-area::placeholder {
+            color: #94a3b8;
+        }
+
+        /* Stunning Analyze Button */
+        .analyze-btn {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 50%, #1e40af 100%);
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            border-radius: 14px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 0 auto;
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.35);
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .analyze-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .analyze-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .analyze-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.45), 0 0 25px rgba(59, 130, 246, 0.3);
+        }
+
+        .analyze-btn:active {
+            transform: translateY(-1px) scale(1.02);
+        }
+
+        .analyze-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .analyze-btn i {
+            font-size: 20px;
+            animation: brain-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes brain-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        /* Match Results Section */
+        .match-results {
+            display: none;
+            margin-top: 30px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        /* Overall Score with Glow Effect */
+        .overall-match-score {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 50%, #bfdbfe 100%);
+            border: 3px solid transparent;
+            border-radius: 20px;
+            padding: 35px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 35px rgba(59, 130, 246, 0.2), 
+                        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .overall-match-score::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+            animation: score-glow 4s ease-in-out infinite;
+        }
+
+        @keyframes score-glow {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(10%, 10%) scale(1.1); }
+        }
+
+        .match-score-circle {
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 20px;
+            position: relative;
+            filter: drop-shadow(0 10px 25px rgba(59, 130, 246, 0.3));
+        }
+
+        .match-score-value {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 42px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: score-bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes score-bounce {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.05); }
+        }
+
+        .match-score-label {
+            font-size: 18px;
+            color: #475569;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        /* Category Grid */
+        .match-category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        /* Beautiful Category Cards */
+        .match-category {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .match-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6 0%, #2563eb 100%);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .match-category:hover::before {
+            transform: scaleX(1);
+        }
+
+        .match-category:hover {
+            border-color: #3b82f6;
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.2), 
+                        0 5px 15px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, #ffffff 0%, #eff6ff 100%);
+        }
+
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .category-name {
+            font-weight: 600;
+            color: #1e293b;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .category-score {
+            font-size: 20px;
+            font-weight: 700;
+            color: #3b82f6;
+        }
+
+        .category-bar {
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .category-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6 0%, #2563eb 100%);
+            border-radius: 4px;
+            transition: width 1s ease;
+        }
+
+        .category-insights {
+            font-size: 13px;
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        /* Matched Keywords with Hover Effects */
+        .matched-keywords {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border: 3px solid #10b981;
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .matched-keywords::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .matched-keywords h4 {
+            color: #065f46;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+        }
+
+        .matched-keywords h4 i {
+            font-size: 22px;
+            animation: check-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes check-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        .keyword-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .keyword-chip {
+            background: white;
+            border: 2px solid #10b981;
+            color: #065f46;
+            padding: 8px 16px;
+            border-radius: 24px;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: default;
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.1);
+        }
+
+        .keyword-chip:hover {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        /* Missing Keywords */
+        .missing-keywords {
+            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+            border: 3px solid #ef4444;
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 25px rgba(239, 68, 68, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .missing-keywords::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(239, 68, 68, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .missing-keywords h4 {
+            color: #991b1b;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+        }
+
+        .missing-keywords h4 i {
+            font-size: 22px;
+            animation: alert-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes alert-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        .missing-chip {
+            background: white;
+            border: 2px solid #ef4444;
+            color: #991b1b;
+            padding: 8px 16px;
+            border-radius: 24px;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: default;
+            box-shadow: 0 2px 8px rgba(239, 68, 68, 0.1);
+        }
+
+        .missing-chip:hover {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 5px 15px rgba(239, 68, 68, 0.3);
+        }
+
+        /* Recommendations with Glowing Bulb */
+        .recommendations {
+            background: linear-gradient(135deg, #fefce8 0%, #fef3c7 100%);
+            border: 3px solid #eab308;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(234, 179, 8, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .recommendations::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(234, 179, 8, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .recommendations h4 {
+            color: #854d0e;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+        }
+
+        .recommendations h4 i {
+            font-size: 22px;
+            animation: bulb-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes bulb-glow {
+            0%, 100% { 
+                filter: drop-shadow(0 0 5px rgba(234, 179, 8, 0.5));
+                transform: scale(1);
+            }
+            50% { 
+                filter: drop-shadow(0 0 10px rgba(234, 179, 8, 0.8));
+                transform: scale(1.1);
+            }
+        }
+
+        .recommendation-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .recommendation-list li {
+            padding: 12px 0;
+            color: #713f12;
+            font-size: 14px;
+            line-height: 1.7;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            border-bottom: 1px solid rgba(234, 179, 8, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .recommendation-list li:last-child {
+            border-bottom: none;
+        }
+
+        .recommendation-list li:hover {
+            padding-left: 10px;
+            color: #854d0e;
+            background: rgba(234, 179, 8, 0.1);
+            border-radius: 8px;
+        }
+
+        .recommendation-list li i {
+            color: #eab308;
+            margin-top: 3px;
+            flex-shrink: 0;
+            font-size: 16px;
+        }
+
+        /* Beautiful Loading Spinner */
+        .loading-spinner {
+            text-align: center;
+            padding: 60px;
+            display: none;
+        }
+
+        .spinner {
+            border: 5px solid #e2e8f0;
+            border-top: 5px solid #3b82f6;
+            border-right: 5px solid #2563eb;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+            box-shadow: 0 5px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: #475569;
+            font-size: 15px;
+            font-weight: 600;
+            animation: text-fade 1.5s ease-in-out infinite;
+        }
+
+        @keyframes text-fade {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        /* ===== END JOB MATCH SCORE STYLES ===== */
+
         .cover-letter-modal {
             display: none;
             position: fixed;
@@ -2831,6 +3563,74 @@
         </div>
     </div>
 
+    <!-- Job Match Score Modal -->
+    <div class="job-match-modal" id="jobMatchModal">
+        <div class="job-match-content">
+            <div class="job-match-header">
+                <h2>
+                    <i class="fas fa-bullseye"></i>
+                    Job Match Score
+                </h2>
+                <button class="job-match-close" onclick="closeJobMatchModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="job-match-body">
+                <div class="job-match-section">
+                    <h3><i class="fas fa-file-alt"></i> Paste Job Description</h3>
+                    <textarea class="job-description-area" id="jobDescriptionInput" placeholder="Paste the full job description here including requirements, qualifications, responsibilities, and skills..."></textarea>
+                </div>
+
+                <button class="analyze-btn" id="analyzeBtn" onclick="analyzeJobMatch()">
+                    <i class="fas fa-brain"></i>
+                    Analyze Match
+                </button>
+
+                <div class="loading-spinner" id="loadingSpinner">
+                    <div class="spinner"></div>
+                    <div class="loading-text">Analyzing your resume against job requirements...</div>
+                </div>
+
+                <div class="match-results" id="matchResults">
+                    <div class="overall-match-score">
+                        <div class="match-score-circle">
+                            <svg width="150" height="150">
+                                <circle class="circle-bg" cx="75" cy="75" r="65" 
+                                    fill="none" stroke="#e2e8f0" stroke-width="12"></circle>
+                                <circle class="circle-progress" cx="75" cy="75" r="65" 
+                                    fill="none" stroke="#3b82f6" stroke-width="12" 
+                                    stroke-dasharray="408.4" stroke-dashoffset="408.4"
+                                    transform="rotate(-90 75 75)" id="matchScoreCircle"></circle>
+                            </svg>
+                            <div class="match-score-value" id="overallMatchScore">0%</div>
+                        </div>
+                        <div class="match-score-label">Overall Match Score</div>
+                    </div>
+
+                    <div class="match-category-grid" id="categoryGrid">
+                        <!-- Categories will be populated dynamically -->
+                    </div>
+
+                    <div class="matched-keywords" id="matchedKeywords">
+                        <h4><i class="fas fa-check-circle"></i> Matched Keywords</h4>
+                        <div class="keyword-chips" id="matchedChips"></div>
+                    </div>
+
+                    <div class="missing-keywords" id="missingKeywords">
+                        <h4><i class="fas fa-exclamation-circle"></i> Missing Keywords</h4>
+                        <div class="keyword-chips" id="missingChips"></div>
+                    </div>
+
+                    <div class="recommendations">
+                        <h4><i class="fas fa-lightbulb"></i> Recommendations to Improve Match</h4>
+                        <ul class="recommendation-list" id="recommendationList"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Cover Letter Generator Modal -->
     <div class="cover-letter-modal" id="coverLetterModal">
         <div class="cover-letter-content">
@@ -3037,6 +3837,11 @@
             </div>
         </div>
     </div>
+
+    <!-- Job Match Score Button -->
+    <button class="job-match-btn" onclick="openJobMatchModal()" title="Job Match Score">
+        <i class="fas fa-bullseye"></i>
+    </button>
 
     <!-- Cover Letter Generator Button -->
     <button class="cover-letter-btn" onclick="openCoverLetterGenerator()" title="Generate Cover Letter">
@@ -5091,7 +5896,337 @@
             if (modal && e.target === modal) {
                 closeCoverLetterGenerator();
             }
+            
+            const jobMatchModal = document.getElementById('jobMatchModal');
+            if (jobMatchModal && e.target === jobMatchModal) {
+                closeJobMatchModal();
+            }
         });
+
+        // ============================================
+        // JOB MATCH SCORE FUNCTIONALITY
+        // ============================================
+
+        function openJobMatchModal() {
+            document.getElementById('jobMatchModal').style.display = 'flex';
+            // Clear previous results
+            document.getElementById('matchResults').style.display = 'none';
+            document.getElementById('jobDescriptionInput').value = '';
+        }
+
+        function closeJobMatchModal() {
+            document.getElementById('jobMatchModal').style.display = 'none';
+        }
+
+        function analyzeJobMatch() {
+            const jobDescription = document.getElementById('jobDescriptionInput').value.trim();
+            
+            if (!jobDescription) {
+                showNotification('Please paste a job description first', 'error');
+                return;
+            }
+
+            // Extract resume data
+            const resumeData = extractResumeData();
+            
+            if (!resumeData.hasContent) {
+                showNotification('Please fill in your resume first', 'error');
+                return;
+            }
+
+            // Show loading
+            document.getElementById('analyzeBtn').disabled = true;
+            document.getElementById('loadingSpinner').style.display = 'block';
+            document.getElementById('matchResults').style.display = 'none';
+
+            // Simulate AI analysis (in production, this would call an AI API)
+            setTimeout(() => {
+                const matchData = performJobMatch(resumeData, jobDescription);
+                displayMatchResults(matchData);
+                
+                document.getElementById('analyzeBtn').disabled = false;
+                document.getElementById('loadingSpinner').style.display = 'none';
+                document.getElementById('matchResults').style.display = 'block';
+            }, 2000);
+        }
+
+        function extractResumeData() {
+            const name = document.getElementById('name').value.trim();
+            const summary = document.getElementById('summary').value.trim();
+            const skills = Array.from(document.querySelectorAll('.skill-chip')).map(chip => 
+                chip.textContent.replace('×', '').trim()
+            );
+            
+            const experiences = [];
+            document.querySelectorAll('.exp-item').forEach(exp => {
+                const role = exp.querySelector('.exp-role')?.value || '';
+                const duration = exp.querySelector('.exp-duration')?.value || '';
+                const description = exp.querySelector('.exp-desc')?.value || '';
+                if (role || description) {
+                    experiences.push({ role, duration, description });
+                }
+            });
+
+            const education = [];
+            document.querySelectorAll('.edu-item').forEach(edu => {
+                const degree = edu.querySelector('.edu-degree')?.value || '';
+                const institution = edu.querySelector('.edu-institution')?.value || '';
+                const eduYear = edu.querySelector('.edu-year')?.value || '';
+                if (degree || institution) {
+                    education.push({ degree, institution, year: eduYear });
+                }
+            });
+
+            return {
+                name,
+                summary,
+                skills,
+                experiences,
+                education,
+                hasContent: name || summary || skills.length > 0 || experiences.length > 0
+            };
+        }
+
+        function performJobMatch(resumeData, jobDescription) {
+            const jdLower = jobDescription.toLowerCase();
+            
+            // Extract keywords from job description
+            const commonWords = new Set(['the', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'a', 'an', 'is', 'are', 'was', 'were', 'be', 'been', 'being', 'have', 'has', 'had', 'do', 'does', 'did', 'will', 'would', 'should', 'could', 'may', 'might', 'must', 'can', 'this', 'that', 'these', 'those', 'such', 'as', 'by', 'from', 'into', 'through', 'during', 'before', 'after', 'above', 'below', 'between', 'under', 'over', 'again', 'further', 'then', 'once', 'here', 'there', 'when', 'where', 'why', 'how', 'all', 'both', 'each', 'few', 'more', 'most', 'other', 'some', 'your', 'our']);
+            
+            const jdWords = jdLower.split(/\W+/).filter(word => 
+                word.length > 2 && !commonWords.has(word)
+            );
+            
+            const jdKeywords = [...new Set(jdWords)].slice(0, 50);
+            
+            // Combine all resume text
+            const resumeText = [
+                resumeData.summary,
+                ...resumeData.skills,
+                ...resumeData.experiences.map(e => `${e.role} ${e.description}`),
+                ...resumeData.education.map(e => `${e.degree} ${e.institution}`)
+            ].join(' ').toLowerCase();
+            
+            // Find matched and missing keywords
+            const matched = [];
+            const missing = [];
+            
+            jdKeywords.forEach(keyword => {
+                if (resumeText.includes(keyword)) {
+                    matched.push(keyword);
+                } else {
+                    missing.push(keyword);
+                }
+            });
+
+            // Calculate category scores
+            const categories = {
+                'Technical Skills': calculateSkillsMatch(jdLower, resumeData.skills),
+                'Experience': calculateExperienceMatch(jdLower, resumeData.experiences),
+                'Education': calculateEducationMatch(jdLower, resumeData.education),
+                'Keywords': (matched.length / jdKeywords.length) * 100,
+                'Summary Impact': resumeData.summary ? Math.min(resumeData.summary.length / 3, 100) : 0,
+                'Completeness': calculateCompletenessScore(resumeData)
+            };
+
+            // Calculate overall score
+            const overallScore = Math.round(
+                Object.values(categories).reduce((a, b) => a + b, 0) / Object.keys(categories).length
+            );
+
+            // Generate recommendations
+            const recommendations = generateRecommendations(categories, matched, missing, resumeData);
+
+            return {
+                overallScore,
+                categories,
+                matched: matched.slice(0, 20),
+                missing: missing.slice(0, 15),
+                recommendations
+            };
+        }
+
+        function calculateSkillsMatch(jdText, skills) {
+            if (skills.length === 0) return 0;
+            
+            const matchedSkills = skills.filter(skill => 
+                jdText.includes(skill.toLowerCase())
+            );
+            
+            return Math.min((matchedSkills.length / Math.max(skills.length, 5)) * 100, 100);
+        }
+
+        function calculateExperienceMatch(jdText, experiences) {
+            if (experiences.length === 0) return 20;
+            
+            const keywords = ['experience', 'years', 'worked', 'developed', 'managed', 'led', 'created'];
+            let score = 40;
+            
+            experiences.forEach(exp => {
+                const expText = `${exp.role} ${exp.description}`.toLowerCase();
+                keywords.forEach(kw => {
+                    if (expText.includes(kw) && jdText.includes(kw)) {
+                        score += 10;
+                    }
+                });
+            });
+            
+            return Math.min(score, 100);
+        }
+
+        function calculateEducationMatch(jdText, education) {
+            if (education.length === 0) return 30;
+            
+            let score = 50;
+            const eduKeywords = ['degree', 'bachelor', 'master', 'phd', 'university', 'college', 'diploma'];
+            
+            education.forEach(edu => {
+                const eduText = `${edu.degree} ${edu.institution}`.toLowerCase();
+                eduKeywords.forEach(kw => {
+                    if (eduText.includes(kw) && jdText.includes(kw)) {
+                        score += 8;
+                    }
+                });
+            });
+            
+            return Math.min(score, 100);
+        }
+
+        function calculateCompletenessScore(resumeData) {
+            let score = 0;
+            if (resumeData.name) score += 15;
+            if (resumeData.summary) score += 20;
+            if (resumeData.skills.length > 0) score += 25;
+            if (resumeData.experiences.length > 0) score += 25;
+            if (resumeData.education.length > 0) score += 15;
+            return score;
+        }
+
+        function generateRecommendations(categories, matched, missing, resumeData) {
+            const recommendations = [];
+            
+            if (categories['Technical Skills'] < 60) {
+                recommendations.push('Add more relevant technical skills that match the job requirements');
+            }
+            
+            if (categories['Keywords'] < 50) {
+                recommendations.push(`Include key terms from job description: ${missing.slice(0, 5).join(', ')}`);
+            }
+            
+            if (categories['Summary Impact'] < 50) {
+                recommendations.push('Enhance your professional summary to highlight relevant achievements');
+            }
+            
+            if (categories['Experience'] < 60) {
+                recommendations.push('Expand your experience descriptions with quantifiable achievements');
+            }
+            
+            if (resumeData.experiences.length < 2) {
+                recommendations.push('Add more work experience entries to strengthen your application');
+            }
+            
+            if (missing.length > 10) {
+                recommendations.push('Consider adding sections for certifications, projects, or relevant coursework');
+            }
+            
+            if (categories['Completeness'] < 80) {
+                recommendations.push('Complete all resume sections for maximum impact');
+            }
+            
+            if (matched.length > 0) {
+                recommendations.push(`Emphasize your strengths in: ${matched.slice(0, 3).join(', ')}`);
+            }
+            
+            return recommendations;
+        }
+
+        function displayMatchResults(matchData) {
+            // Update overall score circle
+            const overallScore = matchData.overallScore;
+            const circle = document.getElementById('matchScoreCircle');
+            const circumference = 2 * Math.PI * 65;
+            const offset = circumference - (overallScore / 100) * circumference;
+            
+            circle.style.strokeDashoffset = offset;
+            document.getElementById('overallMatchScore').textContent = overallScore + '%';
+            
+            // Color code based on score
+            let color = '#ef4444'; // red
+            if (overallScore >= 70) color = '#10b981'; // green
+            else if (overallScore >= 50) color = '#f59e0b'; // orange
+            circle.style.stroke = color;
+            
+            // Display categories
+            const categoryGrid = document.getElementById('categoryGrid');
+            categoryGrid.innerHTML = '';
+            
+            Object.entries(matchData.categories).forEach(([name, score]) => {
+                const roundedScore = Math.round(score);
+                const categoryDiv = document.createElement('div');
+                categoryDiv.className = 'match-category';
+                
+                let icon = 'fa-check';
+                if (name.includes('Skills')) icon = 'fa-code';
+                else if (name.includes('Experience')) icon = 'fa-briefcase';
+                else if (name.includes('Education')) icon = 'fa-graduation-cap';
+                else if (name.includes('Keywords')) icon = 'fa-key';
+                else if (name.includes('Summary')) icon = 'fa-align-left';
+                else if (name.includes('Complete')) icon = 'fa-clipboard-check';
+                
+                categoryDiv.innerHTML = `
+                    <div class="category-header">
+                        <div class="category-name">
+                            <i class="fas ${icon}"></i>
+                            ${name}
+                        </div>
+                        <div class="category-score">${roundedScore}%</div>
+                    </div>
+                    <div class="category-bar">
+                        <div class="category-bar-fill" style="width: ${roundedScore}%"></div>
+                    </div>
+                    <div class="category-insights">
+                        ${getCategoryInsight(name, roundedScore)}
+                    </div>
+                `;
+                categoryGrid.appendChild(categoryDiv);
+            });
+            
+            // Display matched keywords
+            const matchedChips = document.getElementById('matchedChips');
+            matchedChips.innerHTML = '';
+            matchData.matched.forEach(keyword => {
+                const chip = document.createElement('span');
+                chip.className = 'keyword-chip';
+                chip.textContent = keyword;
+                matchedChips.appendChild(chip);
+            });
+            
+            // Display missing keywords
+            const missingChips = document.getElementById('missingChips');
+            missingChips.innerHTML = '';
+            matchData.missing.forEach(keyword => {
+                const chip = document.createElement('span');
+                chip.className = 'missing-chip';
+                chip.textContent = keyword;
+                missingChips.appendChild(chip);
+            });
+            
+            // Display recommendations
+            const recommendationList = document.getElementById('recommendationList');
+            recommendationList.innerHTML = '';
+            matchData.recommendations.forEach(rec => {
+                const li = document.createElement('li');
+                li.innerHTML = `<i class="fas fa-arrow-right"></i> <span>${rec}</span>`;
+                recommendationList.appendChild(li);
+            });
+        }
+
+        function getCategoryInsight(category, score) {
+            if (score >= 80) return '✓ Excellent match!';
+            if (score >= 60) return '↑ Good, but could be improved';
+            if (score >= 40) return '⚠ Needs attention';
+            return '✗ Critical area for improvement';
+        }
 
     </script>
 </body>
