@@ -320,32 +320,27 @@
       if (!valid) return;
 
       try {
-        // POST to the local Flask API route. The backend exposes `/api/register`.
+        // POST to the local Flask API route for registration
         const response = await fetch("/api/register", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             name,
             email,
-            password,
-            phone,
-            college,
-            branch,
-            passingYear
+            password
           }),
         });
         const result = await response.json();
-        if (response.ok) {
-          // success: show message, reset form and redirect to sign-in
-          alert(result.message || 'Registered successfully. Please sign in.');
-          signUpForm.reset();
-          window.location.href = '/sign.html';
+        if (result.success) {
+          // success: show message and redirect to dashboard
+          alert(result.message || 'Registration successful! Welcome to TechElevate.');
+          window.location.href = result.redirect || '/dashboard';
         } else {
-          // server returned an error (400/409 etc.)
+          // server returned an error
           alert(result.message || 'Registration failed.');
         }
       } catch (err) {
-        alert("Error registering user.");
+        alert("Error registering user. Please try again.");
         console.error("Registration error:", err);
       }
     });

@@ -1,21 +1,13 @@
 services:
   - type: web
-    name: tech-elevate-backend
+    name: techelevate
     env: python
-    region: oregon
-    plan: free
-    buildCommand: pip install -r backend/requirements.txt
-    startCommand: python backend/app.py
-    autoDeploy: true
-    repo: https://github.com/vedikalohiya/TechElevate
-    branch: main
-
-  - type: static
-    name: tech-elevate-frontend
-    env: static
-    region: oregon
-    plan: free
-    buildCommand: ''
-    publishPath: frontend
-    repo: https://github.com/vedikalohiya/TechElevate
-    branch: main
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn app:app"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: SECRET_KEY
+        generateValue: true
+      - key: MONGO_URI
+        sync: false

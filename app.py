@@ -2,9 +2,11 @@ import os
 import re
 from flask import Flask, render_template, request, jsonify, session, send_from_directory, abort, redirect, url_for
 from werkzeug.utils import secure_filename
+from werkzeug.security import generate_password_hash, check_password_hash
 from flask_pymongo import PyMongo
 from flask_cors import CORS
-from datetime import datetime
+from datetime import datetime, timedelta
+from functools import wraps
 
 app = Flask(__name__)
 CORS(app)
@@ -27,6 +29,38 @@ except Exception:
     ar = None
 
 
+# === AUTHENTICATION DECORATOR ===
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if 'user_id' not in session:
+            return redirect(url_for('sign_in'))
+        return f(*args, **kwargs)
+    return decorated_function
+
+def subscription_required(tier='free'):
+    """Check if user has required subscription tier"""
+    def decorator(f):
+        @wraps(f)
+        def decorated_function(*args, **kwargs):
+            if 'user_id' not in session:
+                return redirect(url_for('sign_in'))
+            
+            user = mongo.db.users.find_one({'_id': session['user_id']})
+            if not user:
+                return redirect(url_for('sign_in'))
+            
+            tier_hierarchy = {'free': 0, 'basic': 1, 'pro': 2, 'premium': 3}
+            user_tier = user.get('subscription_tier', 'free')
+            
+            if tier_hierarchy.get(user_tier, 0) < tier_hierarchy.get(tier, 0):
+                return redirect(url_for('pricing'))
+            
+            return f(*args, **kwargs)
+        return decorated_function
+    return decorator
+
+
 # === HOME & PAGES ===
 @app.route('/')
 @app.route('/home')
@@ -40,12 +74,16 @@ def sign_in():
     return render_template('sign.html')
 
 @app.route('/profile')
+@login_required
 def show_profile():
-    return render_template('profile.html', user_name="Guest")  # No login required
+    user = mongo.db.users.find_one({'_id': session['user_id']})
+    return render_template('profile.html', user=user)
 
 @app.route('/dashboard')
+@login_required
 def show_dashboard():
-    return render_template('dash.html', user_name="Guest")
+    user = mongo.db.users.find_one({'_id': session['user_id']})
+    return render_template('dash.html', user=user)
 
 @app.route('/mockstart')
 def start_mock():
@@ -95,6 +133,300 @@ def show_technicals():
 @app.route('/softskills')
 def show_softskills():
     return render_template('softskills/softskills.html')
+
+
+# === USER AUTHENTICATION ===
+@app.route('/api/register', methods=['POST'])
+def register_user():
+    try:
+        data = request.get_json()
+        email = data.get('email', '').lower().strip()
+        password = data.get('password', '')
+        name = data.get('name', '').strip()
+        
+        # Validation
+        if not email or not password or not name:
+            return jsonify({'success': False, 'message': 'All fields are required'}), 400
+        
+        if len(password) < 6:
+            return jsonify({'success': False, 'message': 'Password must be at least 6 characters'}), 400
+        
+        # Check if user exists
+        if mongo.db.users.find_one({'email': email}):
+            return jsonify({'success': False, 'message': 'Email already registered'}), 400
+        
+        # Create user
+        user_id = email  # Use email as ID
+        hashed_password = generate_password_hash(password)
+        
+        user_data = {
+            '_id': user_id,
+            'email': email,
+            'name': name,
+            'password': hashed_password,
+            'subscription_tier': 'free',
+            'subscription_status': 'active',
+            'subscription_start': datetime.utcnow(),
+            'subscription_end': None,
+            'resumes_created': 0,
+            'job_matches_used': 0,
+            'cover_letters_generated': 0,
+            'created_at': datetime.utcnow(),
+            'last_login': datetime.utcnow()
+        }
+        
+        mongo.db.users.insert_one(user_data)
+        
+        # Set session
+        session['user_id'] = user_id
+        session['user_name'] = name
+        session['subscription_tier'] = 'free'
+        
+        return jsonify({
+            'success': True,
+            'message': 'Registration successful',
+            'redirect': '/dashboard'
+        })
+    
+    except Exception as e:
+        return jsonify({'success': False, 'message': str(e)}), 500
+
+
+@app.route('/api/login', methods=['POST'])
+def login_user():
+    try:
+        data = request.get_json()
+        email = data.get('email', '').lower().strip()
+        password = data.get('password', '')
+        
+        if not email or not password:
+            return jsonify({'success': False, 'message': 'Email and password required'}), 400
+        
+        # Find user
+        user = mongo.db.users.find_one({'email': email})
+        
+        if not user or not check_password_hash(user['password'], password):
+            return jsonify({'success': False, 'message': 'Invalid email or password'}), 401
+        
+        # Update last login
+        mongo.db.users.update_one(
+            {'_id': user['_id']},
+            {'$set': {'last_login': datetime.utcnow()}}
+        )
+        
+        # Set session
+        session['user_id'] = user['_id']
+        session['user_name'] = user['name']
+        session['subscription_tier'] = user.get('subscription_tier', 'free')
+        
+        return jsonify({
+            'success': True,
+            'message': 'Login successful',
+            'redirect': '/dashboard'
+        })
+    
+    except Exception as e:
+        return jsonify({'success': False, 'message': str(e)}), 500
+
+
+@app.route('/api/logout')
+def logout_user():
+    session.clear()
+    return redirect(url_for('home'))
+
+
+@app.route('/api/user/profile', methods=['GET'])
+@login_required
+def get_user_profile():
+    try:
+        user = mongo.db.users.find_one({'_id': session['user_id']})
+        if user:
+            user.pop('password', None)  # Remove password from response
+            user['_id'] = str(user['_id'])
+            return jsonify({'success': True, 'user': user})
+        return jsonify({'success': False, 'message': 'User not found'}), 404
+    except Exception as e:
+        return jsonify({'success': False, 'message': str(e)}), 500
+
+
+@app.route('/api/user/update', methods=['POST'])
+@login_required
+def update_user_profile():
+    try:
+        data = request.get_json()
+        update_data = {}
+        
+        if 'name' in data:
+            update_data['name'] = data['name'].strip()
+            session['user_name'] = update_data['name']
+        
+        if update_data:
+            mongo.db.users.update_one(
+                {'_id': session['user_id']},
+                {'$set': update_data}
+            )
+            return jsonify({'success': True, 'message': 'Profile updated successfully'})
+        
+        return jsonify({'success': False, 'message': 'No data to update'}), 400
+    
+    except Exception as e:
+        return jsonify({'success': False, 'message': str(e)}), 500
+
+
+# === SUBSCRIPTION & PRICING ===
+@app.route('/pricing')
+def pricing():
+    user_data = None
+    if 'user_id' in session:
+        user_data = mongo.db.users.find_one({'_id': session['user_id']})
+    return render_template('pricing.html', user=user_data)
+
+
+@app.route('/api/subscription/upgrade', methods=['POST'])
+@login_required
+def upgrade_subscription():
+    try:
+        data = request.get_json()
+        tier = data.get('tier', '').lower()
+        
+        valid_tiers = ['basic', 'pro', 'premium']
+        if tier not in valid_tiers:
+            return jsonify({'success': False, 'message': 'Invalid subscription tier'}), 400
+        
+        # In production, integrate with Stripe/PayPal here
+        # For now, simulate successful payment
+        
+        subscription_end = datetime.utcnow() + timedelta(days=30)  # 1 month
+        
+        mongo.db.users.update_one(
+            {'_id': session['user_id']},
+            {'$set': {
+                'subscription_tier': tier,
+                'subscription_status': 'active',
+                'subscription_start': datetime.utcnow(),
+                'subscription_end': subscription_end
+            }}
+        )
+        
+        session['subscription_tier'] = tier
+        
+        return jsonify({
+            'success': True,
+            'message': f'Successfully upgraded to {tier.capitalize()} plan',
+            'tier': tier
+        })
+    
+    except Exception as e:
+        return jsonify({'success': False, 'message': str(e)}), 500
+
+
+@app.route('/api/subscription/cancel', methods=['POST'])
+@login_required
+def cancel_subscription():
+    try:
+        mongo.db.users.update_one(
+            {'_id': session['user_id']},
+            {'$set': {
+                'subscription_tier': 'free',
+                'subscription_status': 'cancelled',
+                'subscription_end': datetime.utcnow()
+            }}
+        )
+        
+        session['subscription_tier'] = 'free'
+        
+        return jsonify({
+            'success': True,
+            'message': 'Subscription cancelled successfully'
+        })
+    
+    except Exception as e:
+        return jsonify({'success': False, 'message': str(e)}), 500
+
+
+# === USAGE TRACKING ===
+@app.route('/api/track/resume', methods=['POST'])
+@login_required
+def track_resume_creation():
+    try:
+        user = mongo.db.users.find_one({'_id': session['user_id']})
+        tier = user.get('subscription_tier', 'free')
+        count = user.get('resumes_created', 0)
+        
+        limits = {'free': 3, 'basic': 10, 'pro': 50, 'premium': 999999}
+        
+        if count >= limits.get(tier, 3):
+            return jsonify({
+                'success': False,
+                'message': f'Resume limit reached. Upgrade to create more resumes.',
+                'limit_reached': True
+            }), 403
+        
+        mongo.db.users.update_one(
+            {'_id': session['user_id']},
+            {'$inc': {'resumes_created': 1}}
+        )
+        
+        return jsonify({'success': True, 'count': count + 1})
+    
+    except Exception as e:
+        return jsonify({'success': False, 'message': str(e)}), 500
+
+
+@app.route('/api/track/job-match', methods=['POST'])
+@login_required
+def track_job_match():
+    try:
+        user = mongo.db.users.find_one({'_id': session['user_id']})
+        tier = user.get('subscription_tier', 'free')
+        count = user.get('job_matches_used', 0)
+        
+        limits = {'free': 5, 'basic': 25, 'pro': 100, 'premium': 999999}
+        
+        if count >= limits.get(tier, 5):
+            return jsonify({
+                'success': False,
+                'message': f'Job match limit reached. Upgrade for more analyses.',
+                'limit_reached': True
+            }), 403
+        
+        mongo.db.users.update_one(
+            {'_id': session['user_id']},
+            {'$inc': {'job_matches_used': 1}}
+        )
+        
+        return jsonify({'success': True, 'count': count + 1})
+    
+    except Exception as e:
+        return jsonify({'success': False, 'message': str(e)}), 500
+
+
+@app.route('/api/track/cover-letter', methods=['POST'])
+@login_required
+def track_cover_letter():
+    try:
+        user = mongo.db.users.find_one({'_id': session['user_id']})
+        tier = user.get('subscription_tier', 'free')
+        count = user.get('cover_letters_generated', 0)
+        
+        limits = {'free': 3, 'basic': 15, 'pro': 75, 'premium': 999999}
+        
+        if count >= limits.get(tier, 3):
+            return jsonify({
+                'success': False,
+                'message': f'Cover letter limit reached. Upgrade for more generations.',
+                'limit_reached': True
+            }), 403
+        
+        mongo.db.users.update_one(
+            {'_id': session['user_id']},
+            {'$inc': {'cover_letters_generated': 1}}
+        )
+        
+        return jsonify({'success': True, 'count': count + 1})
+    
+    except Exception as e:
+        return jsonify({'success': False, 'message': str(e)}), 500
 
 
 

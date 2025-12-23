@@ -1,18 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aptitude Mock Test</title>
     <style>
-      body {
-      font-family: "Roboto", sans-serif;
-      background: url('/static/img/apti.jpg') no-repeat center center fixed;
-      background-size: cover;
-      color: var(--text-light);
-      overflow-x: hidden;
-      transition: background 0.5s, color 0.5s;
-    }
+        body {
+            font-family: "Roboto", sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3), transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(252, 70, 107, 0.3), transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(99, 179, 237, 0.3), transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
 
         .container {
             width: 80%;
@@ -60,6 +92,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <div class="container">
@@ -108,4 +141,5 @@
         </div>
     </div>
 </body>
+
 </html>
