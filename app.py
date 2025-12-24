@@ -11,22 +11,33 @@ from functools import wraps
 app = Flask(__name__)
 CORS(app)
 
-# simple session secret (use env var in production)
-app.secret_key = os.environ.get('SECRET_KEY', 'dev-secret')
+# Session configuration with security
+app.secret_key = os.environ.get('SECRET_KEY', 'dev-secret-change-in-production')
+app.config['SESSION_COOKIE_SECURE'] = os.environ.get('FLASK_ENV') == 'production'
+app.config['SESSION_COOKIE_HTTPONLY'] = True
+app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=7)
 
-app.config["MONGO_URI"] = "mongodb://localhost:27017/techelevate"
+# MongoDB configuration - use environment variable
+app.config["MONGO_URI"] = os.environ.get('MONGO_URI', 'mongodb://localhost:27017/techelevate')
 mongo = PyMongo(app)
 
 # uploads folder for ATS uploads
 UPLOAD_FOLDER = os.path.join(app.root_path, 'uploads')
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size
+ALLOWED_EXTENSIONS = {'pdf', 'jpg', 'jpeg', 'png', 'doc', 'docx'}
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 # local ATS ranker module
 try:
     import ai_ranker as ar
-except Exception:
+except Exception as e:
     ar = None
+    print(f"Warning: ai_ranker module not available: {e}")
 
 
 # === AUTHENTICATION DECORATOR ===
@@ -148,8 +159,16 @@ def register_user():
         if not email or not password or not name:
             return jsonify({'success': False, 'message': 'All fields are required'}), 400
         
-        if len(password) < 6:
-            return jsonify({'success': False, 'message': 'Password must be at least 6 characters'}), 400
+        # Email validation
+        email_regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+        if not re.match(email_regex, email):
+            return jsonify({'success': False, 'message': 'Invalid email format'}), 400
+        
+        if len(password) < 8:
+            return jsonify({'success': False, 'message': 'Password must be at least 8 characters'}), 400
+        
+        if len(name) < 2 or len(name) > 100:
+            return jsonify({'success': False, 'message': 'Name must be between 2 and 100 characters'}), 400
         
         # Check if user exists
         if mongo.db.users.find_one({'email': email}):
@@ -257,7 +276,10 @@ def update_user_profile():
         update_data = {}
         
         if 'name' in data:
-            update_data['name'] = data['name'].strip()
+            name = data['name'].strip()
+            if len(name) < 2 or len(name) > 100:
+                return jsonify({'success': False, 'message': 'Name must be between 2 and 100 characters'}), 400
+            update_data['name'] = name
             session['user_name'] = update_data['name']
         
         if update_data:
@@ -521,48 +543,45 @@ def post_softskills():
     return jsonify({'status': 'success', 'message': 'Softskills data saved.'}), 200
 
 
-# Temporary debug route to verify which template file the server will serve
-@app.route('/__debug_template')
-def debug_template():
-    # resolve template path and return file contents + mtime so we can confirm
-    tpl_rel = os.path.join('templates', 'softskills', 'softskills.html')
-    tpl_path = os.path.abspath(tpl_rel)
-    if not os.path.exists(tpl_path):
-        return jsonify({'exists': False, 'path': tpl_path}), 404
-    mtime = os.path.getmtime(tpl_path)
-    with open(tpl_path, 'r', encoding='utf-8') as f:
-        content = f.read()
-    return ('Path: ' + tpl_path + '\nModified: ' + str(mtime) + '\n\n' + content), 200, {'Content-Type': 'text/plain; charset=utf-8'}
+# Debug routes - only enable in development
+if os.environ.get('FLASK_ENV') == 'development':
+    @app.route('/__debug_template')
+    def debug_template():
+        tpl_rel = os.path.join('templates', 'softskills', 'softskills.html')
+        tpl_path = os.path.abspath(tpl_rel)
+        if not os.path.exists(tpl_path):
+            return jsonify({'exists': False, 'path': tpl_path}), 404
+        mtime = os.path.getmtime(tpl_path)
+        with open(tpl_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+        return ('Path: ' + tpl_path + '\nModified: ' + str(mtime) + '\n\n' + content), 200, {'Content-Type': 'text/plain; charset=utf-8'}
+
+    @app.route('/resume-debug')
+    def resume_debug():
+        return jsonify({'status': 'ok', 'message': 'resume debug route active'}), 200
+
+    @app.route('/__routes')
+    def list_routes():
+        routes = []
+        for rule in app.url_map.iter_rules():
+            routes.append({'endpoint': rule.endpoint, 'rule': str(rule), 'methods': list(rule.methods)})
+        return jsonify({'routes': routes}), 200
 
 
-# Lightweight runtime debug endpoints
-@app.route('/resume-debug')
-def resume_debug():
-    return jsonify({'status': 'ok', 'message': 'resume debug route active'}), 200
-
-@app.route('/__routes')
-def list_routes():
-    routes = []
-    for rule in app.url_map.iter_rules():
-        routes.append({'endpoint': rule.endpoint, 'rule': str(rule), 'methods': list(rule.methods)})
-    return jsonify({'routes': routes}), 200
-
-
-# Runtime info endpoint to help debug which file/process is running
-@app.route('/__runtime')
-def runtime_info():
-    try:
-        import sys, os
-        info = {
-            'app_file': __file__,
-            'app_root': app.root_path,
-            'cwd': os.getcwd(),
-            'python_executable': sys.executable,
-            'pid': os.getpid()
-        }
-        return jsonify({'status': 'ok', 'runtime': info}), 200
-    except Exception as e:
-        return jsonify({'status': 'error', 'error': str(e)}), 500
+    @app.route('/__runtime')
+    def runtime_info():
+        try:
+            import sys
+            info = {
+                'app_file': __file__,
+                'app_root': app.root_path,
+                'cwd': os.getcwd(),
+                'python_executable': sys.executable,
+                'pid': os.getpid()
+            }
+            return jsonify({'status': 'ok', 'runtime': info}), 200
+        except Exception as e:
+            return jsonify({'status': 'error', 'error': str(e)}), 500
 
 
 # Serve an embedded project directory if it's cloned into the workspace
@@ -591,24 +610,35 @@ def embed_check():
 # --- ATS uploader and ranker routes ---
 @app.route('/ats-upload', methods=['GET', 'POST'])
 def ats_upload():
-    # simple admin guard (reuse existing session admin flag)
     if request.method == 'GET':
         return render_template('ats_upload.html')
 
     # POST: process the uploaded resume file
     job_title = request.form.get('job_role', 'Unknown')
     job_desc = request.form.get('job_description', '')
+    
+    if not job_desc:
+        return jsonify({'error': 'Job description is required'}), 400
+    
     job_keywords = ar.extract_keywords_spacy(job_desc) if ar else []
 
     file = request.files.get('resume')
     if not file or not file.filename:
-        return redirect(url_for('ats_upload'))
+        return jsonify({'error': 'No file uploaded'}), 400
+
+    # Validate file type
+    if not allowed_file(file.filename):
+        return jsonify({'error': 'Invalid file type. Allowed: PDF, JPG, PNG, DOC, DOCX'}), 400
 
     filename = secure_filename(file.filename)
     ts = datetime.now().strftime('%Y%m%d%H%M%S')
     save_name = f"{ts}_{filename}"
     path = os.path.join(app.config['UPLOAD_FOLDER'], save_name)
-    file.save(path)
+    
+    try:
+        file.save(path)
+    except Exception as e:
+        return jsonify({'error': f'Failed to save file: {str(e)}'}), 500
 
     # extract text
     text = ''
